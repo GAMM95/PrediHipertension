@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "413651227855",
+    "project_id": "predihipertension-gamm",
+    "storage_bucket": "predihipertension-gamm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:413651227855:android:6a381954f41834aec8d3ba",
+        "android_client_info": {
+          "package_name": "com.example.predihipertension"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "413651227855-gakjhkgi7g6p4pn6bf6vno1n5vcuevvn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB50KOE3dF20NJSHV-Ei1UJxIjWb6Kv144"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "413651227855-gakjhkgi7g6p4pn6bf6vno1n5vcuevvn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "413651227855-6n87e5g4bin5u7jjqrb2lt285rg6r3fr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.predihipertension"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:413651227855:android:0c4a127eca153b0cc8d3ba",
+        "android_client_info": {
+          "package_name": "com.example.predihipertension"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "413651227855-gakjhkgi7g6p4pn6bf6vno1n5vcuevvn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB50KOE3dF20NJSHV-Ei1UJxIjWb6Kv144"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "413651227855-gakjhkgi7g6p4pn6bf6vno1n5vcuevvn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "413651227855-6n87e5g4bin5u7jjqrb2lt285rg6r3fr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.predihipertension"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

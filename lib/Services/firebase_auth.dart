@@ -1,0 +1,192 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../Models/usuario.dart';
+
+
+class AuthService {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  User? get currentUser => _auth.currentUser;
+
+  Stream<User?> get authStateChanges => _auth.authStateChanges();
+
+  /// Método para registrar un usuario con autenticación de email y contraseña.
+  Future<bool> signUp({
+    required Usuario usuario,
+  }) async {
+    try {
+      // Verificar si el correo electrónico ya está registrado.
+      await _auth.createUserWithEmailAndPassword(
+        email: usuario.email.trim(),
+        password: usuario.password.trim(),
+      );
+
+      // Obtener el ID del usuario autenticado
+      String userId = _auth.currentUser!.uid;
+
+      // Guardar información adicional del usuario en Firestore
+      await _firestore.collection('usuario').doc(userId).set({
+        'firstName': usuario.firstName,
+        'lastName': usuario.lastName,
+        'email': usuario.email,
+        'password': usuario.password,
+      });
+
+      // Enviar correo de verificación
+      await _auth.currentUser!.sendEmailVerification();
+
+      return true; // Registro exitoso
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'email-already-in-use') {
+        return false; // Correo electrónico ya registrado
+      } else {
+        throw 'Error durante el registro: ${e.message}';
+      }
+    } catch (error) {
+      rethrow; // Reenviar la excepción para que pueda ser manejada en la capa superior.
+    }
+  }
+
+  /// Método para iniciar sesión con autenticación de email y contraseña.
+  Future<bool> signIn({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      await _auth.signInWithEmailAndPassword(
+        email: email.trim(),
+        password: password.trim(),
+      );
+      // Verificar si el correo electrónico está verificado
+      if (!_auth.currentUser!.emailVerified) {
+        throw "Por favor, verifique su correo electrónico antes de iniciar sesión.";
+      }
+      return true;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        throw 'Usted no está registrado.';
+      } else if (e.code == 'wrong-password') {
+        throw 'Contraseña incorrecta.';
+      } else if (e.code == 'invalid-email') {
+        throw 'Correo electrónico no válido.';
+      } else {
+        throw "Error durante la autenticación: ${e.message}";
+      }
+    } catch (error) {
+      // Reenviar la excepción para que pueda ser manejada en la capa superior.
+      rethrow;
+    }
+  }
+
+  /// Método para iniciar sesión con Google.
+  Future<User?> signInWithGoogle() async {
+    try {
+      // Iniciar sesión con Google
+      final GoogleSignInAccount? googleSignInAccount =
+          await _googleSignIn.signIn();
+      if (googleSignInAccount != null) {
+        final GoogleSignInAuthentication googleSignInAuthentication =
+            await googleSignInAccount.authentication;
+
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleSignInAuthentication.accessToken,
+          idToken: googleSignInAuthentication.idToken,
+        );
+
+        // Autenticar con Firebase
+        final UserCredential userCredential =
+            await _auth.signInWithCredential(credential);
+
+        // Obtener el usuario autenticado
+        final User? user = userCredential.user;
+
+        // Verificar si el usuario está registrado en Firestore
+        final DocumentSnapshot docSnapshot =
+            await _firestore.collection('usuario').doc(user!.uid).get();
+        if (!docSnapshot.exists) {
+          // El usuario no está registrado en Firestore, guardar datos adicionales
+          await _firestore.collection('usuario').doc(user.uid).set({
+            'firstName':
+                user.displayName != null ? user.displayName!.split(' ')[0] : '',
+            'lastName': user.displayName != null
+                ? user.displayName!.split(' ').skip(1).join(' ')
+                : '',
+            'email': user.email,
+            'password': '',
+          });
+        }
+        // Retornar el usuario autenticado
+        return user;
+      }
+    } catch (error) {
+      // Manejar errores
+      rethrow;
+    }
+    return null;
+  }
+
+  /// Método para restablecer la contraseña de un usuario.
+  Future<void> resetPassword({
+    required String email,
+  }) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email.trim());
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        throw 'Usuario no encontrado. Regístrese antes de restablecer la contraseña.';
+      } else if (e.code == 'invalid-email') {
+        throw 'Correo electrónico no válido.';
+      } else {
+        throw 'Ocurrió un problema: ${e.message}';
+      }
+    } catch (error) {
+      // Reenviar la excepción para que pueda ser manejada en la capa superior.
+      throw 'Error inesperado durante el restablecimiento de la contraseña.';
+    }
+  }
+
+  /// Método para cerrar sesión.
+  Future<void> signOut() async {
+    try {
+      await _auth.signOut();
+      await _googleSignIn.signOut();
+    } catch (e) {
+      throw 'Error al cerrar sesión: $e';
+    }
+  }
+
+  Future<void> deleteAccount() async {
+    try {
+      // Obtener el usuario actualmente autenticado
+      User? user = _auth.currentUser;
+
+      if (user != null) {
+        // Eliminar la cuenta del usuario en Firebase Authentication
+        await user.delete();
+
+        // Eliminar los datos del usuario en Firestore
+        await _firestore.collection('usuario').doc(user.uid).delete();
+
+        // Desconectar al usuario localmente
+        await _auth.signOut();
+        await _googleSignIn.signOut();
+      }
+    } catch (e) {
+      // Manejar errores
+      if (e is FirebaseAuthException) {
+        // Error relacionado con Firebase Authentication
+        throw 'Error al eliminar la cuenta: ${e.message}';
+      } else if (e is FirebaseException) {
+        // Error relacionado con Firestore
+        throw 'Error al eliminar los datos del usuario: ${e.message}';
+      } else {
+        // Otros errores
+        throw 'Error inesperado al eliminar la cuenta: $e';
+      }
+    }
+  }
+}

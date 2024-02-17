@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>413651227855-6n87e5g4bin5u7jjqrb2lt285rg6r3fr.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.413651227855-6n87e5g4bin5u7jjqrb2lt285rg6r3fr</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDXvCH5Z_09X2u_567R9hOBVDwItJjSfiA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>413651227855</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.predihipertension</string>
+	<key>PROJECT_ID</key>
+	<string>predihipertension-gamm</string>
+	<key>STORAGE_BUCKET</key>
+	<string>predihipertension-gamm.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:413651227855:ios:6b47e6af9d2f430bc8d3ba</string>
+</dict>
+</plist>
