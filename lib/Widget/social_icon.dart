@@ -69,7 +69,11 @@ class SocialIcons extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed, // Agregar la función onPressed al GestureDetector
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
+        alignment: Alignment.center,
+        padding: const EdgeInsets.symmetric(
+          // horizontal: 20.0,
+          vertical: 15.0,
+        ),
         decoration: BoxDecoration(
           border: Border.all(
             color: Colors.white,
@@ -85,7 +89,7 @@ class SocialIcons extends StatelessWidget {
           ],
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SvgPicture.asset(
               ruta,

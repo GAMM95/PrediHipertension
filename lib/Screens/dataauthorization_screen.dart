@@ -1,18 +1,19 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: use_build_context_synchronously
 
+import 'package:flutter/material.dart';
 import '../Theme/global_colors.dart';
 import '../Utilities/parragraph.dart';
 import '../Utilities/subtitle.dart';
 
-class TerminosCondicionesScreen extends StatefulWidget {
-  const TerminosCondicionesScreen({super.key});
+class DataAuthScreen extends StatefulWidget {
+  const DataAuthScreen({super.key});
 
   @override
-  State<TerminosCondicionesScreen> createState() =>
-      _TerminosCondicionesScreenState();
+  State<DataAuthScreen> createState() => _DataAuthScreenState();
 }
 
-class _TerminosCondicionesScreenState extends State<TerminosCondicionesScreen> {
+class _DataAuthScreenState extends State<DataAuthScreen> {
+  @override
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +38,7 @@ class _TerminosCondicionesScreenState extends State<TerminosCondicionesScreen> {
                   children: [
                     const SizedBox(height: 50.0),
                     Text(
-                      "TÉRMINOS Y CONDICIONES DE USO DEL APLICATIVO MÓVIL PREDIHIPERTENSION",
+                      "AUTORIZACIÓN DE DATOS PERSONALES",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: GlobalColors.titlePanel,

@@ -3,7 +3,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-
 import '../Models/usuario.dart';
 import '../Screens/welcome_screen.dart';
 import '../Services/firebase_auth.dart';
@@ -32,7 +31,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _passwordController = TextEditingController();
 
   final _formSignupKey = GlobalKey<FormState>();
-  bool agreePersonalData = false;
+  bool agreeTercon = false;
+  bool agreeDataAuth = false;
   bool emailVerificationSent = false; // Nuevo estado
 
   @override
@@ -49,7 +49,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _apellidosController.clear();
     _emailController.clear();
     _passwordController.clear();
-    agreePersonalData = false;
+    agreeTercon = false;
+    agreeDataAuth = false;
     FocusScope.of(context).unfocus();
   }
 
@@ -120,16 +121,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         validator: 'Ingrese su contraseña',
                       ),
 
-                      const SizedBox(height: 15.0), // Espacio
+                      const SizedBox(height: 10.0), // Espacio
 
                       // i agree to the processing
                       Row(
                         children: [
                           Checkbox(
-                            value: agreePersonalData,
+                            value: agreeTercon,
                             onChanged: (bool? value) {
                               setState(() {
-                                agreePersonalData = value!;
+                                agreeTercon = value!;
                               });
                             },
                             activeColor: GlobalColors.buttonColor,
@@ -154,6 +155,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ],
                       ),
 
+                      Row(
+                        children: [
+                          Checkbox(
+                            value: agreeDataAuth,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                agreeDataAuth = value!;
+                              });
+                            },
+                            activeColor: GlobalColors.buttonColor,
+                            side:
+                                BorderSide(color: GlobalColors.borderTextField),
+                            // activeColor: lightColorScheme.primary,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).pushNamed('/dataauth');
+                            },
+                            child: Text(
+                              'Autorización de datos personales',
+                              style: TextStyle(
+                                color: lightColorScheme.secondary,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 15.0,
+                                letterSpacing: 0.8,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                       const SizedBox(height: 15.0), // Espacio
 
                       // Boton Unirse
@@ -162,7 +193,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: ElevatedButton(
                           onPressed: () async {
                             if (_formSignupKey.currentState!.validate() &&
-                                agreePersonalData) {
+                                agreeTercon &&
+                                agreeDataAuth) {
                               try {
                                 bool signUpSuccess = await _authService.signUp(
                                     usuario: Usuario(
@@ -211,11 +243,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       'Ocurrió un problema:', '${e.message}');
                                 }
                               }
-                            } else if (!agreePersonalData) {
+                            } else if (!agreeTercon) {
                               CustomDialogs.showErrorDialog(
                                 context,
                                 'Advertencia',
                                 'Acepte términos y condiciones de uso.',
+                              );
+                            } else if (!agreeDataAuth) {
+                              CustomDialogs.showCorrectDialog(
+                                context,
+                                'Advertencia',
+                                'Acepte autorización de datos personales',
                               );
                             }
                           },

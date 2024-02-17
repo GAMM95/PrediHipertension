@@ -68,52 +68,6 @@ class _SignInScreenState extends State<SignInScreen> {
                         validator: 'Ingrese su contraseña',
                       ),
 
-                      const SizedBox(height: 20.0), // Espacio
-
-                      /// CheckBox y Has olvidado Contraseña
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          /// CheckBox Recordarme
-                          // Row(
-                          //   children: [
-                          //     Checkbox(
-                          //       value: rememberPassword,
-                          //       onChanged: (bool? value) {
-                          //         setState(() {
-                          //           rememberPassword = value!;
-                          //         });
-                          //       },
-                          //       // activeColor: lightColorScheme.primary,
-                          //       activeColor: GlobalColors.buttonColor,
-                          //       side: BorderSide(
-                          //           color: GlobalColors.borderTextField),
-                          //     ),
-                          //     Text(
-                          //       'Recuérdame',
-                          //       style: TextStyle(
-                          //         color: GlobalColors.textColor,
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
-
-                          /// Pregunta - ¿Has olvidado tu contraseña?
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).pushNamed('/forgot');
-                            },
-                            child: Text(
-                              '¿Has olvidado tu contraseña?',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: lightColorScheme.secondary,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-
                       const SizedBox(height: 25.0), // Espacio
 
                       /// Boton Continuar - Iniciar Sesión
@@ -210,6 +164,52 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                       ),
 
+                      const SizedBox(height: 15.0), // Espacio
+
+                      /// CheckBox y Has olvidado Contraseña
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          /// CheckBox Recordarme
+                          // Row(
+                          //   children: [
+                          //     Checkbox(
+                          //       value: rememberPassword,
+                          //       onChanged: (bool? value) {
+                          //         setState(() {
+                          //           rememberPassword = value!;
+                          //         });
+                          //       },
+                          //       // activeColor: lightColorScheme.primary,
+                          //       activeColor: GlobalColors.buttonColor,
+                          //       side: BorderSide(
+                          //           color: GlobalColors.borderTextField),
+                          //     ),
+                          //     Text(
+                          //       'Recuérdame',
+                          //       style: TextStyle(
+                          //         color: GlobalColors.textColor,
+                          //       ),
+                          //     ),
+                          //   ],
+                          // ),
+
+                          /// Pregunta - ¿Has olvidado tu contraseña?
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).pushNamed('/forgot');
+                            },
+                            child: Text(
+                              '¿Has olvidado tu contraseña?',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: lightColorScheme.secondary,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+
                       const SizedBox(height: 20.0), // Espacio
 
                       /// Divisor [ --- o--- ]
@@ -260,7 +260,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         ],
                       ),
 
-                      const SizedBox(height: 25.0), // Espacio
+                      const SizedBox(height: 15.0), // Espacio
 
                       // No tienes una cuenta
                       Row(
