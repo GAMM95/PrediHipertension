@@ -28,6 +28,7 @@ class GlobalColors {
   static HexColor welcomeText = HexColor("#8B1037");
   static HexColor saludoText = HexColor("#fff1f1");
   static HexColor titlePrimaryColor = HexColor("#E71746");
+  static HexColor iconColor = HexColor('#c30d3a');
   static HexColor titleColor = HexColor("#3D3D3D");
   static HexColor textColor = HexColor("#FFFFFF");
   static HexColor placeHolderText = HexColor("#BDBDBD");

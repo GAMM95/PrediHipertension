@@ -269,26 +269,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                       const SizedBox(height: 25.0), // Espacio
 
-                      // /// Separacion continuar
-                      // const CustomDivider(),
-                      // const SizedBox(height: 20.0), // Espacio
-                      // /// sign up social media logo
-                      // const Column(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      //   children: [
-                      //     // Continuar con Google
-                      //     SocialIcons(
-                      //         ruta: "assets/icons/google.svg",
-                      //         texto: 'Continuar con Google'),
-                      //     SizedBox(height: 10.0),
-                      //     SocialIcons(
-                      //         ruta: "assets/icons/facebook.svg",
-                      //         texto: 'Continuar con Facebook'),
-                      //   ],
-                      // ),
-
-                      // const SizedBox(height: 20.0), // Espacio
-
                       // Ya tienes una cuenta
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

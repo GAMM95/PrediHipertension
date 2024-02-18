@@ -78,12 +78,12 @@ class _ProfileTabState extends State<ProfileTab> {
                                   currentUser!.photoURL == null
                               ? const Icon(
                                   Icons.person,
-                                  size: 70,
+                                  size: 50,
                                   color: Colors.white,
                                 )
                               : null,
                         ),
-                        const SizedBox(height: 15.0),
+                        const SizedBox(height: 10.0),
                         // Datos del usuario
                         if (currentUser != null)
                           ListTile(
@@ -98,7 +98,7 @@ class _ProfileTabState extends State<ProfileTab> {
                               currentUser!.displayName ?? '',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                fontSize: 18.0,
+                                fontSize: 16.0,
                                 color: GlobalColors.textColor,
                               ),
                             ),
@@ -115,12 +115,29 @@ class _ProfileTabState extends State<ProfileTab> {
                             currentUser!.email ?? '',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontSize: 18.0,
+                              fontSize: 16.0,
                               color: GlobalColors.textColor,
                             ),
                           ),
                         ),
-                        const SizedBox(height: 15.0),
+                        const SizedBox(height: 10.0),
+                        Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                // Lógica del botón Eliminar cuenta
+                                CustomDialogs.cerrarSesion(context);
+                              },
+                              child: const Text(
+                                'Cerrar sesión',
+                                style: TextStyle(fontSize: 16),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 20.0),
                         Padding(
                           padding: const EdgeInsets.all(15.0),
                           child: SizedBox(

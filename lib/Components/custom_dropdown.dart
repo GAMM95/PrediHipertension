@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
-
 import '../Theme/global_colors.dart';
 
 class CustomDropDown extends StatefulWidget {
   final String hintText;
   final Text label;
   final List<String> items;
+  final String? defaultValue;
+  final TextEditingController? controller; // Agrega el parámetro controller
 
   const CustomDropDown({
     super.key,
     required this.hintText,
     required this.label,
     required this.items,
+    this.defaultValue,
+    this.controller,
   });
 
   @override
@@ -19,7 +22,13 @@ class CustomDropDown extends StatefulWidget {
 }
 
 class _CustomDropDownState extends State<CustomDropDown> {
-  String dropdownValue = '';
+  late String dropdownValue;
+
+  @override
+  void initState() {
+    super.initState();
+    dropdownValue = widget.defaultValue ?? '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,6 +91,8 @@ class _CustomDropDownState extends State<CustomDropDown> {
               dropdownValue = newValue;
             });
             // print('Item seleccionado: $newValue');
+            widget.controller?.text =
+                newValue; // Actualiza el valor del controlador
           }
         },
       ),

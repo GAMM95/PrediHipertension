@@ -1,79 +1,82 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
-
-import '../Screens/signin_screen.dart';
-import '../Screens/signup_screen.dart';
 import '../Theme/global_colors.dart';
 import '../Widget/custom_scaffoldwelcome.dart';
 import '../Widget/welcome_button.dart';
 
-class WelcomeScreen extends StatelessWidget {
+class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    // Timer(const Duration(seconds: 1), () {
-    //   SystemChrome.setEnabledSystemUIMode(
-    //     SystemUiMode.manual,
-    //     overlays: [SystemUiOverlay.top],
-    //   );
-    // });
-    // SystemChrome.setPreferredOrientations([
-    //   DeviceOrientation.portraitUp,
-    //   DeviceOrientation.portraitDown,
-    // ]);
+  // ignore: library_private_types_in_public_api
+  _WelcomeScreenState createState() => _WelcomeScreenState();
+}
 
+class _WelcomeScreenState extends State<WelcomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return CustomScaffoldWelcome(
       child: Column(
         children: [
           Flexible(
-              flex: 8,
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 0, horizontal: 40),
-                child: Align(
-                  alignment: Alignment.topCenter,
-                  child: RichText(
-                    textAlign: TextAlign.center,
-                    text: const TextSpan(children: [
-                      TextSpan(
-                          text: '¡Bienvenido de vuelta!\n',
-                          style: TextStyle(
-                            fontSize: 40,
-                            fontWeight: FontWeight.w600,
-                          )),
-                      TextSpan(
-                          text:
-                              '\nVigila tu hipertensión para una vida saludable.',
-                          style: TextStyle(
-                            fontSize: 20,
-                          )),
-                    ]),
-                  ),
+            flex: 8,
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 40),
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  text: const TextSpan(children: [
+                    TextSpan(
+                      text: '¡Bienvenido de vuelta!\n',
+                      style: TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    TextSpan(
+                      text: '\nVigila tu hipertensión para una vida saludable.',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                  ]),
                 ),
-              )),
+              ),
+            ),
+          ),
           Flexible(
             flex: 1,
             child: Align(
               alignment: Alignment.bottomRight,
-              child: Row(children: [
-                const Expanded(
-                  child: WelcomeButton(
-                    buttonText: 'Iniciar Sesión',
-                    onTap: SignInScreen(),
-                    color: Colors.transparent,
-                    textColor: Colors.white,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: WelcomeButton(
+                      buttonText: 'Iniciar Sesión',
+                      onTap: () {
+                        Navigator.of(context).pushNamed('/signin');
+                      },
+                      color: Colors.transparent,
+                      textColor: Colors.white,
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: WelcomeButton(
-                    buttonText: 'Regístrate',
-                    onTap: const SignUpScreen(),
-                    color: Colors.white,
-                    textColor: GlobalColors.welcomeText,
+                  Expanded(
+                    child: WelcomeButton(
+                      buttonText: 'Regístrate',
+                      onTap: () {
+                        Navigator.of(context).pushNamed('/signup');
+                      },
+                      color: Colors.white,
+                      textColor: GlobalColors.welcomeText,
+                    ),
                   ),
-                ),
-              ]),
+                ],
+              ),
             ),
           )
         ],

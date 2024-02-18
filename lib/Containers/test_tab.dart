@@ -1,4 +1,8 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
+import '../Models/datatest.dart';
+import '../Services/methods_auth.dart';
 import '../Theme/global_colors.dart';
 import '../Components/custom_card.dart';
 
@@ -16,7 +20,10 @@ class TestTab extends StatefulWidget {
 
 class _TestTabState extends State<TestTab> {
   TextEditingController edadController = TextEditingController();
+  TextEditingController generoController = TextEditingController();
   TextEditingController imcController = TextEditingController();
+
+  final MethodsAuth _methodsAuth = MethodsAuth();
 
   @override
   Widget build(BuildContext context) {
@@ -61,10 +68,12 @@ class _TestTabState extends State<TestTab> {
                           controller: edadController,
                         ),
                         const SizedBox(height: 15.0),
-                        const CustomDropDown(
+                        CustomDropDown(
                           hintText: 'Seleccione una opción',
-                          label: Text('Género'),
-                          items: ['Masculino', 'Femenino'],
+                          label: const Text('Género'),
+                          items: const ['Masculino', 'Femenino'],
+                          defaultValue: generoController.text,
+                          controller: generoController,
                         ),
                       ],
                     ),
@@ -192,7 +201,7 @@ class _TestTabState extends State<TestTab> {
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       vertical: 15.0,
-                      horizontal: 100.0,
+                      horizontal: 20.0,
                     ),
                     child: SizedBox(
                       width: double.infinity,
@@ -217,8 +226,27 @@ class _TestTabState extends State<TestTab> {
     );
   }
 
-  void _mostrarResultadoDialog() {
-    ResultadoDialog.mostrar(context);
+  void _mostrarResultadoDialog() async {
+    try {
+      // Crear un objeto Datatest con los datos del formulario
+      Datatest datatest = Datatest(
+        age: int.tryParse(edadController.text) ?? 0,
+        genere: generoController.text == 'Masculino'
+            ? 0
+            : 1, // Assuming 0 for Male and 1 for Female
+        imc: double.tryParse(imcController.text) ?? 0.0,
+      );
+
+      // Guardar datos del test en Firestore
+      await _methodsAuth.guardarTest(datatest: datatest);
+
+      // Mostrar el diálogo de resultado
+      ResultadoDialog.mostrar(context);
+    } catch (error) {
+      // Manejar errores
+      // print('Error al guardar el test: $error');
+      // Mostrar un mensaje de error al usuario si lo deseas
+    }
   }
 
   void _calcularIMCDialog() {

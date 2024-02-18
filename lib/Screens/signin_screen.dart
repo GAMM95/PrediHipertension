@@ -255,8 +255,6 @@ class _SignInScreenState extends State<SignInScreen> {
                               }
                             },
                           ),
-
-                          // const SizedBox(height: 10.0), // Espacio
                         ],
                       ),
 
@@ -289,8 +287,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         ],
                       ),
 
-                      const SizedBox(height: 20.0), // Esp
-                      // Repite estas líneas para tus otras cajas de texto
+                      const SizedBox(height: 20.0), // Espacio
                     ],
                   ),
                 ),

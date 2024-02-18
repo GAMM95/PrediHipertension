@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:predihipertension/Theme/global_colors.dart';
 
 import 'info1_tab.dart';
 import 'info2_tab.dart';
@@ -38,11 +39,11 @@ class InfoTab extends StatelessWidget {
           ),
           bottom: TabBar(
             unselectedLabelColor: Colors.black38,
-            labelColor: Colors.purple[900],
-            indicator: const BoxDecoration(
+            labelColor: GlobalColors.iconColor,
+            indicator: BoxDecoration(
               border: Border(
                 bottom: BorderSide(
-                  color: Colors.purple,
+                  color: GlobalColors.titlePrimaryColor,
                   width: 5,
                 ),
               ),

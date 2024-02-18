@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../Models/usuario.dart';
 
-
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
@@ -165,16 +164,24 @@ class AuthService {
       User? user = _auth.currentUser;
 
       if (user != null) {
-        // Eliminar la cuenta del usuario en Firebase Authentication
-        await user.delete();
-
         // Eliminar los datos del usuario en Firestore
         await _firestore.collection('usuario').doc(user.uid).delete();
 
-        // Desconectar al usuario localmente
-        await _auth.signOut();
-        await _googleSignIn.signOut();
+        // Eliminar la cuenta del usuario en Firebase Authentication
+        await user.delete();
+      } else {
+        // Si no hay usuario autenticado, eliminar la colección datatest
+        await _firestore.collection('datatest').get().then((querySnapshot) {
+          // ignore: avoid_function_literals_in_foreach_calls
+          querySnapshot.docs.forEach((doc) async {
+            await doc.reference.delete();
+          });
+        });
       }
+
+      // Desconectar al usuario localmente
+      await _auth.signOut();
+      await _googleSignIn.signOut();
     } catch (e) {
       // Manejar errores
       if (e is FirebaseAuthException) {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../Components/custom_floatingbutton.dart';
 import '../Routes/routes_pages.dart';
@@ -56,12 +55,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Cambiar el color de la barra de estado y el estilo del texto
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
-      statusBarColor: Colors.white, // Color transparente
-      statusBarIconBrightness: Brightness.dark, // Iconos en blanco
-    ));
-
     return Scaffold(
       bottomNavigationBar: myCNB,
       body: RoutesPages(index: index),

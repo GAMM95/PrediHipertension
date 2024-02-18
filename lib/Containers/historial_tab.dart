@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart'; // Importa la librería de formateo de fechas
+import 'package:predihipertension/Services/methods_auth.dart';
+import '../Screens/detalletest_screen.dart';
 import '../Theme/global_colors.dart';
-import '../Components/custom_card.dart';
-import '../Utilities/detalle_test.dart';
+import '../Components/custom_card.dart'; // Importa el servicio FirestoreService
 
 class HistorialTab extends StatefulWidget {
   const HistorialTab({super.key});
@@ -11,8 +13,7 @@ class HistorialTab extends StatefulWidget {
 }
 
 class _HistorialTabState extends State<HistorialTab> {
-  TextEditingController edadController = TextEditingController();
-  TextEditingController imcController = TextEditingController();
+  final MethodsAuth _methodsAuth = MethodsAuth();
 
   @override
   Widget build(BuildContext context) {
@@ -44,25 +45,67 @@ class _HistorialTabState extends State<HistorialTab> {
               child: Column(
                 children: [
                   CustomCard(
-                    title: 'Fecha de test',
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            const Expanded(
-                              child: Text('Fecha Test'),
-                            ),
-                            IconButton(
-                              onPressed: _mostrarDetalleTest,
-                              icon: Icon(
-                                Icons.info_outline,
-                                color: GlobalColors.hintText,
+                    title: 'Fechas de Test',
+                    child: FutureBuilder<List<DateTime>>(
+                      future: _methodsAuth.getDataTestDates(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const CircularProgressIndicator();
+                        } else if (snapshot.hasError) {
+                          return Text('Error: ${snapshot.error}');
+                        } else {
+                          final dates = snapshot.data;
+                          if (dates != null && dates.isNotEmpty) {
+                            return Column(
+                              children: dates.map((date) {
+                                return ListTile(
+                                  title: Text(
+                                    DateFormat('dd/MM/yyyy - HH:mm a')
+                                        .format(date),
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  trailing: IconButton(
+                                    // icon: Icon(
+                                    //   Icons.info_outline,
+                                    //   color: GlobalColors.cardColor,
+                                    // ),
+                                    // onPressed: () {
+                                    //   Navigator.of(context)
+                                    //       .pushNamed('/detalletest');
+                                    // },
+                                    icon: Icon(
+                                      Icons.info_outline,
+                                      color: GlobalColors.cardColor,
+                                    ),
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              DetalleTest(date: date),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                );
+                              }).toList(),
+                            );
+                          } else {
+                            return Container(
+                              height: 40.0,
+                              alignment: Alignment.center,
+                              child: const Text(
+                                'Usted no tiene ningún test',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
+                            );
+                          }
+                        }
+                      },
                     ),
                   ),
                   const SizedBox(height: 20.0),
@@ -73,9 +116,5 @@ class _HistorialTabState extends State<HistorialTab> {
         ),
       ],
     );
-  }
-
-  void _mostrarDetalleTest() {
-    DetalleTest.mostrarDetalle(context, imcController);
   }
 }
