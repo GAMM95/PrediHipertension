@@ -3,7 +3,7 @@ import '../Theme/global_colors.dart';
 
 class CustomDropDown extends StatefulWidget {
   final String hintText;
-  final Text label;
+  final String? label;
   final List<String> items;
   final String? defaultValue;
   final TextEditingController? controller; // Agrega el parámetro controller
@@ -11,7 +11,7 @@ class CustomDropDown extends StatefulWidget {
   const CustomDropDown({
     super.key,
     required this.hintText,
-    required this.label,
+    this.label,
     required this.items,
     this.defaultValue,
     this.controller,
@@ -37,7 +37,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
         value: dropdownValue.isNotEmpty ? dropdownValue : null,
         itemHeight: 50,
         decoration: InputDecoration(
-          labelText: widget.label.data,
+          labelText: widget.label,
           labelStyle: TextStyle(
             color: GlobalColors.hintText,
             fontSize: 16,

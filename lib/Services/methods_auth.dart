@@ -42,9 +42,27 @@ class MethodsAuth {
         // Guardar los datos del test en Firestore
         await _firestore.collection('datatest').add({
           'userId': user.uid,
-          'edad': datatest.age,
-          'genero': datatest.genere,
+          'edadIngresada': datatest.edadIngresada,
+          'edadAgrupada': datatest.edadAgrupada,
+          'genero': datatest.sexo,
+          'educacion': datatest.educacion,
+          'ingresos': datatest.ingreso,
           'imc': datatest.imc,
+          'saludGeneral': datatest.saludGeneral,
+          'saludFisica': datatest.saludFisica,
+          'saludMental': datatest.saludMental,
+          'dificultadCaminar': datatest.dificultadCaminar,
+          'consumoFrutas': datatest.consumoFrutas,
+          'consumoVerduras': datatest.consumoVerduras,
+          'consumoCigarros': datatest.consumoCigarros,
+          'consumoAlcohol': datatest.consumoAlcohol,
+          'actividadFisica': datatest.actividadFisica,
+          'colesterol': datatest.colesterol,
+          'chequeoColesterol': datatest.chequeoColesterol,
+          'acv': datatest.acv,
+          'diabetes': datatest.diabetes,
+          'enfermedadCardiaca': datatest.enfermedadCardiaca,
+
           // Agregar más campos si es necesario
           'timestamp': Timestamp.now(), // Para guardar la fecha y hora del test
         });
@@ -75,6 +93,9 @@ class MethodsAuth {
           DateTime date = timestamp.toDate();
           datasetDates.add(date);
         }
+
+        // Ordenar las fechas en orden descendente
+        datasetDates.sort((a, b) => b.compareTo(a));
       }
 
       return datasetDates;
@@ -99,13 +120,52 @@ class MethodsAuth {
 
       // Iterar sobre los documentos y obtener los datos del test
       for (var doc in querySnapshot.docs) {
-        int edad = doc['edad'];
+        int edadingresada = doc['edadIngresada'];
+        int edadAgrupada = doc['edadAgrupada'];
         int genero = doc['genero'];
+        int educacion = doc['educacion'];
+        int ingresos = doc['ingresos'];
         double imc = doc['imc'];
+        int saludGeneral = doc['saludGeneral'];
+        int saludFisica = doc['saludFisica'];
+        int saludMental = doc['saludMental'];
+        int dificultadCaminar = doc['dificultadCaminar'];
+        int consumoFrutas = doc['consumoFrutas'];
+        int consumoVerduras = doc['consumoVerduras'];
+        int consumoCigarros = doc['consumoCigarros'];
+        int consumoAlcohol = doc['consumoAlcohol'];
+        int actividadFisica = doc['actividadFisica'];
+        int colesterol = doc['colesterol'];
+        int chequeoColesterol = doc['chequeoColesterol'];
+        int acv = doc['acv'];
+        int diabetes = doc['diabetes'];
+        int enfermedadCardiaca = doc['enfermedadCardiaca'];
+
         // Agrega más campos según sea necesario
 
         // Crea un objeto Datatest con los datos obtenidos
-        Datatest dataTest = Datatest(age: edad, genere: genero, imc: imc);
+        Datatest dataTest = Datatest(
+          edadIngresada: edadingresada,
+          edadAgrupada: edadAgrupada,
+          sexo: genero,
+          educacion: educacion,
+          ingreso: ingresos,
+          imc: imc,
+          saludGeneral: saludGeneral,
+          saludFisica: saludFisica,
+          saludMental: saludMental,
+          dificultadCaminar: dificultadCaminar,
+          consumoFrutas: consumoFrutas,
+          consumoVerduras: consumoVerduras,
+          consumoCigarros: consumoCigarros,
+          consumoAlcohol: consumoAlcohol,
+          actividadFisica: actividadFisica,
+          colesterol: colesterol,
+          chequeoColesterol: chequeoColesterol,
+          acv: acv,
+          diabetes: diabetes,
+          enfermedadCardiaca: enfermedadCardiaca,
+        );
         dataTestList.add(dataTest);
       }
 

@@ -40,17 +40,19 @@ class _CustomPasswordTextFieldState extends State<CustomPasswordTextField> {
       },
       style: const TextStyle(color: Colors.white),
       decoration: InputDecoration(
-        suffixIcon: IconButton(
+        suffixIcon: Padding(
           padding: const EdgeInsetsDirectional.only(end: 12.0),
-          color: GlobalColors.hintText,
-          icon: obscureText
-              ? const Icon(Icons.visibility)
-              : const Icon(Icons.visibility_off),
-          onPressed: () {
-            setState(() {
-              obscureText = !obscureText;
-            });
-          },
+          child: IconButton(
+            color: GlobalColors.hintText,
+            icon: obscureText
+                ? const Icon(Icons.visibility)
+                : const Icon(Icons.visibility_off),
+            onPressed: () {
+              setState(() {
+                obscureText = !obscureText;
+              });
+            },
+          ),
         ),
         label: widget.label,
         labelStyle: TextStyle(

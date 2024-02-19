@@ -1,22 +1,70 @@
 class Datatest {
-  final int age;
-  final int genere;
+  final int edadIngresada;
+  final int edadAgrupada;
+  final int sexo;
+  final int educacion;
+  final int ingreso;
   final double imc;
-  // final Usuario usuario;
+  final int saludGeneral;
+  final int saludFisica;
+  final int saludMental;
+  final int dificultadCaminar;
+  final int consumoFrutas;
+  final int consumoVerduras;
+  final int consumoCigarros;
+  final int consumoAlcohol;
+  final int actividadFisica;
+  final int colesterol;
+  final int chequeoColesterol;
+  final int acv;
+  final int diabetes;
+  final int enfermedadCardiaca;
 
   Datatest({
-    required this.age,
-    required this.genere,
-    // required this.usuario,
+    required this.edadIngresada,
+    required this.edadAgrupada,
+    required this.sexo,
     required this.imc,
+    required this.educacion,
+    required this.ingreso,
+    required this.saludGeneral,
+    required this.saludFisica,
+    required this.saludMental,
+    required this.dificultadCaminar,
+    required this.consumoFrutas,
+    required this.consumoVerduras,
+    required this.consumoCigarros,
+    required this.consumoAlcohol,
+    required this.actividadFisica,
+    required this.colesterol,
+    required this.chequeoColesterol,
+    required this.acv,
+    required this.diabetes,
+    required this.enfermedadCardiaca,
   });
 
   factory Datatest.fromMap(Map<String, dynamic> map) {
     return Datatest(
-      age: map['age'] as int,
-      genere: map['genere'] as int,
+      edadIngresada: map['edadIngresada'] as int,
+      edadAgrupada: map['edadAgrupada'] as int,
+      sexo: map['genero'] as int,
+      educacion: map['educacion'] as int,
+      ingreso: map['ingresos'] as int,
       imc: map['imc'] as double,
-      // usuario: Usuario.fromMap(map['usuario'] as Map<String, dynamic>),
+      saludGeneral: map['saludGeneral'] as int,
+      saludFisica: map['saludFisica'] as int,
+      saludMental: map['saludMental'] as int,
+      dificultadCaminar: map['dificultadCaminar'] as int,
+      consumoFrutas: map['consumoFrutas'] as int,
+      consumoVerduras: map['consumoVerduras'] as int,
+      consumoCigarros: map['consumoCigarros'] as int,
+      consumoAlcohol: map['consumoAlcohol'] as int,
+      actividadFisica: map['actividadFisica'] as int,
+      colesterol: map['colesterol'] as int,
+      chequeoColesterol: map['chequeoColesterol'] as int,
+      acv: map['acv'] as int,
+      diabetes: map['diabetes'] as int,
+      enfermedadCardiaca: map['enfermedadCardiaca'] as int,
     );
   }
 }

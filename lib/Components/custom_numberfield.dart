@@ -6,7 +6,7 @@ import '../Theme/global_colors.dart';
 class CustomNumberField extends StatefulWidget {
   final TextEditingController? controller;
   final String hintText;
-  final Text label;
+  final String? label;
   final bool enabled;
   final String validator;
   final int cifras;
@@ -15,7 +15,7 @@ class CustomNumberField extends StatefulWidget {
   const CustomNumberField({
     super.key,
     required this.hintText,
-    required this.label,
+    this.label, 
     required this.validator,
     required this.controller,
     required this.enabled,
@@ -45,7 +45,7 @@ class _CustomNumberFieldState extends State<CustomNumberField> {
         LengthLimitingTextInputFormatter(widget.cifras), // Limitar a 2 dígitos
       ],
       decoration: InputDecoration(
-        labelText: widget.label.data,
+        labelText: widget.label, // Usar widget.label directamente
         labelStyle: TextStyle(
           color: GlobalColors.hintText,
           fontSize: 16,

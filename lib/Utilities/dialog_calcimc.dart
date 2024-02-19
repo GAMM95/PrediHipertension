@@ -36,23 +36,8 @@ class CalculoIMC {
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                // Imagen Talla - Peso - IMC
-                Center(
-                  child: InteractiveViewer(
-                    maxScale: 5.0,
-                    minScale: 1.0,
-                    child: Image.asset('assets/images/imc.png'),
-                  ),
-                ),
-                const Text(
-                  '* Haga zoom para visualizar mejor la imagen',
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
 
-                const SizedBox(height: 20),
+                const SizedBox(height: 10),
 
                 // TextField Peso
                 CustomNumberFieldDark(
@@ -62,10 +47,9 @@ class CalculoIMC {
                   label: const Text('Peso (kg)'),
                   validator: 'Ingrese su peso',
                   controller: pesoController,
+                  showNextButton: true,
                 ),
-
                 const SizedBox(height: 10),
-
                 // TextField Altura
                 CustomNumberFieldDark(
                   hintText: 'Ingrese su altura en m',
@@ -75,9 +59,7 @@ class CalculoIMC {
                   validator: 'Ingrese su altura',
                   controller: alturaController,
                 ),
-
                 const SizedBox(height: 10),
-
                 // Boton Calcular IMC
                 ElevatedButton(
                   onPressed: () {
@@ -91,6 +73,22 @@ class CalculoIMC {
                     Navigator.of(context).pop();
                   },
                   child: const Text('Calcular'),
+                ),
+
+                /// Imagen Talla - Peso - IMC
+                Center(
+                  child: InteractiveViewer(
+                    maxScale: 5.0,
+                    minScale: 1.0,
+                    child: Image.asset('assets/images/imc.png'),
+                  ),
+                ),
+                const Text(
+                  '* Haga zoom para visualizar mejor la imagen',
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
               ],
             ),

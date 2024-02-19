@@ -57,25 +57,18 @@ class _HistorialTabState extends State<HistorialTab> {
                         } else {
                           final dates = snapshot.data;
                           if (dates != null && dates.isNotEmpty) {
+                            dates.sort((a, b) => b.compareTo(a));
                             return Column(
                               children: dates.map((date) {
                                 return ListTile(
                                   title: Text(
-                                    DateFormat('dd/MM/yyyy - HH:mm a')
+                                    DateFormat('dd/MM/yyyy - hh:mm a')
                                         .format(date),
                                     style: const TextStyle(
                                       color: Colors.white,
                                     ),
                                   ),
                                   trailing: IconButton(
-                                    // icon: Icon(
-                                    //   Icons.info_outline,
-                                    //   color: GlobalColors.cardColor,
-                                    // ),
-                                    // onPressed: () {
-                                    //   Navigator.of(context)
-                                    //       .pushNamed('/detalletest');
-                                    // },
                                     icon: Icon(
                                       Icons.info_outline,
                                       color: GlobalColors.cardColor,

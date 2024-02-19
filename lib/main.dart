@@ -25,8 +25,8 @@ class MyApp extends StatelessWidget {
     Timer(const Duration(seconds: 5), () {
       //   // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
       //   //     overlays: [SystemUiOverlay.top]);
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky,
-          overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
+      // SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky,
+      //     overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
       //   // SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge,
       //   //     overlays: [SystemUiOverlay.bottom]);
 

@@ -7,6 +7,7 @@ import 'package:predihipertension/Utilities/custom_dialogs.dart';
 import 'package:predihipertension/Widget/custom_listDetail.dart';
 import 'package:predihipertension/Services/methods_auth.dart';
 import '../Models/datatest.dart';
+import '../Utilities/logica.dart';
 
 class DetalleTest extends StatefulWidget {
   final DateTime date;
@@ -25,6 +26,8 @@ class CustomListItemData {
 
 class _DetalleTestState extends State<DetalleTest> {
   final MethodsAuth _methodsAuth = MethodsAuth();
+  final TestLogic _testLogic = TestLogic();
+
   List<CustomListItemData> dataList = [];
 
   @override
@@ -39,23 +42,62 @@ class _DetalleTestState extends State<DetalleTest> {
           await _methodsAuth.getDataTestByDate(widget.date);
       setState(() {
         dataList = [
-          CustomListItemData('Edad', '${dataTestList[0].age}'),
-          CustomListItemData('Género', _getGenderText(dataTestList[0].genere)),
           CustomListItemData(
-              'Índice de Masa Corporal - (IMC)', '${dataTestList[0].imc}'),
+              '1. Edad:', '${dataTestList[0].edadIngresada} años'),
+          CustomListItemData(
+              '2. Género:', _testLogic.getGenderText(dataTestList[0].sexo)),
+          CustomListItemData('3. Nivel de educación:',
+              _testLogic.getEducationText(dataTestList[0].educacion)),
+          CustomListItemData('4. Ingreso promedio anual:',
+              _testLogic.getIncomeText(dataTestList[0].ingreso)),
+          CustomListItemData(
+              '5. Índice de Masa Corporal - (IMC):', '${dataTestList[0].imc}'),
+          CustomListItemData('6. Estado de salud percibida:',
+              _testLogic.getDiffWalkText(dataTestList[0].dificultadCaminar)),
+          CustomListItemData(
+              '7. Cantidad de días en la que considera su estado de salud física no fue tan buena:',
+              '${dataTestList[0].saludFisica} días'),
+          CustomListItemData(
+              '8. Cantidad de días en la que considera su estado de salud mental no fue tan buena:',
+              '${dataTestList[0].saludMental} días'),
+          CustomListItemData(
+              '9. Presenta serias dificultades para caminar o subir escaleras:',
+              _testLogic.getDiffWalkText(dataTestList[0].dificultadCaminar)),
+          CustomListItemData('10. Consumo de frutas de una a más veces al día:',
+              _testLogic.getFruitText(dataTestList[0].consumoFrutas)),
+          CustomListItemData(
+              '11. Consumo de verduras de una a más veces al día:',
+              _testLogic.getVeggiesText(dataTestList[0].consumoVerduras)),
+          CustomListItemData('12. Consumo de al menos 100 cigarros en su vida:',
+              _testLogic.getSmokeText(dataTestList[0].consumoCigarros)),
+          CustomListItemData('13. Se considera bebedor empedernido:',
+              _testLogic.getAlcoholText(dataTestList[0].consumoAlcohol)),
+          CustomListItemData(
+              '14. Ha realizado actividad física durante los últimos 30 días:',
+              _testLogic.getPhysActivityText(dataTestList[0].actividadFisica)),
+          CustomListItemData(
+              '15. Profesional de la salud le indico que tiene colesterol alto en la sangre:',
+              _testLogic.getCholesterolText(dataTestList[0].colesterol)),
+          CustomListItemData(
+              '16. Ha realizado un control de colesterol en los últimos 5 años:',
+              _testLogic.getCheckCholText(dataTestList[0].chequeoColesterol)),
+          CustomListItemData('17. Estado de diabetes:',
+              _testLogic.getDiabetesText(dataTestList[0].diabetes)),
+          CustomListItemData(
+              '18. Ha presentado un accidente cerebrovascular (acv):',
+              _testLogic.getAcvText(dataTestList[0].acv)),
+          CustomListItemData(
+              '19. Ha presentado una enfermedad o ataque cardiaco:',
+              _testLogic.getHeartText(dataTestList[0].enfermedadCardiaca)),
         ];
       });
     } catch (e) {
       CustomDialogs.showErrorDialog(
         context,
-        'Error',
+        'Advertencia',
         'Error al cargar los datos del test',
       );
     }
-  }
-
-  String _getGenderText(int gender) {
-    return gender == 0 ? 'Masculino' : 'Femenino';
   }
 
   @override
