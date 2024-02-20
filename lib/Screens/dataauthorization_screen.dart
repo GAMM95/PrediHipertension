@@ -42,7 +42,7 @@ class _DataAuthScreenState extends State<DataAuthScreen> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: GlobalColors.titlePanel,
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: FontWeight.w600,
                       ),
                     ),

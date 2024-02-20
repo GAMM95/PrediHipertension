@@ -13,7 +13,7 @@ class Parragraph extends StatelessWidget {
       textAlign: TextAlign.justify,
       style: TextStyle(
         color: GlobalColors.textColor,
-        fontSize: 16.0,
+        fontSize: 14.0,
         fontWeight: FontWeight.w400,
       ),
     );

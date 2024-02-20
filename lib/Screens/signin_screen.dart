@@ -157,7 +157,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           child: Text(
                             'Continuar',
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: 16,
                               color: GlobalColors.textColor,
                             ),
                           ), // Nombre del boton
@@ -203,6 +203,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               '¿Has olvidado tu contraseña?',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
+                                fontSize: 14.0,
                                 color: lightColorScheme.secondary,
                               ),
                             ),
@@ -333,7 +334,7 @@ class _SignInScreenState extends State<SignInScreen> {
               'Inicia Sesión',
               style: TextStyle(
                 color: GlobalColors.titlePrimaryColor,
-                fontSize: 26,
+                fontSize: 22,
                 fontWeight: FontWeight.w600,
               ),
             ),

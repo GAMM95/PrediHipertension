@@ -40,7 +40,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
           labelText: widget.label,
           labelStyle: TextStyle(
             color: GlobalColors.hintText,
-            fontSize: 16,
+            fontSize: 14,
           ),
           hintText: widget.hintText,
           hintStyle: TextStyle(
@@ -78,7 +78,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
             child: Text(
               item,
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 14,
                 fontWeight: FontWeight.w400,
                 color: GlobalColors.hintText,
               ),

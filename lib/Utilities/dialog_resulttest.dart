@@ -27,7 +27,7 @@ class ResultadoDialog {
                 child: Text(
                   'Este es tu resultado',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 16),
                 ),
               ),
             ],

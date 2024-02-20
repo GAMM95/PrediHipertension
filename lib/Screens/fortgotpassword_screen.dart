@@ -62,7 +62,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: GlobalColors.titlePanel,
-                    fontSize: 25,
+                    fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -72,7 +72,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   textAlign: TextAlign.justify,
                   style: TextStyle(
                     color: GlobalColors.textColor,
-                    fontSize: 17.0,
+                    fontSize: 14.0,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -130,7 +130,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           },
                           child: const Text(
                             'Enviar',
-                            style: TextStyle(fontSize: 16),
+                            style: TextStyle(fontSize: 14),
                           ),
                         ),
                       ),
@@ -145,7 +145,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       '¿Quieres iniciar sesión? ',
                       style: TextStyle(
                         color: GlobalColors.textColor,
-                        fontSize: 15.0,
+                        fontSize: 13.0,
                       ),
                     ),
                     const SizedBox(width: 8.0),
@@ -156,7 +156,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       child: Text(
                         'Regresar',
                         style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 13,
                           fontWeight: FontWeight.bold,
                           color: GlobalColors.linkText,
                         ),

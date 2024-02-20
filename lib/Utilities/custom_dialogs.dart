@@ -14,8 +14,7 @@ class CustomDialogs {
       context: context,
       builder: (context) {
         Future.delayed(const Duration(seconds: 3), () {
-          Navigator.of(context)
-              .pop(true); // Cierra el diálogo después de 3 segundos
+          Navigator.of(context).pop(true);
         });
         return AlertDialog(
           backgroundColor: Colors.red[50],
@@ -27,7 +26,7 @@ class CustomDialogs {
           title: Text(
             title,
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 16,
               fontWeight: FontWeight.bold,
               color: GlobalColors.titleColor,
             ),
@@ -36,7 +35,7 @@ class CustomDialogs {
             message,
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 14,
               color: GlobalColors.titleColor,
             ),
           ),
@@ -52,8 +51,7 @@ class CustomDialogs {
       context: context,
       builder: (context) {
         Future.delayed(const Duration(seconds: 4), () {
-          Navigator.of(context)
-              .pop(true); // Cierra el diálogo después de 3 segundos
+          Navigator.of(context).pop(true);
         });
         return AlertDialog(
           backgroundColor: Colors.red[50],
@@ -65,7 +63,7 @@ class CustomDialogs {
           title: Text(
             title,
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 16,
               color: GlobalColors.titleColor,
               fontWeight: FontWeight.bold,
             ),
@@ -74,7 +72,7 @@ class CustomDialogs {
             message,
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 14,
               color: GlobalColors.titleColor,
             ),
           ),
@@ -103,7 +101,7 @@ class CustomDialogs {
           title: Text(
             title,
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 16,
               color: GlobalColors.titleColor,
               fontWeight: FontWeight.bold,
             ),
@@ -112,7 +110,7 @@ class CustomDialogs {
             message,
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 14,
               color: GlobalColors.titleColor,
             ),
           ),
@@ -137,7 +135,7 @@ class CustomDialogs {
             '¿Seguro que quieres salir?',
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 16,
               fontWeight: FontWeight.w500,
               color: GlobalColors.titleColor,
             ),
@@ -152,7 +150,7 @@ class CustomDialogs {
               child: const Text(
                 'Sí',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 14,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -164,7 +162,7 @@ class CustomDialogs {
               child: Text(
                 'No',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 14,
                   fontWeight: FontWeight.w500,
                   color: GlobalColors.titleColor,
                 ),
@@ -192,7 +190,7 @@ class CustomDialogs {
           title: Text(
             title,
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 16,
               color: GlobalColors.titleColor,
               fontWeight: FontWeight.bold,
             ),
@@ -201,7 +199,7 @@ class CustomDialogs {
             message,
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 14,
               color: GlobalColors.titleColor,
             ),
           ),
@@ -217,7 +215,7 @@ class CustomDialogs {
               child: const Text(
                 'Eliminar',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 14,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -229,7 +227,7 @@ class CustomDialogs {
               child: Text(
                 'Cancelar',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 14,
                   fontWeight: FontWeight.w500,
                   color: GlobalColors.titleColor,
                 ),
@@ -266,7 +264,7 @@ class CustomDialogs {
                 child: Text(
                   'Este es tu resultado',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 16),
                 ),
               ),
             ],

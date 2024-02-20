@@ -147,8 +147,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               style: TextStyle(
                                 color: lightColorScheme.secondary,
                                 fontWeight: FontWeight.w500,
-                                fontSize: 15.0,
-                                letterSpacing: 0.8,
+                                fontSize: 13.0,
                               ),
                             ),
                           ),
@@ -178,8 +177,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               style: TextStyle(
                                 color: lightColorScheme.secondary,
                                 fontWeight: FontWeight.w500,
-                                fontSize: 15.0,
-                                letterSpacing: 0.8,
+                                fontSize: 13.0,
                               ),
                             ),
                           ),
@@ -260,7 +258,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           child: Text(
                             'Unirse',
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: 16,
                               color: GlobalColors.textColor,
                             ),
                           ),
@@ -345,7 +343,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               'Únete a PrediHipertension',
               style: TextStyle(
                 color: GlobalColors.titlePrimaryColor,
-                fontSize: 26,
+                fontSize: 22,
                 fontWeight: FontWeight.w600,
               ),
             ),

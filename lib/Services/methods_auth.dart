@@ -109,7 +109,6 @@ class MethodsAuth {
   // Método para obtener los datos del test para una fecha específica
   Future<List<Datatest>> getDataTestByDate(DateTime date) async {
     List<Datatest> dataTestList = [];
-
     try {
       // Consultar los datos del test para la fecha especificada
       QuerySnapshot querySnapshot = await _firestore
@@ -141,8 +140,6 @@ class MethodsAuth {
         int diabetes = doc['diabetes'];
         int enfermedadCardiaca = doc['enfermedadCardiaca'];
 
-        // Agrega más campos según sea necesario
-
         // Crea un objeto Datatest con los datos obtenidos
         Datatest dataTest = Datatest(
           edadIngresada: edadingresada,
@@ -173,6 +170,31 @@ class MethodsAuth {
     } catch (e) {
       // Manejar errores
       // print('Error al obtener los datos del test: $e');
+      rethrow;
+    }
+  }
+
+  // Método para eliminar un test basado en la fecha
+  Future<void> deleteTestByDateTime(DateTime dateTime) async {
+    try {
+      final User? user = _auth.currentUser;
+      if (user != null) {
+        QuerySnapshot querySnapshot = await _firestore
+            .collection('datatest')
+            .where('userId', isEqualTo: user.uid)
+            .get();
+
+        // Iterar sobre los documentos y eliminar aquellos que coincidan con la fecha y hora
+        // ignore: avoid_function_literals_in_foreach_calls
+        querySnapshot.docs.forEach((doc) async {
+          Timestamp timestamp = doc['timestamp'];
+          DateTime documentDateTime = timestamp.toDate();
+          if (documentDateTime.isAtSameMomentAs(dateTime)) {
+            await doc.reference.delete();
+          }
+        });
+      }
+    } catch (error) {
       rethrow;
     }
   }

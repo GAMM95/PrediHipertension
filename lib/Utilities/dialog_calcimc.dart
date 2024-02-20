@@ -21,6 +21,7 @@ class CalculoIMC {
             textAlign: TextAlign.center,
             style: TextStyle(
               fontWeight: FontWeight.w500,
+              fontSize: 16.0,
             ),
           ),
           content: SingleChildScrollView(
@@ -32,7 +33,7 @@ class CalculoIMC {
                   'Aquí puedes calcular tu Índice de Masa Corporal (IMC). Este valor se utiliza para estimar la cantidad de grasa corporal.',
                   textAlign: TextAlign.justify,
                   style: TextStyle(
-                    fontSize: 15,
+                    fontSize: 14.0,
                     fontWeight: FontWeight.w400,
                   ),
                 ),

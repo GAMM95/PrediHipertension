@@ -61,7 +61,10 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text(
           '$_saludo $_nombreUsuario',
-          style: TextStyle(color: GlobalColors.saludoText),
+          style: TextStyle(
+            color: GlobalColors.saludoText,
+            fontSize: 18,
+          ),
         ),
         centerTitle: false,
         elevation: 4,

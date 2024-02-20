@@ -25,7 +25,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           Flexible(
             flex: 8,
             child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 40),
+              padding: const EdgeInsets.symmetric(
+                vertical: 0,
+                horizontal: 4,
+              ),
               child: Align(
                 alignment: Alignment.topCenter,
                 child: RichText(
@@ -34,7 +37,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     TextSpan(
                       text: '¡Bienvenido de vuelta!\n',
                       style: TextStyle(
-                        fontSize: 40,
+                        fontSize: 38,
                         fontWeight: FontWeight.w600,
                       ),
                     ),

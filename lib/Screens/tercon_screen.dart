@@ -41,7 +41,7 @@ class _TerminosCondicionesScreenState extends State<TerminosCondicionesScreen> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: GlobalColors.titlePanel,
-                        fontSize: 20,
+                        fontSize: 16,
                         fontWeight: FontWeight.w600,
                       ),
                     ),

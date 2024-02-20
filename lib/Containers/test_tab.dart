@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:predihipertension/Utilities/title_tab.dart';
 import '../Utilities/logica.dart';
 import '../Utilities/parragraph.dart';
 import '../Theme/global_colors.dart';
@@ -50,22 +51,7 @@ class _TestTabState extends State<TestTab> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          color: GlobalColors.bgPanelDark2,
-          width: MediaQuery.of(context).size.width,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 15.0),
-            child: Text(
-              'Test de Hipertensión Arterial',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 25,
-                color: GlobalColors.titlePanel,
-              ),
-            ),
-          ),
-        ),
+        const TituloTab(titulo: 'Test de Hipertensión Arterial'),
         Expanded(
           child: SingleChildScrollView(
             child: Container(
@@ -427,17 +413,10 @@ class _TestTabState extends State<TestTab> {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: _mostrarResultadoDialog,
-                        // onPressed:
-                        //     allFieldsFilled ? _mostrarResultadoDialog : null,
-                        // style: ElevatedButton.styleFrom(
-                        //   backgroundColor: allFieldsFilled
-                        //       ? null
-                        //       : Colors.blue.withOpacity(0.5),
-                        // ),
                         child: const Text(
                           'Evaluar',
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 14,
                             letterSpacing: 1.0,
                           ),
                         ),

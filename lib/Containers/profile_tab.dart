@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:predihipertension/Utilities/title_tab.dart';
 import '../Components/custom_card.dart';
 import '../Services/firebase_auth.dart';
 import '../Theme/global_colors.dart';
@@ -36,22 +37,7 @@ class _ProfileTabState extends State<ProfileTab> {
       color: GlobalColors.bgDark2,
       child: Column(
         children: [
-          Container(
-            color: GlobalColors.bgPanelDark2,
-            width: MediaQuery.of(context).size.width,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 15.0),
-              child: Text(
-                'Mi perfil',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 25,
-                  color: GlobalColors.textColor,
-                ),
-              ),
-            ),
-          ),
+          const TituloTab(titulo: 'Mi perfil'),
           Expanded(
             child: Center(
               child: SingleChildScrollView(
@@ -92,13 +78,14 @@ class _ProfileTabState extends State<ProfileTab> {
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: GlobalColors.textColor,
+                                fontSize: 16.0,
                               ),
                             ),
                             subtitle: Text(
                               currentUser!.displayName ?? '',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                fontSize: 16.0,
+                                fontSize: 14.0,
                                 color: GlobalColors.textColor,
                               ),
                             ),
@@ -109,13 +96,14 @@ class _ProfileTabState extends State<ProfileTab> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: GlobalColors.textColor,
+                              fontSize: 16.0,
                             ),
                           ),
                           subtitle: Text(
                             currentUser!.email ?? '',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontSize: 16.0,
+                              fontSize: 14.0,
                               color: GlobalColors.textColor,
                             ),
                           ),
@@ -132,12 +120,11 @@ class _ProfileTabState extends State<ProfileTab> {
                               },
                               child: const Text(
                                 'Cerrar sesión',
-                                style: TextStyle(fontSize: 16),
+                                style: TextStyle(fontSize: 14),
                               ),
                             ),
                           ),
                         ),
-                        const SizedBox(height: 20.0),
                         Padding(
                           padding: const EdgeInsets.all(15.0),
                           child: SizedBox(
@@ -154,7 +141,7 @@ class _ProfileTabState extends State<ProfileTab> {
                               },
                               child: const Text(
                                 'Eliminar cuenta',
-                                style: TextStyle(fontSize: 16),
+                                style: TextStyle(fontSize: 14),
                               ),
                             ),
                           ),

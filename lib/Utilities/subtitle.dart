@@ -13,7 +13,7 @@ class Subtitle extends StatelessWidget {
       textAlign: TextAlign.start,
       style: TextStyle(
         color: GlobalColors.textColor,
-        fontSize: 18.0,
+        fontSize: 16.0,
         fontWeight: FontWeight.w600,
       ),
     );

@@ -48,7 +48,7 @@ class SocialIcons extends StatelessWidget {
             Text(
               texto,
               style: const TextStyle(
-                fontSize: 16,
+                fontSize: 14,
                 fontWeight: FontWeight.w500,
               ),
             ),

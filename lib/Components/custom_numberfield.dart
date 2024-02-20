@@ -48,7 +48,7 @@ class _CustomNumberFieldState extends State<CustomNumberField> {
         labelText: widget.label, // Usar widget.label directamente
         labelStyle: TextStyle(
           color: GlobalColors.hintText,
-          fontSize: 16,
+          fontSize: 14,
         ),
         hintText: widget.hintText,
         hintStyle: TextStyle(

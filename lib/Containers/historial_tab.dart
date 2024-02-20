@@ -1,9 +1,13 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart'; // Importa la librería de formateo de fechas
-import 'package:predihipertension/Services/methods_auth.dart';
+import 'package:intl/intl.dart';
+import '../Services/methods_auth.dart';
+import '../Utilities/custom_dialogs.dart';
+import '../Utilities/title_tab.dart';
 import '../Screens/detalletest_screen.dart';
 import '../Theme/global_colors.dart';
-import '../Components/custom_card.dart'; // Importa el servicio FirestoreService
+import '../Components/custom_card.dart';
 
 class HistorialTab extends StatefulWidget {
   const HistorialTab({super.key});
@@ -19,33 +23,18 @@ class _HistorialTabState extends State<HistorialTab> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          color: GlobalColors.bgPanelDark2,
-          width: MediaQuery.of(context).size.width,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 15.0),
-            child: Text(
-              'Historial de consultas',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 25,
-                color: GlobalColors.titlePanel,
-              ),
-            ),
-          ),
-        ),
+        const TituloTab(titulo: 'Historial de consultas'),
         Expanded(
           child: SingleChildScrollView(
             child: Container(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(15.0),
               decoration: BoxDecoration(
                 color: GlobalColors.bgDark2,
               ),
               child: Column(
                 children: [
                   CustomCard(
-                    title: 'Fechas de Test',
+                    title: 'Fecha y hora de Test',
                     child: FutureBuilder<List<DateTime>>(
                       future: _methodsAuth.getDataTestDates(),
                       builder: (context, snapshot) {
@@ -61,26 +50,57 @@ class _HistorialTabState extends State<HistorialTab> {
                             return Column(
                               children: dates.map((date) {
                                 return ListTile(
-                                  title: Text(
-                                    DateFormat('dd/MM/yyyy - hh:mm a')
-                                        .format(date),
-                                    style: const TextStyle(
-                                      color: Colors.white,
+                                  title: Padding(
+                                    padding: const EdgeInsets.only(left: 0.0),
+                                    child: Text(
+                                      DateFormat('dd/MM/yyyy - hh:mm a')
+                                          .format(date),
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 14.0,
+                                      ),
                                     ),
                                   ),
-                                  trailing: IconButton(
-                                    icon: Icon(
-                                      Icons.info_outline,
-                                      color: GlobalColors.cardColor,
-                                    ),
-                                    onPressed: () {
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              DetalleTest(date: date),
+                                  trailing: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      IconButton(
+                                        icon: Icon(
+                                          Icons.info_outline,
+                                          color: GlobalColors.cardColor,
                                         ),
-                                      );
-                                    },
+                                        onPressed: () {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  DetalleTest(date: date),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                      IconButton(
+                                        icon: const Icon(
+                                          Icons.delete,
+                                          color: Colors.red,
+                                        ),
+                                        onPressed: () async {
+                                          try {
+                                            await _methodsAuth
+                                                .deleteTestByDateTime(date);
+                                            CustomDialogs.showCorrectDialog(
+                                                context,
+                                                'Mensaje',
+                                                'Se eliminó test de Hipertensión de la fecha ${DateFormat('dd/MM/yyyy - hh:mm a').format(date)}');
+                                            setState(() {});
+                                          } catch (error) {
+                                            CustomDialogs.showErrorDialog(
+                                                context,
+                                                'Advertencia',
+                                                'No se pudo eliminar test de Hipertensión de la fecha ${DateFormat('dd/MM/yyyy - hh:mm a').format(date)}');
+                                          }
+                                        },
+                                      ),
+                                    ],
                                   ),
                                 );
                               }).toList(),

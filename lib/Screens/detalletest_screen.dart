@@ -109,7 +109,7 @@ class _DetalleTestState extends State<DetalleTest> {
           'Detalle del Test',
           style: TextStyle(
             color: GlobalColors.titlePrimaryColor,
-            fontSize: 25.0,
+            fontSize: 22.0,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -129,7 +129,7 @@ class _DetalleTestState extends State<DetalleTest> {
         ],
         iconTheme: IconThemeData(
           color: GlobalColors.titlePrimaryColor,
-          size: 30.0,
+          size: 25.0,
         ),
       ),
       body: Column(
@@ -142,7 +142,7 @@ class _DetalleTestState extends State<DetalleTest> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: GlobalColors.cardColor,
-                fontSize: 20.0,
+                fontSize: 18.0,
                 fontWeight: FontWeight.w600,
               ),
             ),

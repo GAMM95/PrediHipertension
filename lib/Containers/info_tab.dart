@@ -18,7 +18,7 @@ class InfoTab extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               fontWeight: FontWeight.w500,
-              fontSize: 25,
+              fontSize: 22,
               // color: GlobalColors.titlePanel,
             ),
           ),

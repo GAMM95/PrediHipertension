@@ -48,7 +48,7 @@ class _CustomNumberFieldDarkState extends State<CustomNumberFieldDark> {
         labelText: widget.label.data,
         labelStyle: TextStyle(
           color: GlobalColors.bgPanelDark,
-          fontSize: 16,
+          fontSize: 14,
         ),
         hintText: widget.hintText,
         hintStyle: TextStyle(
