@@ -43,6 +43,8 @@ dependencies:
   icons_plus: ^5.0.0
   flutter_launcher_icons: ^0.13.1
   flutter_speed_dial: ^7.0.0
+  pdf: ^3.10.7
+  path_provider: ^2.1.2
   intl: ^0.19.0
 
   # Dependencias de firebase

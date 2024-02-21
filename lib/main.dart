@@ -9,31 +9,33 @@ import '../Routes/routes_screens.dart';
 import '../Screens/splash_screen.dart';
 import 'firebase_options.dart';
 
+/// Método principal de la aplicación.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Inicializa Firebase con las opciones por defecto según la plataforma actual.
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   runApp(const MyApp());
 }
 
+/// Aplicación principal.
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Temporizador para ocultar la barra de estado después de 5 segundos.
     Timer(const Duration(seconds: 5), () {
-      //   // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-      //   //     overlays: [SystemUiOverlay.top]);
-      // SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky,
-      //     overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
-      //   // SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge,
-      //   //     overlays: [SystemUiOverlay.bottom]);
-
-      //   // SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive,
-      //   //     overlays: [SystemUiOverlay.top]);
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
+        SystemUiOverlay.top,
+        SystemUiOverlay.bottom,
+      ]);
     });
 
+    // Configura el estilo de la barra de estado y la barra de navegación del sistema.
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarBrightness: Brightness.light,
       statusBarColor: Colors.transparent,
@@ -42,6 +44,7 @@ class MyApp extends StatelessWidget {
       systemNavigationBarIconBrightness: Brightness.light,
     ));
 
+    // Configura las orientaciones preferidas de la pantalla.
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,

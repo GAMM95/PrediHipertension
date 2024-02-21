@@ -9,6 +9,8 @@ import 'package:predihipertension/Services/methods_auth.dart';
 import '../Models/datatest.dart';
 import '../Utilities/logica.dart';
 
+// import 'package:pdf/widgets.dart' as pw;
+
 class DetalleTest extends StatefulWidget {
   final DateTime date;
   const DetalleTest({super.key, required this.date});
@@ -119,7 +121,22 @@ class _DetalleTestState extends State<DetalleTest> {
             padding: const EdgeInsets.only(right: 15.0),
             child: IconButton(
               onPressed: () {
-                // Acción para el ícono del PDF
+                // // Crear el PDF
+                // final pdf = pw.Document();
+
+                // // Agregar contenido al PDF
+                // pdf.addPage(
+                //   pw.Page(
+                //     build: (pw.Context context) {
+                //       return pw.Center(
+                //         child: pw.Text('Contenido del PDF'),
+                //       );
+                //     },
+                //   ),
+                // );
+
+                // // Guardar el PDF en el dispositivo
+                // _methodsAuth.savePDF(pdf);
               },
               icon: const Icon(Icons.picture_as_pdf),
               color: GlobalColors.buttonColor,
@@ -144,6 +161,25 @@ class _DetalleTestState extends State<DetalleTest> {
                 color: GlobalColors.cardColor,
                 fontSize: 18.0,
                 fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20.0),
+              child: Container(
+                color: Colors.white, // Color de fondo del contenedor
+                padding: const EdgeInsets.all(8.0),
+                child: const Text(
+                  'Resultado',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
           ),

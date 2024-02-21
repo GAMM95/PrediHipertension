@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+/// Widget reutilizable para mostrar iconos sociales.
 class SocialIcons extends StatelessWidget {
   final String ruta;
   final String texto;
@@ -16,13 +17,10 @@ class SocialIcons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onPressed, // Agregar la función onPressed al GestureDetector
+      onTap: onPressed,
       child: Container(
         alignment: Alignment.center,
-        padding: const EdgeInsets.symmetric(
-          // horizontal: 20.0,
-          vertical: 15.0,
-        ),
+        padding: const EdgeInsets.symmetric(vertical: 15.0),
         decoration: BoxDecoration(
           border: Border.all(
             color: Colors.white,

@@ -9,6 +9,7 @@ import '../Screens/detalletest_screen.dart';
 import '../Theme/global_colors.dart';
 import '../Components/custom_card.dart';
 
+/// Widget para mostrar un historial de fechas de consultas.
 class HistorialTab extends StatefulWidget {
   const HistorialTab({super.key});
 
@@ -21,31 +22,40 @@ class _HistorialTabState extends State<HistorialTab> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const TituloTab(titulo: 'Historial de consultas'),
-        Expanded(
-          child: SingleChildScrollView(
-            child: Container(
-              padding: const EdgeInsets.all(15.0),
-              decoration: BoxDecoration(
-                color: GlobalColors.bgDark2,
-              ),
-              child: Column(
-                children: [
-                  CustomCard(
+    return Container(
+      color: GlobalColors.bgDark2,
+      child: Column(
+        children: [
+          // Título para la pestaña de historial.
+          const TituloTab(titulo: 'Historial de consultas'),
+          Expanded(
+            child: Center(
+              child: SingleChildScrollView(
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.95,
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 20.0,
+                    horizontal: 10.0,
+                  ),
+                  child: CustomCard(
                     title: 'Fecha y hora de Test',
                     child: FutureBuilder<List<DateTime>>(
                       future: _methodsAuth.getDataTestDates(),
-                      builder: (context, snapshot) {
+                      builder:
+                          (context, AsyncSnapshot<List<DateTime>> snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return const CircularProgressIndicator();
+                          // Muestra un indicador de carga mientras se obtienen los datos.
+                          return const Center(
+                              child: CircularProgressIndicator());
                         } else if (snapshot.hasError) {
+                          // Muestra un mensaje de error si falla la obtención de datos.
                           return Text('Error: ${snapshot.error}');
                         } else {
+                          // Extrae los datos del snapshot.
                           final dates = snapshot.data;
                           if (dates != null && dates.isNotEmpty) {
+                            // Ordena las fechas en orden descendente.
                             dates.sort((a, b) => b.compareTo(a));
                             return Column(
                               children: dates.map((date) {
@@ -64,6 +74,7 @@ class _HistorialTabState extends State<HistorialTab> {
                                   trailing: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
+                                      // Botón para ver detalles del test.
                                       IconButton(
                                         icon: Icon(
                                           Icons.info_outline,
@@ -78,6 +89,7 @@ class _HistorialTabState extends State<HistorialTab> {
                                           );
                                         },
                                       ),
+                                      // Botón para eliminar el test.
                                       IconButton(
                                         icon: const Icon(
                                           Icons.delete,
@@ -85,18 +97,24 @@ class _HistorialTabState extends State<HistorialTab> {
                                         ),
                                         onPressed: () async {
                                           try {
+                                            // Intenta eliminar el test.
                                             await _methodsAuth
                                                 .deleteTestByDateTime(date);
+                                            // Muestra un diálogo de éxito tras la eliminación.
                                             CustomDialogs.showCorrectDialog(
-                                                context,
-                                                'Mensaje',
-                                                'Se eliminó test de Hipertensión de la fecha ${DateFormat('dd/MM/yyyy - hh:mm a').format(date)}');
+                                              context,
+                                              'Mensaje',
+                                              'Se eliminó test de Hipertensión de la fecha ${DateFormat('dd/MM/yyyy - hh:mm a').format(date)}',
+                                            );
+                                            // Actualiza la interfaz tras la eliminación.
                                             setState(() {});
                                           } catch (error) {
+                                            // Muestra un diálogo de error si la eliminación falla.
                                             CustomDialogs.showErrorDialog(
-                                                context,
-                                                'Advertencia',
-                                                'No se pudo eliminar test de Hipertensión de la fecha ${DateFormat('dd/MM/yyyy - hh:mm a').format(date)}');
+                                              context,
+                                              'Advertencia',
+                                              'No se pudo eliminar test de Hipertensión de la fecha ${DateFormat('dd/MM/yyyy - hh:mm a').format(date)}',
+                                            );
                                           }
                                         },
                                       ),
@@ -106,6 +124,7 @@ class _HistorialTabState extends State<HistorialTab> {
                               }).toList(),
                             );
                           } else {
+                            // Muestra un mensaje cuando no hay tests disponibles.
                             return Container(
                               height: 40.0,
                               alignment: Alignment.center,
@@ -121,13 +140,12 @@ class _HistorialTabState extends State<HistorialTab> {
                       },
                     ),
                   ),
-                  const SizedBox(height: 20.0),
-                ],
+                ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
