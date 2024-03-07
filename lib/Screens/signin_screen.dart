@@ -2,6 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:predihipertension/Widget/custom_button.dart';
 import '../Services/firebase_auth.dart';
 import '../Theme/global_colors.dart';
 import '../Theme/theme.dart';
@@ -71,97 +72,84 @@ class _SignInScreenState extends State<SignInScreen> {
                       const SizedBox(height: 25.0), // Espacio
 
                       /// Boton Continuar - Iniciar Sesión
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: GlobalColors.buttonColor),
-                          onPressed: () async {
-                            if (_formSignKey.currentState!.validate()) {
-                              try {
-                                // Mostrar el círculo de progreso
-                                showDialog(
-                                  context: context,
-                                  barrierDismissible: false,
-                                  builder: (context) => const Center(
-                                    child: CircularProgressIndicator(),
-                                  ),
-                                );
-                                bool isSignInSuccessful =
-                                    await _authService.signIn(
-                                  email: _emailController.text.trim(),
-                                  password: _passwordController.text.trim(),
-                                );
-                                // Retrasar la navegación a la pantalla principal por 2 segundos
-                                await Future.delayed(
-                                    const Duration(seconds: 2));
+                      CustomButton(
+                        texto: 'Continuar',
+                        onPressed: () async {
+                          if (_formSignKey.currentState!.validate()) {
+                            try {
+                              // Mostrar el círculo de progreso
+                              showDialog(
+                                context: context,
+                                barrierDismissible: false,
+                                builder: (context) => const Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                              );
+                              bool isSignInSuccessful =
+                                  await _authService.signIn(
+                                email: _emailController.text.trim(),
+                                password: _passwordController.text.trim(),
+                              );
+                              // Retrasar la navegación a la pantalla principal por 2 segundos
+                              await Future.delayed(const Duration(seconds: 2));
 
-                                // Ocultar el diálogo de progreso
-                                Navigator.of(context).pop();
-                                if (isSignInSuccessful) {
-                                  // Verificar si el correo electrónico está verificado
-                                  if (!_authService
-                                      .currentUser!.emailVerified) {
-                                    CustomDialogs.showErrorDialog(
-                                      context,
-                                      'Correo electrónico no verificado',
-                                      'Por favor, verifique su correo electrónico antes de continuar.',
-                                    );
-                                  } else {
-                                    // Iniciar sesión correctamente
-                                    showDialog(
-                                      context: context,
-                                      barrierDismissible: false,
-                                      builder: (context) => const Center(
-                                          child: CircularProgressIndicator()),
-                                    );
-                                    Navigator.of(context)
-                                        .pushNamedAndRemoveUntil(
-                                      '/principal',
-                                      (route) => false,
-                                    );
-                                  }
-                                } else {
+                              // Ocultar el diálogo de progreso
+                              Navigator.of(context).pop();
+                              if (isSignInSuccessful) {
+                                // Verificar si el correo electrónico está verificado
+                                if (!_authService.currentUser!.emailVerified) {
                                   CustomDialogs.showErrorDialog(
                                     context,
-                                    'Credenciales incorrectas',
-                                    'Verifique su email y/o contraseña',
+                                    'Correo electrónico no verificado',
+                                    'Por favor, verifique su correo electrónico antes de continuar.',
                                   );
-                                }
-                              } on FirebaseAuthException catch (e) {
-                                if (e.code != 'user-not-found') {
-                                  CustomDialogs.showErrorDialog(
-                                    context,
-                                    'Ocurrió un problema:',
-                                    'Usuario no encontrado. Regístrese antes de iniciar sesión.',
-                                  );
-                                } else if (e.code == 'invalid-email') {
-                                  CustomDialogs.showErrorDialog(
-                                      context,
-                                      'Ocurrió un problema:',
-                                      'Formato de correo electrónico inválido.');
                                 } else {
-                                  CustomDialogs.showErrorDialog(context,
-                                      'Ocurrió un problema:', '${e.message}');
+                                  // Iniciar sesión correctamente
+                                  showDialog(
+                                    context: context,
+                                    barrierDismissible: false,
+                                    builder: (context) => const Center(
+                                        child: CircularProgressIndicator()),
+                                  );
+                                  Navigator.of(context).pushNamedAndRemoveUntil(
+                                    '/principal',
+                                    (route) => false,
+                                  );
                                 }
-                              } catch (error) {
-                                Navigator.of(context).pop();
+                              } else {
                                 CustomDialogs.showErrorDialog(
                                   context,
-                                  'Error inesperado:',
-                                  '$error',
+                                  'Credenciales incorrectas',
+                                  'Verifique su email y/o contraseña',
                                 );
                               }
+                            } on FirebaseAuthException catch (e) {
+                              if (e.code != 'user-not-found') {
+                                CustomDialogs.showErrorDialog(
+                                  context,
+                                  'Ocurrió un problema:',
+                                  'Usuario no encontrado. Regístrese antes de iniciar sesión.',
+                                );
+                              } else if (e.code == 'invalid-email') {
+                                CustomDialogs.showErrorDialog(
+                                    context,
+                                    'Ocurrió un problema:',
+                                    'Formato de correo electrónico inválido.');
+                              } else {
+                                CustomDialogs.showErrorDialog(context,
+                                    'Ocurrió un problema:', '${e.message}');
+                              }
+                            } catch (error) {
+                              Navigator.of(context).pop();
+                              CustomDialogs.showErrorDialog(
+                                context,
+                                'Error inesperado:',
+                                '$error',
+                              );
                             }
-                          },
-                          child: Text(
-                            'Continuar',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: GlobalColors.textColor,
-                            ),
-                          ), // Nombre del boton
-                        ),
+                          }
+                        },
+                        isEnabled: true,
                       ),
 
                       const SizedBox(height: 15.0), // Espacio

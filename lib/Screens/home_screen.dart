@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:predihipertension/Theme/theme.dart';
 
 import '../Components/custom_floatingbutton.dart';
 import '../Routes/routes_pages.dart';
@@ -62,8 +63,9 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text(
           '$_saludo $_nombreUsuario',
           style: TextStyle(
-            color: GlobalColors.saludoText,
+            color: lightColorScheme.primary,
             fontSize: 18,
+            fontWeight: FontWeight.w500,
           ),
         ),
         centerTitle: false,
@@ -73,8 +75,8 @@ class _HomeScreenState extends State<HomeScreen> {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                GlobalColors.headerColor1,
-                GlobalColors.headerColor1,
+                GlobalColors.appBarColor,
+                GlobalColors.appBarColor,
               ],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,

@@ -8,15 +8,15 @@ class CustomNumberField extends StatefulWidget {
   final String hintText;
   final String? label;
   final bool enabled;
-  final String validator;
+  final String? Function(String?)? validator;
   final int cifras;
   final bool showNextButton;
 
   const CustomNumberField({
     super.key,
     required this.hintText,
-    this.label, 
-    required this.validator,
+    this.label,
+    this.validator,
     required this.controller,
     required this.enabled,
     required this.cifras,
@@ -28,24 +28,27 @@ class CustomNumberField extends StatefulWidget {
 }
 
 class _CustomNumberFieldState extends State<CustomNumberField> {
+  String? _errorText;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.controller,
       enabled: widget.enabled,
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return widget.validator;
-        }
-        return null;
+      validator: widget.validator,
+      onChanged: (value) {
+        setState(() {
+          _errorText =
+              widget.validator != null ? widget.validator!(value) : null;
+        });
       },
       style: const TextStyle(color: Colors.white),
       keyboardType: const TextInputType.numberWithOptions(decimal: true),
       inputFormatters: [
-        LengthLimitingTextInputFormatter(widget.cifras), // Limitar a 2 dígitos
+        LengthLimitingTextInputFormatter(widget.cifras),
       ],
       decoration: InputDecoration(
-        labelText: widget.label, // Usar widget.label directamente
+        labelText: widget.label,
         labelStyle: TextStyle(
           color: GlobalColors.hintText,
           fontSize: 14,
@@ -73,6 +76,7 @@ class _CustomNumberFieldState extends State<CustomNumberField> {
           ),
           borderRadius: BorderRadius.circular(10),
         ),
+        errorText: _errorText,
       ),
       textInputAction: widget.showNextButton
           ? TextInputAction.next

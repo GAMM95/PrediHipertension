@@ -240,6 +240,23 @@ class TestLogic {
     }
   }
 
+  String getGeneralHealth(int healthValue) {
+    switch (healthValue) {
+      case 1:
+        return 'Excelente';
+      case 2:
+        return 'Muy bueno';
+      case 3:
+        return 'Bueno';
+      case 4:
+        return 'Regular';
+      case 5:
+        return 'Deficiente';
+      default:
+        return '';
+    }
+  }
+
   String getDiffWalkText(int diffWalk) {
     return diffWalk == 0 ? 'No' : 'Sí';
   }

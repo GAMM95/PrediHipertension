@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../Theme/global_colors.dart';
-import '../Utilities/parragraph.dart';
+import '../Utilities/paragraph.dart';
 import '../Utilities/subtitle.dart';
 
 class TerminosCondicionesScreen extends StatefulWidget {

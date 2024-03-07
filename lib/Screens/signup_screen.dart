@@ -2,6 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:predihipertension/Widget/custom_button.dart';
 
 import '../Models/usuario.dart';
 import '../Screens/welcome_screen.dart';
@@ -185,84 +186,76 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       const SizedBox(height: 15.0), // Espacio
 
-                      // Boton Unirse
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            if (_formSignupKey.currentState!.validate() &&
-                                agreeTercon &&
-                                agreeDataAuth) {
-                              try {
-                                bool signUpSuccess = await _authService.signUp(
-                                    usuario: Usuario(
-                                  firstName: _nombreController.text.trim(),
-                                  lastName: _apellidosController.text.trim(),
-                                  email: _emailController.text.trim(),
-                                  password: _passwordController.text.trim(),
-                                ));
+                      /// Boton Unirse
+                      CustomButton(
+                        texto: 'Unirse',
+                        onPressed: () async {
+                          if (_formSignupKey.currentState!.validate() &&
+                              agreeTercon &&
+                              agreeDataAuth) {
+                            try {
+                              bool signUpSuccess = await _authService.signUp(
+                                  usuario: Usuario(
+                                firstName: _nombreController.text.trim(),
+                                lastName: _apellidosController.text.trim(),
+                                email: _emailController.text.trim(),
+                                password: _passwordController.text.trim(),
+                              ));
 
-                                if (signUpSuccess) {
-                                  // Mostrar cuadro de diálogo de éxito
-                                  CustomDialogs.showCorrectDialog(
-                                    context,
-                                    'Bienvenido a PredHipertension ${_nombreController.text.trim()}',
-                                    "Se ha enviado un correo electrónico de verificación. Por favor, compruebe su bandeja de entrada al correo ${_emailController.text.trim()}",
-                                  );
-                                } else {
-                                  // Mostrar cuadro de diálogo de error
-                                  CustomDialogs.showErrorDialog(
-                                    context,
-                                    'Ocurrió un problema:',
-                                    'Este correo electrónico ya está registrado.',
-                                  );
-                                }
-
-                                _clearInputs();
-                              } on FirebaseAuthException catch (e) {
-                                if (e.code == 'email-already-in-use') {
-                                  CustomDialogs.showErrorDialog(
-                                    context,
-                                    'Ocurrió un problema:',
-                                    'Este correo electrónico ya está registrado.',
-                                  );
-                                } else if (e.code == 'invalid-email') {
-                                  CustomDialogs.showErrorDialog(
-                                      context,
-                                      'Ocurrió un problema:',
-                                      'Formato de correo electrónico inválido.');
-                                } else if (e.code == 'weak-password') {
-                                  CustomDialogs.showErrorDialog(
-                                      context,
-                                      'Ocurrió un problema:',
-                                      'Su contraseña debe tener al menos 6 caracteres.');
-                                } else {
-                                  CustomDialogs.showErrorDialog(context,
-                                      'Ocurrió un problema:', '${e.message}');
-                                }
+                              if (signUpSuccess) {
+                                // Mostrar cuadro de diálogo de éxito
+                                CustomDialogs.showCorrectDialog(
+                                  context,
+                                  'Bienvenido a PredHipertension ${_nombreController.text.trim()}',
+                                  "Se ha enviado un correo electrónico de verificación. Por favor, compruebe su bandeja de entrada al correo ${_emailController.text.trim()}",
+                                );
+                              } else {
+                                // Mostrar cuadro de diálogo de error
+                                CustomDialogs.showErrorDialog(
+                                  context,
+                                  'Ocurrió un problema:',
+                                  'Este correo electrónico ya está registrado.',
+                                );
                               }
-                            } else if (!agreeTercon) {
-                              CustomDialogs.showErrorDialog(
-                                context,
-                                'Advertencia',
-                                'Acepte términos y condiciones de uso.',
-                              );
-                            } else if (!agreeDataAuth) {
-                              CustomDialogs.showCorrectDialog(
-                                context,
-                                'Advertencia',
-                                'Acepte autorización de datos personales',
-                              );
+
+                              _clearInputs();
+                            } on FirebaseAuthException catch (e) {
+                              if (e.code == 'email-already-in-use') {
+                                CustomDialogs.showErrorDialog(
+                                  context,
+                                  'Ocurrió un problema:',
+                                  'Este correo electrónico ya está registrado.',
+                                );
+                              } else if (e.code == 'invalid-email') {
+                                CustomDialogs.showErrorDialog(
+                                    context,
+                                    'Ocurrió un problema:',
+                                    'Formato de correo electrónico inválido.');
+                              } else if (e.code == 'weak-password') {
+                                CustomDialogs.showErrorDialog(
+                                    context,
+                                    'Ocurrió un problema:',
+                                    'Su contraseña debe tener al menos 6 caracteres.');
+                              } else {
+                                CustomDialogs.showErrorDialog(context,
+                                    'Ocurrió un problema:', '${e.message}');
+                              }
                             }
-                          },
-                          child: Text(
-                            'Unirse',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: GlobalColors.textColor,
-                            ),
-                          ),
-                        ),
+                          } else if (!agreeTercon) {
+                            CustomDialogs.showErrorDialog(
+                              context,
+                              'Advertencia',
+                              'Acepte términos y condiciones de uso.',
+                            );
+                          } else if (!agreeDataAuth) {
+                            CustomDialogs.showCorrectDialog(
+                              context,
+                              'Advertencia',
+                              'Acepte autorización de datos personales',
+                            );
+                          }
+                        },
+                        isEnabled: true,
                       ),
 
                       const SizedBox(height: 25.0), // Espacio

@@ -13,24 +13,26 @@ class InfoTab extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
+          title: Text(
             'Información',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 22,
-              // color: GlobalColors.titlePanel,
+              color: GlobalColors.titlePanel,
             ),
           ),
           centerTitle: true,
           elevation: 3,
           shadowColor: Colors.black26,
           flexibleSpace: Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Color.fromARGB(255, 235, 183, 192),
-                  Color.fromARGB(255, 241, 200, 206),
+                  // Color.fromARGB(255, 235, 183, 192),
+                  // Color.fromARGB(255, 241, 200, 206),
+                  GlobalColors.bgPanelDark2,
+                  GlobalColors.bgPanelDark2
                 ],
                 begin: Alignment.bottomRight,
                 end: Alignment.topLeft,
@@ -39,7 +41,7 @@ class InfoTab extends StatelessWidget {
           ),
           bottom: TabBar(
             unselectedLabelColor: Colors.black38,
-            labelColor: GlobalColors.iconColor,
+            labelColor: GlobalColors.appBarColor,
             indicator: BoxDecoration(
               border: Border(
                 bottom: BorderSide(

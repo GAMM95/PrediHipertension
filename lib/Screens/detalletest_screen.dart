@@ -55,7 +55,7 @@ class _DetalleTestState extends State<DetalleTest> {
           CustomListItemData(
               '5. Índice de Masa Corporal - (IMC):', '${dataTestList[0].imc}'),
           CustomListItemData('6. Estado de salud percibida:',
-              _testLogic.getDiffWalkText(dataTestList[0].dificultadCaminar)),
+              _testLogic.getGeneralHealth(dataTestList[0].saludGeneral)),
           CustomListItemData(
               '7. Cantidad de días en la que considera su estado de salud física no fue tan buena:',
               '${dataTestList[0].saludFisica} días'),

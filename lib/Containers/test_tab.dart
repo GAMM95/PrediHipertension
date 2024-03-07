@@ -1,9 +1,10 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:predihipertension/Utilities/custom_dialogs.dart';
 import 'package:predihipertension/Utilities/title_tab.dart';
 import '../Utilities/logica.dart';
-import '../Utilities/parragraph.dart';
+import '../Utilities/paragraph.dart';
 import '../Theme/global_colors.dart';
 import '../Components/custom_card.dart';
 
@@ -47,6 +48,82 @@ class _TestTabState extends State<TestTab> {
   TextEditingController diabetesController = TextEditingController();
   TextEditingController heartController = TextEditingController();
 
+  bool isButtonActive = false;
+
+  @override
+  void initState() {
+    super.initState();
+    ageController.addListener(_validarFormulario);
+    sexController.addListener(_validarFormulario);
+    educationController.addListener(_validarFormulario);
+    incomeController.addListener(_validarFormulario);
+    bmiController.addListener(_validarFormulario);
+    genhlthController.addListener(_validarFormulario);
+    menthlthController.addListener(_validarFormulario);
+    physhlthController.addListener(_validarFormulario);
+    diffWalkController.addListener(_validarFormulario);
+    fruitController.addListener(_validarFormulario);
+    vegetableController.addListener(_validarFormulario);
+    smokeController.addListener(_validarFormulario);
+    drinkController.addListener(_validarFormulario);
+    physactivityController.addListener(_validarFormulario);
+    toldCholController.addListener(_validarFormulario);
+    checkCholController.addListener(_validarFormulario);
+    strokeController.addListener(_validarFormulario);
+    diabetesController.addListener(_validarFormulario);
+    heartController.addListener(_validarFormulario);
+  }
+
+  @override
+  void dispose() {
+    ageController.dispose();
+    sexController.dispose();
+    educationController.dispose();
+    incomeController.dispose();
+    bmiController.dispose();
+    genhlthController.dispose();
+    menthlthController.dispose();
+    physhlthController.dispose();
+    diffWalkController.dispose();
+    fruitController.dispose();
+    vegetableController.dispose();
+    smokeController.dispose();
+    drinkController.dispose();
+    physactivityController.dispose();
+    toldCholController.dispose();
+    checkCholController.dispose();
+    strokeController.dispose();
+    diabetesController.dispose();
+    heartController.dispose();
+    super.dispose();
+  }
+
+  void _validarFormulario() {
+    final bool isValid = ageController.text.isNotEmpty &&
+        sexController.text.isNotEmpty &&
+        educationController.text.isNotEmpty &&
+        incomeController.text.isNotEmpty &&
+        bmiController.text.isNotEmpty &&
+        genhlthController.text.isNotEmpty &&
+        menthlthController.text.isNotEmpty &&
+        physhlthController.text.isNotEmpty &&
+        diffWalkController.text.isNotEmpty &&
+        fruitController.text.isNotEmpty &&
+        vegetableController.text.isNotEmpty &&
+        smokeController.text.isNotEmpty &&
+        drinkController.text.isNotEmpty &&
+        physactivityController.text.isNotEmpty &&
+        toldCholController.text.isNotEmpty &&
+        checkCholController.text.isNotEmpty &&
+        diabetesController.text.isNotEmpty &&
+        strokeController.text.isNotEmpty &&
+        heartController.text.isNotEmpty;
+
+    setState(() {
+      isButtonActive = isValid;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -59,6 +136,8 @@ class _TestTabState extends State<TestTab> {
               decoration: BoxDecoration(
                 color: GlobalColors.bgDark2,
               ),
+              // child: Form(
+              // key: _formTestKey,
               child: Column(
                 children: [
                   /// Card Informacion Personal
@@ -74,7 +153,17 @@ class _TestTabState extends State<TestTab> {
                           hintText: 'Ingrese su edad',
                           enabled: true,
                           cifras: 2,
-                          validator: 'Ingrese su edad',
+                          // validator: 'Ingrese su edad',
+                          validator: (String? value) {
+                            if (value == null || value.isEmpty) {
+                              return '';
+                            }
+                            int edad = int.tryParse(value) ?? 0;
+                            if (edad < 18) {
+                              return 'Usted es menor de edad';
+                            }
+                            return null;
+                          },
                           showNextButton: true,
                           controller: ageController,
                         ),
@@ -158,8 +247,21 @@ class _TestTabState extends State<TestTab> {
                                 hintText: 'Ingrese su IMC',
                                 enabled: true,
                                 cifras: 5,
-                                validator: 'Ingrese su IMC',
                                 controller: bmiController,
+                                // validator: 'Ingrese o calcule su IMC',
+                                // validator: (String? value) {
+                                //   if (value == null || value.isEmpty) {
+                                //     return '';
+                                //   }
+                                //   double imc = double.tryParse(value) ?? 0.0;
+                                //   if (imc == 0) {
+                                //     return 'Calcule su IMC';
+                                //   }
+                                //   if (value.isNotEmpty) {
+                                //     return '';
+                                //   }
+                                //   return null;
+                                // },
                               ),
                             ),
                             IconButton(
@@ -205,8 +307,18 @@ class _TestTabState extends State<TestTab> {
                           enabled: true,
                           showNextButton: true,
                           cifras: 2,
-                          validator: 'Ingrese la cantidad de días',
+                          // validator: 'Ingrese la cantidad de días',
                           controller: menthlthController,
+                          validator: (String? value) {
+                            if (value == null || value.isEmpty) {
+                              return '';
+                            }
+                            int dias = int.tryParse(value) ?? 0;
+                            if (dias > 30) {
+                              return 'No debe exceder más de 30 días';
+                            }
+                            return null;
+                          },
                         ),
 
                         const SizedBox(height: 15.0),
@@ -221,7 +333,16 @@ class _TestTabState extends State<TestTab> {
                           enabled: true,
                           showNextButton: true,
                           cifras: 2,
-                          validator: 'Ingrese la cantidad de días',
+                          validator: (String? value) {
+                            if (value == null || value.isEmpty) {
+                              return '';
+                            }
+                            int dias = int.tryParse(value) ?? 0;
+                            if (dias > 30) {
+                              return 'No debe exceder más de 30 días';
+                            }
+                            return null;
+                          },
                           controller: physhlthController,
                         ),
 
@@ -404,6 +525,7 @@ class _TestTabState extends State<TestTab> {
                     ),
                   ),
                   const SizedBox(height: 20.0),
+
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       vertical: 15.0,
@@ -412,7 +534,11 @@ class _TestTabState extends State<TestTab> {
                     child: SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: _mostrarResultadoDialog,
+                        style: ElevatedButton.styleFrom(
+                            disabledForegroundColor: Colors.red[700],
+                            disabledBackgroundColor: Colors.red[50]),
+                        onPressed:
+                            isButtonActive ? _mostrarResultadoDialog : null,
                         child: const Text(
                           'Evaluar',
                           style: TextStyle(
@@ -425,6 +551,7 @@ class _TestTabState extends State<TestTab> {
                   ),
                 ],
               ),
+              // ),
             ),
           ),
         ),
@@ -466,10 +593,13 @@ class _TestTabState extends State<TestTab> {
 
       // Mostrar el diálogo de resultado
       ResultadoDialog.mostrar(context);
+      setState(() {
+        isButtonActive = false;
+      });
     } catch (error) {
       // Manejar errores
-      // print('Error al guardar el test: $error');
-      // Mostrar un mensaje de error al usuario si lo deseas
+      CustomDialogs.showErrorDialog(
+          context, 'Mensaje', 'No se puedo evaluar su resultado');
     }
   }
 

@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:predihipertension/Utilities/title_tab.dart';
-import '../Components/custom_card.dart';
-import '../Services/firebase_auth.dart';
-import '../Theme/global_colors.dart';
-import '../Utilities/custom_dialogs.dart';
+import 'package:predihipertension/Components/custom_card.dart';
+import 'package:predihipertension/Services/firebase_auth.dart';
+import 'package:predihipertension/Theme/global_colors.dart';
+import 'package:predihipertension/Utilities/custom_dialogs.dart';
+import 'package:predihipertension/Widget/custom_button.dart';
 
 class ProfileTab extends StatefulWidget {
   const ProfileTab({super.key});
@@ -57,7 +58,7 @@ class _ProfileTabState extends State<ProfileTab> {
                         CircleAvatar(
                           backgroundImage: currentUser != null
                               ? NetworkImage(currentUser!.photoURL ?? '')
-                              : null, // Usar null para mostrar el icono de persona predeterminado
+                              : null,
                           radius: 70,
                           backgroundColor: Colors.grey[500],
                           child: currentUser != null &&
@@ -109,42 +110,26 @@ class _ProfileTabState extends State<ProfileTab> {
                           ),
                         ),
                         const SizedBox(height: 10.0),
-                        Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: SizedBox(
-                            width: double.infinity,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                // Lógica del botón Eliminar cuenta
-                                CustomDialogs.cerrarSesion(context);
-                              },
-                              child: const Text(
-                                'Cerrar sesión',
-                                style: TextStyle(fontSize: 14),
-                              ),
-                            ),
-                          ),
+                        CustomButton(
+                          texto: 'Cerrar sesión',
+                          onPressed: () {
+                            CustomDialogs.cerrarSesion(context);
+                          },
+                          isEnabled: true,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: SizedBox(
-                            width: double.infinity,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                // Lógica del botón Eliminar cuenta
-                                CustomDialogs.eliminarCuenta(
-                                  context,
-                                  'Nos apena que te vayas',
-                                  'Esperamos regreses pronto.',
-                                );
-                                _authService.deleteAccount();
-                              },
-                              child: const Text(
-                                'Eliminar cuenta',
-                                style: TextStyle(fontSize: 14),
-                              ),
-                            ),
-                          ),
+
+                        CustomButton(
+                          texto: 'Eliminar cuenta',
+                          onPressed: () {
+                            // Lógica del botón Eliminar cuenta
+                            CustomDialogs.eliminarCuenta(
+                              context,
+                              'Nos apena que te vayas',
+                              'Esperamos regreses pronto.',
+                            );
+                            _authService.deleteAccount();
+                          },
+                          isEnabled: true,
                         ),
                       ],
                     ),
