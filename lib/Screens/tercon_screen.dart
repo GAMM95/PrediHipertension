@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../Theme/global_colors.dart';
-import '../Utilities/paragraph.dart';
-import '../Utilities/subtitle.dart';
+import 'package:predihipertension/Theme/global_colors.dart';
+import 'package:predihipertension/Utilities/paragraph.dart';
+import 'package:predihipertension/Utilities/subtitle.dart';
 
 class TerminosCondicionesScreen extends StatefulWidget {
   const TerminosCondicionesScreen({super.key});

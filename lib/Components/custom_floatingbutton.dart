@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
-import '../Utilities/custom_dialogs.dart';
-import '../Utilities/dialog_calcimc.dart';
+import 'package:predihipertension/Utilities/custom_dialogs.dart';
+import 'package:predihipertension/Utilities/dialog_calcimc.dart';
 
 class CustomFloatingActionButton extends StatelessWidget {
   final imcController = TextEditingController();

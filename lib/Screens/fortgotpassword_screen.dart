@@ -4,10 +4,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-import '../Components/custom_textfield.dart';
-import '../Services/firebase_auth.dart';
-import '../Theme/global_colors.dart';
-import '../Utilities/custom_dialogs.dart';
+import 'package:predihipertension/Components/custom_textfield.dart';
+import 'package:predihipertension/Services/firebase_auth.dart';
+import 'package:predihipertension/Theme/global_colors.dart';
+import 'package:predihipertension/Utilities/custom_dialogs.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});

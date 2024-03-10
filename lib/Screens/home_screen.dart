@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:predihipertension/Theme/theme.dart';
 
-import '../Components/custom_floatingbutton.dart';
-import '../Routes/routes_pages.dart';
-import '../Services/methods_auth.dart';
-import '../Theme/global_colors.dart';
-import '../Utilities/saludo.dart';
-import '../Widget/custom_bottomnavbar.dart';
+import 'package:predihipertension/Components/custom_floatingbutton.dart';
+import 'package:predihipertension/Routes/routes_pages.dart';
+import 'package:predihipertension/Services/methods_auth.dart';
+import 'package:predihipertension/Theme/global_colors.dart';
+import 'package:predihipertension/Utilities/saludo.dart';
+import 'package:predihipertension/Widget/custom_bottomnavbar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

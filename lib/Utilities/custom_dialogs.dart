@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-import '../Services/firebase_auth.dart';
-import '../Theme/global_colors.dart';
+import 'package:predihipertension/Services/firebase_auth.dart';
+import 'package:predihipertension/Theme/global_colors.dart';
 
 class CustomDialogs {
   static void showErrorDialog(

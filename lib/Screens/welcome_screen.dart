@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../Theme/global_colors.dart';
-import '../Widget/custom_scaffoldwelcome.dart';
-import '../Widget/welcome_button.dart';
+import 'package:predihipertension/Theme/global_colors.dart';
+import 'package:predihipertension/Widget/custom_scaffoldwelcome.dart';
+import 'package:predihipertension/Widget/welcome_button.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});

@@ -58,8 +58,8 @@
 
 import 'package:flutter/material.dart';
 
-import '../Theme/global_colors.dart';
-import '../Theme/theme.dart';
+import 'package:predihipertension/Theme/global_colors.dart';
+import 'package:predihipertension/Theme/theme.dart';
 
 /// Widget para la barra de navegación personalizada.
 class CustomNavBar extends StatefulWidget {
@@ -95,7 +95,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
       unselectedFontSize: 12.0,
       items: const [
         BottomNavigationBarItem(
-          icon: Icon(Icons.home_filled),
+          icon: Icon(Icons.text_snippet),
           label: 'Test',
         ),
         BottomNavigationBarItem(

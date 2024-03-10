@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../Containers/historial_tab.dart';
-import '../Containers/info_tab.dart';
-import '../Containers/profile_tab.dart';
-import '../Containers/test_tab.dart';
+import 'package:predihipertension/Containers/historial_tab.dart';
+import 'package:predihipertension/Containers/info_tab.dart';
+import 'package:predihipertension/Containers/profile_tab.dart';
+import 'package:predihipertension/Containers/test_tab.dart';
 
 class RoutesPages extends StatelessWidget {
   final int index;

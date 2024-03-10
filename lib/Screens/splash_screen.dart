@@ -3,8 +3,8 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 
-import '../Screens/welcome_screen.dart';
-import '../Theme/global_colors.dart';
+import 'package:predihipertension/Screens/welcome_screen.dart';
+import 'package:predihipertension/Theme/global_colors.dart';
 
 /// Widget para mostrar una pantalla de splash animada al iniciar la aplicación.
 class Splash extends StatelessWidget {

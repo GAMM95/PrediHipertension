@@ -1,9 +1,10 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import '../Theme/global_colors.dart';
-import '../Utilities/paragraph.dart';
-import '../Utilities/subtitle.dart';
+
+import 'package:predihipertension/Theme/global_colors.dart';
+import 'package:predihipertension/Utilities/paragraph.dart';
+import 'package:predihipertension/Utilities/subtitle.dart';
 
 class DataAuthScreen extends StatefulWidget {
   const DataAuthScreen({super.key});

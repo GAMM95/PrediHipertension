@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../Theme/global_colors.dart';
+import 'package:predihipertension/Theme/global_colors.dart';
 
 /// Widget reutilizable para mostrar un título en una pestaña.
 class TituloTab extends StatelessWidget {

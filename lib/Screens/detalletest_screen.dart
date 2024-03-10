@@ -6,8 +6,8 @@ import 'package:predihipertension/Theme/global_colors.dart';
 import 'package:predihipertension/Utilities/custom_dialogs.dart';
 import 'package:predihipertension/Widget/custom_listDetail.dart';
 import 'package:predihipertension/Services/methods_auth.dart';
-import '../Models/datatest.dart';
-import '../Utilities/logica.dart';
+import 'package:predihipertension/Models/datatest.dart';
+import 'package:predihipertension/Utilities/logica.dart';
 
 // import 'package:pdf/widgets.dart' as pw;
 

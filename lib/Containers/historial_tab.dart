@@ -2,12 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../Services/methods_auth.dart';
-import '../Utilities/custom_dialogs.dart';
-import '../Utilities/title_tab.dart';
-import '../Screens/detalletest_screen.dart';
-import '../Theme/global_colors.dart';
-import '../Components/custom_card.dart';
+import 'package:predihipertension/Services/methods_auth.dart';
+import 'package:predihipertension/Utilities/custom_dialogs.dart';
+import 'package:predihipertension/Utilities/title_tab.dart';
+import 'package:predihipertension/Screens/detalletest_screen.dart';
+import 'package:predihipertension/Theme/global_colors.dart';
+import 'package:predihipertension/Components/custom_card.dart';
 
 /// Widget para mostrar un historial de fechas de consultas.
 class HistorialTab extends StatefulWidget {

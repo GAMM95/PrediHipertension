@@ -3,15 +3,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:predihipertension/Widget/custom_button.dart';
-import '../Services/firebase_auth.dart';
-import '../Theme/global_colors.dart';
-import '../Theme/theme.dart';
-import '../Components/custom_passwordfield.dart';
-import '../Components/custom_textfield.dart';
-import '../Components/custom_divider.dart';
-import '../Utilities/custom_clipper.dart';
-import '../Utilities/custom_dialogs.dart';
-import '../Widget/social_icon.dart';
+
+import 'package:predihipertension/Services/firebase_auth.dart';
+import 'package:predihipertension/Theme/global_colors.dart';
+import 'package:predihipertension/Theme/theme.dart';
+import 'package:predihipertension/Components/custom_passwordfield.dart';
+import 'package:predihipertension/Components/custom_textfield.dart';
+import 'package:predihipertension/Components/custom_divider.dart';
+import 'package:predihipertension/Utilities/custom_clipper.dart';
+import 'package:predihipertension/Utilities/custom_dialogs.dart';
+import 'package:predihipertension/Widget/social_icon.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});

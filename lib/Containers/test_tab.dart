@@ -3,15 +3,15 @@
 import 'package:flutter/material.dart';
 import 'package:predihipertension/Utilities/custom_dialogs.dart';
 import 'package:predihipertension/Utilities/title_tab.dart';
-import '../Utilities/logica.dart';
-import '../Utilities/paragraph.dart';
-import '../Theme/global_colors.dart';
-import '../Components/custom_card.dart';
+import 'package:predihipertension/Utilities/logica.dart';
+import 'package:predihipertension/Utilities/paragraph.dart';
+import 'package:predihipertension/Theme/global_colors.dart';
+import 'package:predihipertension/Components/custom_card.dart';
 
-import '../Components/custom_dropdown.dart';
-import '../Components/custom_numberfield.dart';
-import '../Utilities/dialog_calcimc.dart';
-import '../Utilities/dialog_resulttest.dart';
+import 'package:predihipertension/Components/custom_dropdown.dart';
+import 'package:predihipertension/Components/custom_numberfield.dart';
+import 'package:predihipertension/Utilities/dialog_calcimc.dart';
+import 'package:predihipertension/Utilities/dialog_resulttest.dart';
 
 class TestTab extends StatefulWidget {
   const TestTab({super.key});

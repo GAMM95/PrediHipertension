@@ -4,15 +4,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:predihipertension/Widget/custom_button.dart';
 
-import '../Models/usuario.dart';
-import '../Screens/welcome_screen.dart';
-import '../Services/firebase_auth.dart';
-import '../Theme/global_colors.dart';
-import '../Theme/theme.dart';
-import '../Components/custom_passwordfield.dart';
-import '../Components/custom_textfield.dart';
-import '../Utilities/custom_clipper.dart';
-import '../Utilities/custom_dialogs.dart';
+import 'package:predihipertension/Models/usuario.dart';
+import 'package:predihipertension/Screens/welcome_screen.dart';
+import 'package:predihipertension/Services/firebase_auth.dart';
+import 'package:predihipertension/Theme/global_colors.dart';
+import 'package:predihipertension/Theme/theme.dart';
+import 'package:predihipertension/Components/custom_passwordfield.dart';
+import 'package:predihipertension/Components/custom_textfield.dart';
+import 'package:predihipertension/Utilities/custom_clipper.dart';
+import 'package:predihipertension/Utilities/custom_dialogs.dart';
 // import '../Components/custom_divider.dart';
 // import '../Widget/social_icon.dart';
 
