@@ -1,5 +1,5 @@
 import 'package:predihipertension/Models/datatest.dart';
-impobrt 'package:predihipertension/Services/methods_auth.dart';
+import 'package:predihipertension/Services/methods_auth.dart';
 
 class TestLogic {
   final MethodsAuth _methodsAuth = MethodsAuth();
