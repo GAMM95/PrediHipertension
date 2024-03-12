@@ -43,14 +43,14 @@ dependencies:
   icons_plus: ^5.0.0
   flutter_launcher_icons: ^0.13.1
   flutter_speed_dial: ^7.0.0
-  pdf: ^3.10.7
+  pdf: ^3.10.8
   path_provider: ^2.1.2
   intl: ^0.19.0
 
   # Dependencias de firebase
-  firebase_auth: ^4.17.4
-  firebase_core: ^2.25.4
-  cloud_firestore: ^4.15.7
+  firebase_auth: ^4.17.8
+  firebase_core: ^2.27.0
+  cloud_firestore: ^4.15.8
   google_sign_in: ^6.2.1
 
   # Dependencias de ML
