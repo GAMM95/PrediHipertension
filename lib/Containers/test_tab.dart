@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:predihipertension/Services/modelo_prediccion.dart';
 import 'package:predihipertension/Utilities/custom_dialogs.dart';
 import 'package:predihipertension/Utilities/title_tab.dart';
 import 'package:predihipertension/Utilities/logica.dart';
@@ -47,6 +48,8 @@ class _TestTabState extends State<TestTab> {
   TextEditingController strokeController = TextEditingController();
   TextEditingController diabetesController = TextEditingController();
   TextEditingController heartController = TextEditingController();
+
+  ModeloPrediccion modelo = ModeloPrediccion();
 
   bool isButtonActive = false;
 

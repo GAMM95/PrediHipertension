@@ -55,6 +55,7 @@ dependencies:
 
   # Dependencias de ML
   tflite_flutter: ^0.10.4
+  pickle: ^2.0.0
 
 dev_dependencies:
   flutter_test:
