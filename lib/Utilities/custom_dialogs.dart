@@ -254,7 +254,7 @@ class CustomDialogs {
     // Definir el mensaje según el valor de la hipertensión
     String message;
     if (hypertension == 0) {
-      message = '¡Felicidades! Usted es una persona sana.';
+      message = '¡Felicidades! Usted goza de una buena salud.';
     } else if (hypertension == 1) {
       message =
           '¡A tomar precauciones! Usted es un paciente propenso a desarrollar hipertensión.';

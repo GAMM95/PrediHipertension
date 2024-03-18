@@ -50,42 +50,42 @@ class _DetalleTestState extends State<DetalleTest> {
               '2. Género:', _testLogic.getGenderText(dataTestList[0].sexo)),
           CustomListItemData(
               '3. Índice de Masa Corporal - (IMC):', '${dataTestList[0].imc}'),
-          CustomListItemData('6. Estado de salud percibida:',
+          CustomListItemData('4. Estado de salud percibida:',
               _testLogic.getGeneralHealth(dataTestList[0].saludGeneral)),
-          CustomListItemData(
-              '4. Cantidad de días en la que considera su estado de salud física no fue tan buena:',
-              '${dataTestList[0].saludFisica} días'),
           CustomListItemData(
               '5. Cantidad de días en la que considera su estado de salud mental no fue tan buena:',
               '${dataTestList[0].saludMental} días'),
           CustomListItemData(
-              '6. Presenta serias dificultades para caminar o subir escaleras:',
+              '6. Cantidad de días en la que considera su estado de salud física no fue tan buena:',
+              '${dataTestList[0].saludFisica} días'),
+          CustomListItemData(
+              '7. Presenta serias dificultades para caminar o subir escaleras:',
               _testLogic.getDiffWalkText(dataTestList[0].dificultadCaminar)),
-          CustomListItemData('7. Consumo de frutas de una a más veces al día:',
+          CustomListItemData('8. Consumo de frutas de una a más veces al día:',
               _testLogic.getFruitText(dataTestList[0].consumoFrutas)),
           CustomListItemData(
-              '8. Consumo de verduras de una a más veces al día:',
+              '9. Consumo de verduras de una a más veces al día:',
               _testLogic.getVeggiesText(dataTestList[0].consumoVerduras)),
-          CustomListItemData('9. Consumo de al menos 100 cigarros en su vida:',
+          CustomListItemData('10. Consumo de al menos 100 cigarros en su vida:',
               _testLogic.getSmokeText(dataTestList[0].consumoCigarros)),
-          CustomListItemData('10. Se considera bebedor empedernido:',
+          CustomListItemData('11. Se considera bebedor empedernido:',
               _testLogic.getAlcoholText(dataTestList[0].consumoAlcohol)),
           CustomListItemData(
-              '11. Ha realizado actividad física durante los últimos 30 días:',
+              '12. Ha realizado actividad física durante los últimos 30 días:',
               _testLogic.getPhysActivityText(dataTestList[0].actividadFisica)),
           CustomListItemData(
-              '12. Profesional de la salud le indico que tiene colesterol alto en la sangre:',
+              '13. Profesional de la salud le indico que tiene colesterol alto en la sangre:',
               _testLogic.getCholesterolText(dataTestList[0].colesterol)),
           CustomListItemData(
-              '13. Ha realizado un control de colesterol en los últimos 5 años:',
+              '14. Ha realizado un control de colesterol en los últimos 5 años:',
               _testLogic.getCheckCholText(dataTestList[0].chequeoColesterol)),
-          CustomListItemData('14. Estado de diabetes:',
+          CustomListItemData('15. Estado de diabetes:',
               _testLogic.getDiabetesText(dataTestList[0].diabetes)),
           CustomListItemData(
-              '15. Ha presentado un accidente cerebrovascular (acv):',
+              '16. Ha presentado un accidente cerebrovascular (acv):',
               _testLogic.getAcvText(dataTestList[0].acv)),
           CustomListItemData(
-              '16. Ha presentado una enfermedad o ataque cardiaco:',
+              '17. Ha presentado una enfermedad o ataque cardiaco:',
               _testLogic.getHeartText(dataTestList[0].enfermedadCardiaca)),
         ];
       });

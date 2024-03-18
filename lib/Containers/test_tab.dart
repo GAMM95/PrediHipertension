@@ -614,7 +614,7 @@ class _TestTabState extends State<TestTab> {
     // Realizar la solicitud HTTP al servidor Flask
     try {
       print('Cuerpo de la solicitud: $body');
-      final ip = Platform.isAndroid ? '192.168.1.12' : '192.168.1.12';
+      final ip = Platform.isAndroid ? '192.168.1.12' : '192.168.1.12'; //aqui se tiene que cambiar
       final response = await http.post(
         Uri.parse('http://$ip:5000/predict'),
         body: body,
@@ -624,7 +624,6 @@ class _TestTabState extends State<TestTab> {
       //   Uri.parse('http://127.0.0.1:5000/predict'),
       //   body: body,
       // );
-      // print('solicitud exitosa');
       if (response.statusCode == 200) {
         // Mostrar el diálogo de resultado con la respuesta del servidor
         // ResultadoDialog.mostrar(context, response.body);
