@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:predihipertension/Services/modelo_prediccion.dart';
 import 'package:predihipertension/Utilities/custom_dialogs.dart';
 import 'package:predihipertension/Utilities/title_tab.dart';
 import 'package:predihipertension/Utilities/logica.dart';
@@ -12,7 +11,9 @@ import 'package:predihipertension/Components/custom_card.dart';
 import 'package:predihipertension/Components/custom_dropdown.dart';
 import 'package:predihipertension/Components/custom_numberfield.dart';
 import 'package:predihipertension/Utilities/dialog_calcimc.dart';
-import 'package:predihipertension/Utilities/dialog_resulttest.dart';
+
+import 'package:http/http.dart' as http;
+import 'dart:io' show Platform;
 
 class TestTab extends StatefulWidget {
   const TestTab({super.key});
@@ -25,8 +26,6 @@ class _TestTabState extends State<TestTab> {
   /// Informacion personal
   TextEditingController ageController = TextEditingController();
   TextEditingController sexController = TextEditingController();
-  TextEditingController educationController = TextEditingController();
-  TextEditingController incomeController = TextEditingController();
 
   /// Salud General y Salud Mental
   TextEditingController bmiController = TextEditingController();
@@ -49,8 +48,6 @@ class _TestTabState extends State<TestTab> {
   TextEditingController diabetesController = TextEditingController();
   TextEditingController heartController = TextEditingController();
 
-  ModeloPrediccion modelo = ModeloPrediccion();
-
   bool isButtonActive = false;
 
   @override
@@ -58,8 +55,6 @@ class _TestTabState extends State<TestTab> {
     super.initState();
     ageController.addListener(_validarFormulario);
     sexController.addListener(_validarFormulario);
-    educationController.addListener(_validarFormulario);
-    incomeController.addListener(_validarFormulario);
     bmiController.addListener(_validarFormulario);
     genhlthController.addListener(_validarFormulario);
     menthlthController.addListener(_validarFormulario);
@@ -81,8 +76,6 @@ class _TestTabState extends State<TestTab> {
   void dispose() {
     ageController.dispose();
     sexController.dispose();
-    educationController.dispose();
-    incomeController.dispose();
     bmiController.dispose();
     genhlthController.dispose();
     menthlthController.dispose();
@@ -104,8 +97,6 @@ class _TestTabState extends State<TestTab> {
   void _validarFormulario() {
     final bool isValid = ageController.text.isNotEmpty &&
         sexController.text.isNotEmpty &&
-        educationController.text.isNotEmpty &&
-        incomeController.text.isNotEmpty &&
         bmiController.text.isNotEmpty &&
         genhlthController.text.isNotEmpty &&
         menthlthController.text.isNotEmpty &&
@@ -139,8 +130,6 @@ class _TestTabState extends State<TestTab> {
               decoration: BoxDecoration(
                 color: GlobalColors.bgDark2,
               ),
-              // child: Form(
-              // key: _formTestKey,
               child: Column(
                 children: [
                   /// Card Informacion Personal
@@ -182,50 +171,6 @@ class _TestTabState extends State<TestTab> {
                           defaultValue: sexController.text,
                           controller: sexController,
                         ),
-
-                        const SizedBox(height: 15.0),
-
-                        /// Nivel de eduacion alcanzado del usuario
-                        const Parragraph(
-                            parrafo:
-                                '3. ¿Cuál es el grado o año escolar más alto que completó?'),
-                        const SizedBox(height: 5.0),
-                        CustomDropDown(
-                          hintText: 'Seleccione una opción',
-                          items: const [
-                            'Nunca asistió o solo jardín',
-                            'Primaria completa',
-                            'Secundaria incompleta',
-                            'Secundaria completa',
-                            'Educación técnica',
-                            'Universitaria'
-                          ],
-                          defaultValue: educationController.text,
-                          controller: educationController,
-                        ),
-
-                        const SizedBox(height: 15.0),
-
-                        /// Ingreso promedio anual del usuario
-                        const Parragraph(
-                            parrafo:
-                                '4. ¿Cuánto es su ingreso anual promedio en su hogar?'),
-                        const SizedBox(height: 5.0),
-                        CustomDropDown(
-                          hintText: 'Seleccione una opción',
-                          items: const [
-                            'Menos de S/ 10,000',
-                            'Menos de S/ 15,000',
-                            'Menos de S/ 20,000',
-                            'Menos de S/ 25,000',
-                            'Menos de S/ 35,000',
-                            'Menos de S/ 50,000',
-                            'Menos de S/ 75,000',
-                            'Mas de S/ 75,000',
-                          ],
-                          defaultValue: incomeController.text,
-                          controller: incomeController,
-                        ),
                       ],
                     ),
                   ),
@@ -241,30 +186,16 @@ class _TestTabState extends State<TestTab> {
                         /// Indice de Masa Corporal del usuario
                         const Parragraph(
                             parrafo:
-                                '5. ¿Cuánto es su Índice de Masa Corporal?'),
+                                '3. ¿Cuánto es su Índice de Masa Corporal?'),
                         const SizedBox(height: 5.0),
                         Row(
                           children: [
                             Expanded(
                               child: CustomNumberField(
-                                hintText: 'Ingrese su IMC',
+                                hintText: 'Calcule o ingrese su IMC',
                                 enabled: true,
                                 cifras: 5,
                                 controller: bmiController,
-                                // validator: 'Ingrese o calcule su IMC',
-                                // validator: (String? value) {
-                                //   if (value == null || value.isEmpty) {
-                                //     return '';
-                                //   }
-                                //   double imc = double.tryParse(value) ?? 0.0;
-                                //   if (imc == 0) {
-                                //     return 'Calcule su IMC';
-                                //   }
-                                //   if (value.isNotEmpty) {
-                                //     return '';
-                                //   }
-                                //   return null;
-                                // },
                               ),
                             ),
                             IconButton(
@@ -283,7 +214,7 @@ class _TestTabState extends State<TestTab> {
                         /// Estado general percibido de salud del usuario
                         const Parragraph(
                             parrafo:
-                                '6. Diría usted que en general su salud es:'),
+                                '4. Diría usted que en general su salud es:'),
                         const SizedBox(height: 5.0),
                         CustomDropDown(
                           hintText: 'Seleccione una opción',
@@ -303,7 +234,7 @@ class _TestTabState extends State<TestTab> {
                         /// Salud mental percibida en los ultimos 30 dias
                         const Parragraph(
                             parrafo:
-                                '7. Pensando en su salud mental que incluye estrés, depresión y problemas emocionales. ¿Durante cuántos días del último mes su salud mental no fue buena?'),
+                                '5. ¿Durante cuántos días del último mes su salud mental no fue buena? (Estrés, depresión y problemas emocionales)'),
                         const SizedBox(height: 5.0),
                         CustomNumberField(
                           hintText: 'Ingrese la cantidad de días',
@@ -329,7 +260,7 @@ class _TestTabState extends State<TestTab> {
                         /// Salud mental percibida en los ultimos 30 dias
                         const Parragraph(
                             parrafo:
-                                '8. Pensando en su salud física, que incluye enfermedades y lesiones físicas. ¿Durante cuántos días del último mes su salud mental no fue buena?'),
+                                '6. ¿Durante cuántos días del último mes su salud mental no fue buena? (Enfermedades y lesiones físicas)'),
                         const SizedBox(height: 5.0),
                         CustomNumberField(
                           hintText: 'Ingrese la cantidad de días',
@@ -354,7 +285,7 @@ class _TestTabState extends State<TestTab> {
                         /// Dificultad para caminar o subir escaleras
                         const Parragraph(
                             parrafo:
-                                '9. ¿Tiene serias dificultades para caminar o subir escaleras?'),
+                                '7. ¿Tiene serias dificultades para caminar o subir escaleras?'),
                         const SizedBox(height: 5.0),
                         CustomDropDown(
                           hintText: 'Seleccione una opción',
@@ -376,8 +307,7 @@ class _TestTabState extends State<TestTab> {
                       children: [
                         /// Consumo de frutas
                         const Parragraph(
-                            parrafo:
-                                '10. ¿Consume fruta 1 o más veces al día?'),
+                            parrafo: '8. ¿Consume fruta 1 o más veces al día?'),
                         const SizedBox(height: 5.0),
                         CustomDropDown(
                           hintText: 'Seleccione una opción',
@@ -391,7 +321,7 @@ class _TestTabState extends State<TestTab> {
                         /// Consumo de vegetales
                         const Parragraph(
                             parrafo:
-                                '11. ¿Consume verduras 1 o más veces al día?'),
+                                '9. ¿Consume verduras 1 o más veces al día?'),
                         const SizedBox(height: 5.0),
                         CustomDropDown(
                           hintText: 'Seleccione una opción',
@@ -405,7 +335,7 @@ class _TestTabState extends State<TestTab> {
                         /// Consumo de cigarros
                         const Parragraph(
                             parrafo:
-                                '12. ¿Has fumado al menos 100 cigarrillos en toda tu vida? \n* Nota: 5 paquetes = 100 cigarrillos'),
+                                '10. ¿Has fumado al menos 100 cigarrillos en toda tu vida? \n* Nota: 5 paquetes = 100 cigarrillos'),
                         const SizedBox(height: 5.0),
                         CustomDropDown(
                           hintText: 'Seleccione una opción',
@@ -419,7 +349,7 @@ class _TestTabState extends State<TestTab> {
                         /// Consumo de alcohol
                         const Parragraph(
                             parrafo:
-                                '13. ¿Te consideras un bebedor empedernido? \n* Hombres > 14 tragos por semana. \n* Mujeres > 7 tragos por semana.'),
+                                '11. ¿Te consideras un bebedor empedernido? \n* Hombres > 14 tragos por semana. \n* Mujeres > 7 tragos por semana.'),
                         const SizedBox(height: 5.0),
                         CustomDropDown(
                           hintText: 'Seleccione una opción',
@@ -433,7 +363,7 @@ class _TestTabState extends State<TestTab> {
                         /// Actividad fisica del usuario
                         const Parragraph(
                             parrafo:
-                                '14 ¿Ha realizado actividad física o ejercicio durante los últimos 30 días fuera de su trabajo habitual?'),
+                                '12. ¿Ha realizado actividad física durante los últimos 30 días fuera de su trabajo habitual?'),
                         const SizedBox(height: 5.0),
                         CustomDropDown(
                           hintText: 'Seleccione una opción',
@@ -458,7 +388,7 @@ class _TestTabState extends State<TestTab> {
                         ///  Le han dicho que su colesterol en sangre es alto?
                         const Parragraph(
                             parrafo:
-                                '15 ¿Alguna vez un médico, enfermera u otro profesional de la salud le ha dicho que su colesterol en sangre es alto?'),
+                                '13. ¿Alguna vez un médico, enfermera u otro profesional de la salud le ha dicho que su colesterol en sangre es alto?'),
                         const SizedBox(height: 5.0),
                         CustomDropDown(
                           hintText: 'Seleccione una opción',
@@ -472,7 +402,7 @@ class _TestTabState extends State<TestTab> {
                         /// Control de colesterol en los últimos cinco años
                         const Parragraph(
                             parrafo:
-                                '16 ¿Ha realizado un control de colesterol en los últimos cinco años?'),
+                                '14. ¿Ha realizado un control de colesterol en los últimos cinco años?'),
                         const SizedBox(height: 5.0),
                         CustomDropDown(
                           hintText: 'Seleccione una opción',
@@ -486,7 +416,7 @@ class _TestTabState extends State<TestTab> {
                         /// Paciente Diabetico
                         const Parragraph(
                             parrafo:
-                                '17 ¿Cuál es tu estado actual de diabetes?'),
+                                '15. ¿Cuál es tu estado actual de diabetes?'),
                         const SizedBox(height: 5.0),
                         CustomDropDown(
                           hintText: 'Seleccione una opción',
@@ -503,7 +433,7 @@ class _TestTabState extends State<TestTab> {
 
                         const Parragraph(
                             parrafo:
-                                '18 ¿Has tenido alguna vez un accidente cerebrovascular?'),
+                                '16. ¿Has tenido alguna vez un accidente cerebrovascular?'),
                         const SizedBox(height: 5.0),
                         CustomDropDown(
                           hintText: 'Seleccione una opción',
@@ -516,7 +446,7 @@ class _TestTabState extends State<TestTab> {
 
                         const Parragraph(
                             parrafo:
-                                '19 ¿Has padecido de una enfermedad coronaria o infarto de miocardio?'),
+                                '17. ¿Has padecido de una enfermedad coronaria o infarto de miocardio?'),
                         const SizedBox(height: 5.0),
                         CustomDropDown(
                           hintText: 'Seleccione una opción',
@@ -562,51 +492,159 @@ class _TestTabState extends State<TestTab> {
     );
   }
 
-  void _mostrarResultadoDialog() async {
-    TestLogic testLogic = TestLogic();
-    try {
-      await testLogic.guardarTest(
-        /// Informacion personal
-        edad: ageController.text,
-        genero: sexController.text,
-        educacion: educationController.text,
-        ingresos: incomeController.text,
-
-        /// Salud General y Salud Mental
-        imc: bmiController.text,
-        saludGeneral: genhlthController.text,
-        saludMental: menthlthController.text,
-        saludFisica: physhlthController.text,
-        dificultadCaminar: diffWalkController.text,
-
-        // Hábitos y Estilos de vida
-        consumoFrutas: fruitController.text,
-        consumoVerduras: vegetableController.text,
-        consumoCigarros: smokeController.text,
-        consumoAlcohol: drinkController.text,
-        actividadFisica: physactivityController.text,
-
-        /// Historial Medico
-        colesterol: toldCholController.text,
-        chequeoColesterol: checkCholController.text,
-        acv: strokeController.text,
-        diabetes: diabetesController.text,
-        enfermedadCardiaca: heartController.text,
-      );
-
-      // Mostrar el diálogo de resultado
-      ResultadoDialog.mostrar(context);
-      setState(() {
-        isButtonActive = false;
-      });
-    } catch (error) {
-      // Manejar errores
-      CustomDialogs.showErrorDialog(
-          context, 'Mensaje', 'No se puedo evaluar su resultado');
-    }
-  }
-
   void _calcularIMCDialog() {
     CalculoIMC.mostrar(context, bmiController);
+  }
+
+  void _mostrarResultadoDialog() async {
+    TestLogic testLogic = TestLogic();
+    await testLogic.guardarTest(
+      edad: ageController.text,
+      genero: sexController.text,
+      imc: bmiController.text,
+      saludGeneral: genhlthController.text,
+      saludMental: menthlthController.text,
+      saludFisica: physhlthController.text,
+      dificultadCaminar: diffWalkController.text,
+      consumoFrutas: fruitController.text,
+      consumoVerduras: vegetableController.text,
+      consumoCigarros: smokeController.text,
+      consumoAlcohol: drinkController.text,
+      actividadFisica: physactivityController.text,
+      colesterol: toldCholController.text,
+      chequeoColesterol: checkCholController.text,
+      acv: strokeController.text,
+      diabetes: diabetesController.text,
+      enfermedadCardiaca: heartController.text,
+    );
+    // Convertir edad a categoría
+    int ageCategory;
+    int ageValue = int.tryParse(ageController.text) ?? 0;
+    if (ageValue >= 18 && ageValue <= 24) {
+      ageCategory = 1;
+    } else if (ageValue >= 25 && ageValue <= 29) {
+      ageCategory = 2;
+    } else if (ageValue >= 30 && ageValue <= 34) {
+      ageCategory = 3;
+    } else if (ageValue >= 35 && ageValue <= 39) {
+      ageCategory = 4;
+    } else if (ageValue >= 40 && ageValue <= 44) {
+      ageCategory = 5;
+    } else if (ageValue >= 45 && ageValue <= 49) {
+      ageCategory = 6;
+    } else if (ageValue >= 50 && ageValue <= 54) {
+      ageCategory = 7;
+    } else if (ageValue >= 55 && ageValue <= 59) {
+      ageCategory = 8;
+    } else if (ageValue >= 60 && ageValue <= 64) {
+      ageCategory = 9;
+    } else if (ageValue >= 65 && ageValue <= 69) {
+      ageCategory = 10;
+    } else if (ageValue >= 70 && ageValue <= 74) {
+      ageCategory = 11;
+    } else if (ageValue >= 75 && ageValue <= 79) {
+      ageCategory = 12;
+    } else if (ageValue >= 80 && ageValue < 100) {
+      ageCategory = 13;
+    } else {
+      ageCategory = 0;
+    }
+
+// Convertir salud general a valor numérico
+    int healthValue;
+    switch (genhlthController.text) {
+      case 'Excelente':
+        healthValue = 1;
+        break;
+      case 'Muy bueno':
+        healthValue = 2;
+        break;
+      case 'Bueno':
+        healthValue = 3;
+        break;
+      case 'Regular':
+        healthValue = 4;
+        break;
+      case 'Deficiente':
+        healthValue = 5;
+        break;
+      default:
+        healthValue = 0;
+        break;
+    }
+
+// Convertir diabetes a valor numérico
+    int diabetesValue;
+    switch (diabetesController.text) {
+      case 'Sin diabetes':
+        diabetesValue = 0;
+        break;
+      case 'Prediabetes':
+        diabetesValue = 1;
+        break;
+      case 'Diabetes':
+        diabetesValue = 2;
+        break;
+      default:
+        diabetesValue = 3;
+        break;
+    }
+
+// Construir el cuerpo de la solicitud HTTP con los datos transformados
+    Map<String, String> body = {
+      'Age': ageCategory.toString(),
+      'Sex': sexController.text == 'Masculino' ? '0' : '1',
+      'BMI': bmiController.text,
+      'GenHlth': healthValue.toString(),
+      'MentHlth': menthlthController.text,
+      'PhysHlth': physhlthController.text,
+      'DiffWalk': diffWalkController.text == 'No' ? '0' : '1',
+      'Fruits': fruitController.text == 'No' ? '0' : '1',
+      'Veggies': vegetableController.text == 'No' ? '0' : '1',
+      'Smoker': smokeController.text == 'No' ? '0' : '1',
+      'HvyAlcoholConsump': drinkController.text == 'No' ? '0' : '1',
+      'PhysActivity': physactivityController.text == 'No' ? '0' : '1',
+      'HighChol': toldCholController.text == 'No' ? '0' : '1',
+      'CholCheck': checkCholController.text == 'No' ? '0' : '1',
+      'Diabetes': diabetesValue.toString(),
+      'Stroke': strokeController.text == 'No' ? '0' : '1',
+      'HeartDiseaseorAttack': heartController.text == 'No' ? '0' : '1',
+    };
+
+    // Realizar la solicitud HTTP al servidor Flask
+    try {
+      print('Cuerpo de la solicitud: $body');
+      final ip = Platform.isAndroid ? '192.168.1.12' : '192.168.1.12';
+      final response = await http.post(
+        Uri.parse('http://$ip:5000/predict'),
+        body: body,
+      );
+      // final response = await http.post(
+      //   // Uri.parse('http://10.0.2.2:5000/predict'),
+      //   Uri.parse('http://127.0.0.1:5000/predict'),
+      //   body: body,
+      // );
+      // print('solicitud exitosa');
+      if (response.statusCode == 200) {
+        // Mostrar el diálogo de resultado con la respuesta del servidor
+        // ResultadoDialog.mostrar(context, response.body);
+        CustomDialogs.mostrarResultadoTest(context, response.body);
+        setState(() {
+          isButtonActive = false;
+          print('solicitud exitosa');
+        });
+      } else {
+        throw Exception('Error en la solicitud HTTP');
+      }
+    } catch (error) {
+      // Manejar errores
+
+      CustomDialogs.showErrorDialog(
+        context,
+        'Mensaje',
+        'No se pudo evaluar su resultado: $error',
+      );
+      print('No se pudo evaluar su resultado: $error');
+    }
   }
 }

@@ -1,5 +1,5 @@
 import 'package:predihipertension/Models/datatest.dart';
-import 'package:predihipertension/Services/methods_auth.dart';
+import 'package:predihipertension/Services/methods_firebase.dart';
 
 class TestLogic {
   final MethodsAuth _methodsAuth = MethodsAuth();
@@ -7,8 +7,6 @@ class TestLogic {
   Future<void> guardarTest({
     required String edad,
     required String genero,
-    required String educacion,
-    required String ingresos,
     required String imc,
     required String saludGeneral,
     required String saludFisica,
@@ -57,64 +55,6 @@ class TestLogic {
         ageCategory = 13;
       } else {
         ageCategory = 0;
-      }
-
-      /// Logica para el atributo educacion
-      int educationValue;
-      switch (educacion) {
-        case 'Nunca asistió o solo jardín':
-          educationValue = 1;
-          break;
-        case 'Primaria completa':
-          educationValue = 2;
-          break;
-        case 'Secundaria incompleta':
-          educationValue = 3;
-          break;
-        case 'Secundaria completa':
-          educationValue = 4;
-          break;
-        case 'Educación técnica':
-          educationValue = 5;
-          break;
-        case 'Universitaria':
-          educationValue = 6;
-          break;
-        default:
-          educationValue = 0;
-          break;
-      }
-
-      /// Logica para el atributo ingresos
-      int incomeValue;
-      switch (ingresos) {
-        case 'Menos de S/ 10,000':
-          incomeValue = 1;
-          break;
-        case 'Menos de S/ 15,000':
-          incomeValue = 2;
-          break;
-        case 'Menos de S/ 20,000':
-          incomeValue = 3;
-          break;
-        case 'Menos de S/ 25,000':
-          incomeValue = 4;
-          break;
-        case 'Menos de S/ 35,000':
-          incomeValue = 5;
-          break;
-        case 'Menos de S/ 50,000':
-          incomeValue = 6;
-          break;
-        case 'Menos de S/ 75,000':
-          incomeValue = 7;
-          break;
-        case 'Mas de S/ 75,000':
-          incomeValue = 8;
-          break;
-        default:
-          incomeValue = 0;
-          break;
       }
 
       /// Lógica para salud general
@@ -167,8 +107,8 @@ class TestLogic {
         edadIngresada: ageValue,
         edadAgrupada: ageCategory,
         sexo: genero == 'Masculino' ? 0 : 1,
-        educacion: educationValue,
-        ingreso: incomeValue,
+        // educacion: educationValue,
+        // ingreso: incomeValue,
         imc: double.tryParse(imc) ?? 0.0,
         saludGeneral: healthValue,
         saludFisica: saludFisicaValue,
@@ -191,6 +131,39 @@ class TestLogic {
     } catch (error) {
       // return algo;
       rethrow;
+    }
+  }
+
+  String getAge(int ageCategory) {
+    switch (ageCategory) {
+      case 1:
+        return '18-24';
+      case 2:
+        return '25-29';
+      case 3:
+        return '30-34';
+      case 4:
+        return '35-39';
+      case 5:
+        return '40-44';
+      case 6:
+        return '45-49';
+      case 7:
+        return '50-54';
+      case 8:
+        return '55-59';
+      case 9:
+        return '60-64';
+      case 10:
+        return '65-69';
+      case 11:
+        return '70-74';
+      case 12:
+        return '75-79';
+      case 13:
+        return '80 o más';
+      default:
+        return '';
     }
   }
 

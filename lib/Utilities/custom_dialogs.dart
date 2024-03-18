@@ -1,5 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -239,7 +241,28 @@ class CustomDialogs {
     );
   }
 
-  static void mostrarResultadoTest(BuildContext context) {
+  static void mostrarResultadoTest(BuildContext context, String resultado) {
+    // Parsear el JSON
+    final Map<String, dynamic> parsedResult = jsonDecode(resultado);
+
+    // Extraer el valor de hipertensión y convertirlo a entero
+    final dynamic hypertensionValue = parsedResult['hypertension'];
+    final int hypertension = hypertensionValue is String
+        ? int.tryParse(hypertensionValue) ?? 0
+        : hypertensionValue ?? 0;
+
+    // Definir el mensaje según el valor de la hipertensión
+    String message;
+    if (hypertension == 0) {
+      message = '¡Felicidades! Usted es una persona sana.';
+    } else if (hypertension == 1) {
+      message =
+          '¡A tomar precauciones! Usted es un paciente propenso a desarrollar hipertensión.';
+    } else {
+      message = 'No se pudo determinar el resultado.';
+    }
+
+    // Mostrar el diálogo con el mensaje personalizado
     showDialog(
       barrierDismissible: false,
       context: context,
@@ -262,9 +285,20 @@ class CustomDialogs {
               ),
               const Center(
                 child: Text(
-                  'Este es tu resultado',
+                  'Resultado:',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+              Center(
+                child: Text(
+                  message,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 16),
                 ),
               ),
             ],

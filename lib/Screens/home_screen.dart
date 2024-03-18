@@ -3,7 +3,7 @@ import 'package:predihipertension/Theme/theme.dart';
 
 import 'package:predihipertension/Components/custom_floatingbutton.dart';
 import 'package:predihipertension/Routes/routes_pages.dart';
-import 'package:predihipertension/Services/methods_auth.dart';
+import 'package:predihipertension/Services/methods_firebase.dart';
 import 'package:predihipertension/Theme/global_colors.dart';
 import 'package:predihipertension/Utilities/saludo.dart';
 import 'package:predihipertension/Widget/custom_bottomnavbar.dart';

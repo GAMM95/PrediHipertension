@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:predihipertension/Services/methods_auth.dart';
+import 'package:predihipertension/Services/methods_firebase.dart';
 import 'package:predihipertension/Utilities/custom_dialogs.dart';
 import 'package:predihipertension/Utilities/title_tab.dart';
 import 'package:predihipertension/Screens/detalletest_screen.dart';

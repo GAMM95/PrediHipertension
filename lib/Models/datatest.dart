@@ -2,8 +2,6 @@ class Datatest {
   final int edadIngresada;
   final int edadAgrupada;
   final int sexo;
-  final int educacion;
-  final int ingreso;
   final double imc;
   final int saludGeneral;
   final int saludFisica;
@@ -25,8 +23,6 @@ class Datatest {
     required this.edadAgrupada,
     required this.sexo,
     required this.imc,
-    required this.educacion,
-    required this.ingreso,
     required this.saludGeneral,
     required this.saludFisica,
     required this.saludMental,
@@ -48,8 +44,6 @@ class Datatest {
       edadIngresada: map['edadIngresada'] as int,
       edadAgrupada: map['edadAgrupada'] as int,
       sexo: map['genero'] as int,
-      educacion: map['educacion'] as int,
-      ingreso: map['ingresos'] as int,
       imc: map['imc'] as double,
       saludGeneral: map['saludGeneral'] as int,
       saludFisica: map['saludFisica'] as int,

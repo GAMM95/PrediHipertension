@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:predihipertension/Theme/global_colors.dart';
 import 'package:predihipertension/Utilities/custom_dialogs.dart';
 import 'package:predihipertension/Widget/custom_listDetail.dart';
-import 'package:predihipertension/Services/methods_auth.dart';
+import 'package:predihipertension/Services/methods_firebase.dart';
 import 'package:predihipertension/Models/datatest.dart';
 import 'package:predihipertension/Utilities/logica.dart';
 
@@ -48,48 +48,44 @@ class _DetalleTestState extends State<DetalleTest> {
               '1. Edad:', '${dataTestList[0].edadIngresada} años'),
           CustomListItemData(
               '2. Género:', _testLogic.getGenderText(dataTestList[0].sexo)),
-          CustomListItemData('3. Nivel de educación:',
-              _testLogic.getEducationText(dataTestList[0].educacion)),
-          CustomListItemData('4. Ingreso promedio anual:',
-              _testLogic.getIncomeText(dataTestList[0].ingreso)),
           CustomListItemData(
-              '5. Índice de Masa Corporal - (IMC):', '${dataTestList[0].imc}'),
+              '3. Índice de Masa Corporal - (IMC):', '${dataTestList[0].imc}'),
           CustomListItemData('6. Estado de salud percibida:',
               _testLogic.getGeneralHealth(dataTestList[0].saludGeneral)),
           CustomListItemData(
-              '7. Cantidad de días en la que considera su estado de salud física no fue tan buena:',
+              '4. Cantidad de días en la que considera su estado de salud física no fue tan buena:',
               '${dataTestList[0].saludFisica} días'),
           CustomListItemData(
-              '8. Cantidad de días en la que considera su estado de salud mental no fue tan buena:',
+              '5. Cantidad de días en la que considera su estado de salud mental no fue tan buena:',
               '${dataTestList[0].saludMental} días'),
           CustomListItemData(
-              '9. Presenta serias dificultades para caminar o subir escaleras:',
+              '6. Presenta serias dificultades para caminar o subir escaleras:',
               _testLogic.getDiffWalkText(dataTestList[0].dificultadCaminar)),
-          CustomListItemData('10. Consumo de frutas de una a más veces al día:',
+          CustomListItemData('7. Consumo de frutas de una a más veces al día:',
               _testLogic.getFruitText(dataTestList[0].consumoFrutas)),
           CustomListItemData(
-              '11. Consumo de verduras de una a más veces al día:',
+              '8. Consumo de verduras de una a más veces al día:',
               _testLogic.getVeggiesText(dataTestList[0].consumoVerduras)),
-          CustomListItemData('12. Consumo de al menos 100 cigarros en su vida:',
+          CustomListItemData('9. Consumo de al menos 100 cigarros en su vida:',
               _testLogic.getSmokeText(dataTestList[0].consumoCigarros)),
-          CustomListItemData('13. Se considera bebedor empedernido:',
+          CustomListItemData('10. Se considera bebedor empedernido:',
               _testLogic.getAlcoholText(dataTestList[0].consumoAlcohol)),
           CustomListItemData(
-              '14. Ha realizado actividad física durante los últimos 30 días:',
+              '11. Ha realizado actividad física durante los últimos 30 días:',
               _testLogic.getPhysActivityText(dataTestList[0].actividadFisica)),
           CustomListItemData(
-              '15. Profesional de la salud le indico que tiene colesterol alto en la sangre:',
+              '12. Profesional de la salud le indico que tiene colesterol alto en la sangre:',
               _testLogic.getCholesterolText(dataTestList[0].colesterol)),
           CustomListItemData(
-              '16. Ha realizado un control de colesterol en los últimos 5 años:',
+              '13. Ha realizado un control de colesterol en los últimos 5 años:',
               _testLogic.getCheckCholText(dataTestList[0].chequeoColesterol)),
-          CustomListItemData('17. Estado de diabetes:',
+          CustomListItemData('14. Estado de diabetes:',
               _testLogic.getDiabetesText(dataTestList[0].diabetes)),
           CustomListItemData(
-              '18. Ha presentado un accidente cerebrovascular (acv):',
+              '15. Ha presentado un accidente cerebrovascular (acv):',
               _testLogic.getAcvText(dataTestList[0].acv)),
           CustomListItemData(
-              '19. Ha presentado una enfermedad o ataque cardiaco:',
+              '16. Ha presentado una enfermedad o ataque cardiaco:',
               _testLogic.getHeartText(dataTestList[0].enfermedadCardiaca)),
         ];
       });
