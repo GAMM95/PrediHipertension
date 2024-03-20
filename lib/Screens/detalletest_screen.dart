@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:predihipertension/Theme/global_colors.dart';
 import 'package:predihipertension/Utilities/custom_dialogs.dart';
+import 'package:predihipertension/Utilities/testlogic.dart';
 import 'package:predihipertension/Widget/custom_listDetail.dart';
 import 'package:predihipertension/Services/methods_firebase.dart';
 import 'package:predihipertension/Models/datatest.dart';
-import 'package:predihipertension/Utilities/logica.dart';
 
 // import 'package:pdf/widgets.dart' as pw;
 
@@ -59,33 +59,33 @@ class _DetalleTestState extends State<DetalleTest> {
               '6. Cantidad de días en la que considera su estado de salud física no fue tan buena:',
               '${dataTestList[0].saludFisica} días'),
           CustomListItemData(
-              '7. Presenta serias dificultades para caminar o subir escaleras:',
+              '7. Presenta dificultades graves para caminar o subir escaleras:',
               _testLogic.getDiffWalkText(dataTestList[0].dificultadCaminar)),
-          CustomListItemData('8. Consumo de frutas de una a más veces al día:',
+          CustomListItemData('8. Consumo de frutas al menos 1 vez al día:',
               _testLogic.getFruitText(dataTestList[0].consumoFrutas)),
           CustomListItemData(
-              '9. Consumo de verduras de una a más veces al día:',
+              '9. Consumo de verduras al menos 1 vez al día:',
               _testLogic.getVeggiesText(dataTestList[0].consumoVerduras)),
-          CustomListItemData('10. Consumo de al menos 100 cigarros en su vida:',
+          CustomListItemData('10. Consumo de al menos 100 cigarrillos en su vida:',
               _testLogic.getSmokeText(dataTestList[0].consumoCigarros)),
-          CustomListItemData('11. Se considera bebedor empedernido:',
+          CustomListItemData('11. Consumo de alcohol muy frecuente:',
               _testLogic.getAlcoholText(dataTestList[0].consumoAlcohol)),
           CustomListItemData(
               '12. Ha realizado actividad física durante los últimos 30 días:',
               _testLogic.getPhysActivityText(dataTestList[0].actividadFisica)),
           CustomListItemData(
-              '13. Profesional de la salud le indico que tiene colesterol alto en la sangre:',
+              '13. Colesterol alto en la sangre según el profesional de salud:',
               _testLogic.getCholesterolText(dataTestList[0].colesterol)),
           CustomListItemData(
               '14. Ha realizado un control de colesterol en los últimos 5 años:',
               _testLogic.getCheckCholText(dataTestList[0].chequeoColesterol)),
-          CustomListItemData('15. Estado de diabetes:',
+          CustomListItemData('15. Estado actual de diabetes:',
               _testLogic.getDiabetesText(dataTestList[0].diabetes)),
           CustomListItemData(
               '16. Ha presentado un accidente cerebrovascular (acv):',
               _testLogic.getAcvText(dataTestList[0].acv)),
           CustomListItemData(
-              '17. Ha presentado una enfermedad o ataque cardiaco:',
+              '17. Ha presentado una enfermedad coronaria o infarto de miocardio:',
               _testLogic.getHeartText(dataTestList[0].enfermedadCardiaca)),
         ];
       });

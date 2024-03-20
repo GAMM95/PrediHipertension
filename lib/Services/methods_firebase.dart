@@ -1,10 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-// import 'dart:io';
-// import 'package:path_provider/path_provider.dart';
-// import 'package:pdf/widgets.dart' as pw;
-
 import '../Models/datatest.dart';
 
 class MethodsAuth {
@@ -100,8 +96,6 @@ class MethodsAuth {
 
       return datasetDates;
     } catch (e) {
-      // Manejar errores
-      // print('Error al obtener las fechas de los datasets: $e');
       rethrow;
     }
   }
@@ -122,8 +116,6 @@ class MethodsAuth {
         int edadingresada = doc['edadIngresada'];
         int edadAgrupada = doc['edadAgrupada'];
         int genero = doc['genero'];
-        // int educacion = doc['educacion'];
-        // int ingresos = doc['ingresos'];
         double imc = doc['imc'];
         int saludGeneral = doc['saludGeneral'];
         int saludFisica = doc['saludFisica'];
@@ -166,8 +158,6 @@ class MethodsAuth {
 
       return dataTestList;
     } catch (e) {
-      // Manejar errores
-      // print('Error al obtener los datos del test: $e');
       rethrow;
     }
   }
@@ -196,20 +186,4 @@ class MethodsAuth {
       rethrow;
     }
   }
-
-  // Future<void> savePDF(pw.Document pdf) async {
-  //   try {
-  //     // Obtener el directorio de documentos del dispositivo
-  //     final directory = await getApplicationDocumentsDirectory();
-  //     final path = directory.path;
-
-  //     // Guardar el PDF en el directorio de documentos
-  //     final file = File('$path/ejemplo.pdf');
-  //     await file.writeAsBytes(await pdf.save());
-  //   } catch (error) {
-  //     // Manejar errores
-  //     print('Error al guardar el PDF: $error');
-  //     rethrow;
-  //   }
-  // }
 }
