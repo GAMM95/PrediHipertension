@@ -152,7 +152,10 @@ class _TestTabState extends State<TestTab> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         /// Edad del usuario
-                        const Parragraph(parrafo: '1. ¿Cuántos años tienes?'),
+                        Parragraph(
+                          parrafo: '1. ¿Cuántos años tienes?',
+                          color: GlobalColors.textColor,
+                        ),
                         const SizedBox(height: 5.0),
                         CustomNumberField(
                           hintText: 'Ingrese su edad',
@@ -176,7 +179,10 @@ class _TestTabState extends State<TestTab> {
                         const SizedBox(height: 15.0),
 
                         /// Género del usuario
-                        const Parragraph(parrafo: '2. ¿Cuál es tu género?'),
+                        Parragraph(
+                          parrafo: '2. ¿Cuál es tu género?',
+                          color: GlobalColors.textColor,
+                        ),
                         const SizedBox(height: 5.0),
                         CustomDropDown(
                           hintText: 'Seleccione una opción',
@@ -197,9 +203,11 @@ class _TestTabState extends State<TestTab> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         /// Indice de Masa Corporal del usuario
-                        const Parragraph(
-                            parrafo:
-                                '3. ¿Cuál es tu Índice de Masa Corporal (IMC)?'),
+                        Parragraph(
+                          parrafo:
+                              '3. ¿Cuál es tu Índice de Masa Corporal (IMC)?',
+                          color: GlobalColors.textColor,
+                        ),
                         const SizedBox(height: 5.0),
                         Row(
                           children: [
@@ -225,9 +233,10 @@ class _TestTabState extends State<TestTab> {
                         const SizedBox(height: 15.0),
 
                         /// Estado general percibido de salud del usuario
-                        const Parragraph(
-                            parrafo:
-                                '4. Diría usted que en general su salud es:'),
+                        Parragraph(
+                          parrafo: '4. Diría usted que en general su salud es:',
+                          color: GlobalColors.textColor,
+                        ),
                         const SizedBox(height: 5.0),
                         CustomDropDown(
                           hintText: 'Seleccione una opción',
@@ -245,9 +254,11 @@ class _TestTabState extends State<TestTab> {
                         const SizedBox(height: 15.0),
 
                         /// Salud mental percibida en los ultimos 30 dias
-                        const Parragraph(
-                            parrafo:
-                                '5. ¿¿Durante cuántos días en el último mes considera que su salud mental no fue buena? (Incluya estrés, depresión y problemas emocionales)'),
+                        Parragraph(
+                          parrafo:
+                              '5. ¿¿Durante cuántos días en el último mes considera que su salud mental no fue buena? (Incluya estrés, depresión y problemas emocionales)',
+                          color: GlobalColors.textColor,
+                        ),
                         const SizedBox(height: 5.0),
                         CustomNumberField(
                           hintText: 'Ingrese la cantidad de días',
@@ -270,9 +281,11 @@ class _TestTabState extends State<TestTab> {
                         const SizedBox(height: 15.0),
 
                         /// Salud mental percibida en los ultimos 30 dias
-                        const Parragraph(
-                            parrafo:
-                                '6. ¿Durante cuántos días en el último mes considera que su salud física no fue buena? (Incluya enfermedades y lesiones físicas)'),
+                        Parragraph(
+                          parrafo:
+                              '6. ¿Durante cuántos días en el último mes considera que su salud física no fue buena? (Incluya enfermedades y lesiones físicas)',
+                          color: GlobalColors.textColor,
+                        ),
                         const SizedBox(height: 5.0),
                         CustomNumberField(
                           hintText: 'Ingrese la cantidad de días',
@@ -295,9 +308,11 @@ class _TestTabState extends State<TestTab> {
                         const SizedBox(height: 15.0),
 
                         /// Dificultad para caminar o subir escaleras
-                        const Parragraph(
-                            parrafo:
-                                '7. ¿Tiene dificultades graves para caminar o subir escaleras?'),
+                        Parragraph(
+                          parrafo:
+                              '7. ¿Tiene dificultades graves para caminar o subir escaleras?',
+                          color: GlobalColors.textColor,
+                        ),
                         const SizedBox(height: 5.0),
                         CustomDropDown(
                           hintText: 'Seleccione una opción',
@@ -318,9 +333,10 @@ class _TestTabState extends State<TestTab> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         /// Consumo de frutas
-                        const Parragraph(
-                            parrafo:
-                                '8. ¿Consume fruta al menos una vez al día?'),
+                        Parragraph(
+                          parrafo: '8. ¿Consume fruta al menos una vez al día?',
+                          color: GlobalColors.textColor,
+                        ),
                         const SizedBox(height: 5.0),
                         CustomDropDown(
                           hintText: 'Seleccione una opción',
@@ -332,9 +348,11 @@ class _TestTabState extends State<TestTab> {
                         const SizedBox(height: 15.0),
 
                         /// Consumo de vegetales
-                        const Parragraph(
-                            parrafo:
-                                '9. ¿Comes verduras al menos una vez al día?'),
+                        Parragraph(
+                          parrafo:
+                              '9. ¿Comes verduras al menos una vez al día?',
+                          color: GlobalColors.textColor,
+                        ),
                         const SizedBox(height: 5.0),
                         CustomDropDown(
                           hintText: 'Seleccione una opción',
@@ -346,9 +364,11 @@ class _TestTabState extends State<TestTab> {
                         const SizedBox(height: 15.0),
 
                         /// Consumo de cigarros
-                        const Parragraph(
-                            parrafo:
-                                '10. ¿Has fumado al menos 100 cigarrillos en tu vida? \n* Nota: 5 paquetes = 100 cigarrillos'),
+                        Parragraph(
+                          parrafo:
+                              '10. ¿Has fumado al menos 100 cigarrillos en tu vida? \n* Nota: 5 paquetes = 100 cigarrillos',
+                          color: GlobalColors.textColor,
+                        ),
                         const SizedBox(height: 5.0),
                         CustomDropDown(
                           hintText: 'Seleccione una opción',
@@ -360,9 +380,11 @@ class _TestTabState extends State<TestTab> {
                         const SizedBox(height: 15.0),
 
                         /// Consumo de alcohol
-                        const Parragraph(
-                            parrafo:
-                                '11. ¿Consumes alcohol muy frecuentemente? \n* Hombres > 14 tragos por semana. \n* Mujeres > 7 tragos por semana.'),
+                        Parragraph(
+                          parrafo:
+                              '11. ¿Consumes alcohol muy frecuentemente? \n* Hombres > 14 tragos por semana. \n* Mujeres > 7 tragos por semana.',
+                          color: GlobalColors.textColor,
+                        ),
                         const SizedBox(height: 5.0),
                         CustomDropDown(
                           hintText: 'Seleccione una opción',
@@ -374,9 +396,11 @@ class _TestTabState extends State<TestTab> {
                         const SizedBox(height: 15.0),
 
                         /// Actividad fisica del usuario
-                        const Parragraph(
-                            parrafo:
-                                '12.  ¿Ha hecho ejercicio fuera de su trabajo habitual en los últimos 30 días?'),
+                        Parragraph(
+                          parrafo:
+                              '12.  ¿Ha hecho ejercicio fuera de su trabajo habitual en los últimos 30 días?',
+                          color: GlobalColors.textColor,
+                        ),
                         const SizedBox(height: 5.0),
                         CustomDropDown(
                           hintText: 'Seleccione una opción',
@@ -399,9 +423,11 @@ class _TestTabState extends State<TestTab> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ///  Le han dicho que su colesterol en sangre es alto?
-                        const Parragraph(
-                            parrafo:
-                                '13. ¿Un profesional de la salud le ha indicado que tiene colesterol alto en la sangre?'),
+                        Parragraph(
+                          parrafo:
+                              '13. ¿Un profesional de la salud le ha indicado que tiene colesterol alto en la sangre?',
+                          color: GlobalColors.textColor,
+                        ),
                         const SizedBox(height: 5.0),
                         CustomDropDown(
                           hintText: 'Seleccione una opción',
@@ -413,9 +439,11 @@ class _TestTabState extends State<TestTab> {
                         const SizedBox(height: 15.0),
 
                         /// Control de colesterol en los últimos cinco años
-                        const Parragraph(
-                            parrafo:
-                                '14. ¿Ha realizado un control de colesterol en los últimos 5 años?'),
+                        Parragraph(
+                          parrafo:
+                              '14. ¿Ha realizado un control de colesterol en los últimos 5 años?',
+                          color: GlobalColors.textColor,
+                        ),
                         const SizedBox(height: 5.0),
                         CustomDropDown(
                           hintText: 'Seleccione una opción',
@@ -427,9 +455,10 @@ class _TestTabState extends State<TestTab> {
                         const SizedBox(height: 15.0),
 
                         /// Paciente Diabetico
-                        const Parragraph(
-                            parrafo:
-                                '15. ¿Cuál es tu estado actual de diabetes?'),
+                        Parragraph(
+                          parrafo: '15. ¿Cuál es tu estado actual de diabetes?',
+                          color: GlobalColors.textColor,
+                        ),
                         const SizedBox(height: 5.0),
                         CustomDropDown(
                           hintText: 'Seleccione una opción',
@@ -444,9 +473,11 @@ class _TestTabState extends State<TestTab> {
 
                         const SizedBox(height: 15.0),
 
-                        const Parragraph(
-                            parrafo:
-                                '16. ¿Has tenido alguna vez un accidente cerebrovascular (ACV)?'),
+                        Parragraph(
+                          parrafo:
+                              '16. ¿Has tenido alguna vez un accidente cerebrovascular (ACV)?',
+                          color: GlobalColors.textColor,
+                        ),
                         const SizedBox(height: 5.0),
                         CustomDropDown(
                           hintText: 'Seleccione una opción',
@@ -457,9 +488,11 @@ class _TestTabState extends State<TestTab> {
 
                         const SizedBox(height: 15.0),
 
-                        const Parragraph(
-                            parrafo:
-                                '17. ¿Has padecido alguna vez de enfermedad coronaria o infarto de miocardio?'),
+                        Parragraph(
+                          parrafo:
+                              '17. ¿Has padecido alguna vez de enfermedad coronaria o infarto de miocardio?',
+                          color: GlobalColors.textColor,
+                        ),
                         const SizedBox(height: 5.0),
                         CustomDropDown(
                           hintText: 'Seleccione una opción',

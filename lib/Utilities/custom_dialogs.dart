@@ -277,9 +277,9 @@ class CustomDialogs {
                 height: 120,
                 child: Center(
                   child: Lottie.asset(
-                    'assets/animations/loader.json',
-                    width: 120,
-                    height: 120,
+                    'assets/animations/heart_test.json',
+                    width: 150,
+                    height: 150,
                   ),
                 ),
               ),

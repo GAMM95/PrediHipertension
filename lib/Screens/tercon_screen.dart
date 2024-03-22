@@ -46,32 +46,50 @@ class _TerminosCondicionesScreenState extends State<TerminosCondicionesScreen> {
                       ),
                     ),
                     const SizedBox(height: 15.0),
-                    const Parragraph(
-                        parrafo:
-                            'Por favor, lee detenidamente estos términos y condiciones antes de utilizar nuestra aplicación de predicción de hipertensión. Al acceder o utilizar esta aplicación, aceptas estar legalmente vinculado por estos términos y condiciones.'),
+                    Parragraph(
+                      parrafo:
+                          'Por favor, lee detenidamente estos términos y condiciones antes de utilizar nuestra aplicación de predicción de hipertensión. Al acceder o utilizar esta aplicación, aceptas estar legalmente vinculado por estos términos y condiciones.',
+                      color: GlobalColors.textColor,
+                    ),
                     const SizedBox(height: 10.0),
-                    const Subtitle(subtitulo: "Descripción de la Aplicación"),
+                    Subtitle(
+                      subtitulo: "Descripción de la Aplicación",
+                      color: GlobalColors.textColor,
+                    ),
                     const SizedBox(height: 10.0),
-                    const Parragraph(
-                        parrafo:
-                            "Nuestra aplicación móvil tiene como objetivo proporcionar información y predicciones relacionadas con la hipertensión. Ofrece funcionalidades como:"),
+                    Parragraph(
+                      parrafo:
+                          "Nuestra aplicación móvil tiene como objetivo proporcionar información y predicciones relacionadas con la hipertensión. Ofrece funcionalidades como:",
+                      color: GlobalColors.textColor,
+                    ),
                     const SizedBox(height: 10.0),
-                    const Parragraph(
-                        parrafo:
-                            "- Análisis de datos introducidos por el usuario para predecir riesgos de hipertensión.\n- Proporciona recomendaciones generales relacionadas con la salud cardiovascular.\n♥ Almacena datos de usuario de manera segura y confidencial."),
+                    Parragraph(
+                      parrafo:
+                          "- Análisis de datos introducidos por el usuario para predecir riesgos de hipertensión.\n- Proporciona recomendaciones generales relacionadas con la salud cardiovascular.\n♥ Almacena datos de usuario de manera segura y confidencial.",
+                      color: GlobalColors.textColor,
+                    ),
                     const SizedBox(height: 10.0),
-                    const Subtitle(subtitulo: "Requisitos de Uso"),
+                    Subtitle(
+                      subtitulo: "Requisitos de Uso",
+                      color: GlobalColors.textColor,
+                    ),
                     const SizedBox(height: 10.0),
-                    const Parragraph(
-                        parrafo:
-                            'Al utilizar esta aplicación, aceptas y confirmas que:'),
+                    Parragraph(
+                      parrafo:
+                          'Al utilizar esta aplicación, aceptas y confirmas que:',
+                      color: GlobalColors.textColor,
+                    ),
                     const SizedBox(height: 10.0),
-                    const Subtitle(
-                        subtitulo: "Protección de Datos y Privacidad"),
+                    Subtitle(
+                      subtitulo: "Protección de Datos y Privacidad",
+                      color: GlobalColors.textColor,
+                    ),
                     const SizedBox(height: 10.0),
-                    const Parragraph(
-                        parrafo:
-                            'La seguridad y privacidad de tus datos son fundamentales para nosotros. La información que compartas con la aplicación se manejará de acuerdo con nuestra [Política de Privacidad](enlace a la política de privacidad). Nos comprometemos a proteger tus datos y a no compartir información personal sin tu consentimiento.'),
+                    Parragraph(
+                      parrafo:
+                          'La seguridad y privacidad de tus datos son fundamentales para nosotros. La información que compartas con la aplicación se manejará de acuerdo con nuestra [Política de Privacidad](enlace a la política de privacidad). Nos comprometemos a proteger tus datos y a no compartir información personal sin tu consentimiento.',
+                      color: GlobalColors.textColor,
+                    ),
                   ],
                 ),
                 Positioned(

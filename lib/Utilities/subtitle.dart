@@ -4,7 +4,12 @@ import 'package:predihipertension/Theme/global_colors.dart';
 
 class Subtitle extends StatelessWidget {
   final String subtitulo;
-  const Subtitle({super.key, required this.subtitulo});
+  final Color color;
+  const Subtitle({
+    super.key,
+    required this.subtitulo,
+    required this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +17,7 @@ class Subtitle extends StatelessWidget {
       subtitulo,
       textAlign: TextAlign.start,
       style: TextStyle(
-        color: GlobalColors.textColor,
+        color: color,
         fontSize: 16.0,
         fontWeight: FontWeight.w600,
       ),

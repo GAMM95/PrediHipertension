@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'package:predihipertension/Theme/global_colors.dart';
-
 class Parragraph extends StatelessWidget {
   final String parrafo;
-  const Parragraph({super.key, required this.parrafo});
+  final Color color;
+
+  const Parragraph({
+    super.key,
+    required this.parrafo,
+    required this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +16,7 @@ class Parragraph extends StatelessWidget {
       parrafo,
       textAlign: TextAlign.justify,
       style: TextStyle(
-        color: GlobalColors.textColor,
+        color: color,
         fontSize: 14.0,
         fontWeight: FontWeight.w400,
       ),
