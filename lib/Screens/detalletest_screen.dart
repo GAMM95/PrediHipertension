@@ -111,7 +111,7 @@ class _DetalleTestState extends State<DetalleTest> {
             fontWeight: FontWeight.w600,
           ),
         ),
-        titleSpacing: -8, //
+        titleSpacing: -8,
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 15.0),

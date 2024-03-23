@@ -3,6 +3,7 @@ import 'package:predihipertension/Theme/global_colors.dart';
 
 import 'info1_tab.dart';
 import 'info2_tab.dart';
+import 'info3_tab.dart';
 
 class InfoTab extends StatelessWidget {
   const InfoTab({super.key});
@@ -11,85 +12,62 @@ class InfoTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Información',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 22,
-              color: GlobalColors.titlePanel,
-            ),
-          ),
-          centerTitle: true,
-          elevation: 3,
-          shadowColor: Colors.black26,
-          flexibleSpace: Container(
+      child: Column(
+        children: [
+          Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [
-                  // Color.fromARGB(255, 235, 183, 192),
-                  // Color.fromARGB(255, 241, 200, 206),
-                  GlobalColors.bgPanelDark2,
-                  GlobalColors.bgPanelDark2
-                ],
+                colors: [GlobalColors.bgDark2, GlobalColors.bgDark2],
                 begin: Alignment.bottomRight,
                 end: Alignment.topLeft,
               ),
             ),
-          ),
-          bottom: TabBar(
-            unselectedLabelColor: Colors.black38,
-            labelColor: GlobalColors.appBarColor,
-            indicator: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(
-                  color: GlobalColors.titlePrimaryColor,
-                  width: 5,
+            child: TabBar(
+              unselectedLabelColor: const Color.fromARGB(96, 243, 243, 243),
+              labelColor: GlobalColors.appBarColor,
+              indicator: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: GlobalColors.titlePrimaryColor,
+                    width: 5,
+                  ),
                 ),
               ),
+              tabs: const [
+                Tab(
+                  icon: Icon(
+                    Icons.book_sharp,
+                    size: 30,
+                  ),
+                  text: 'Definiciones',
+                ),
+                Tab(
+                  icon: Icon(
+                    Icons.ballot,
+                    size: 30,
+                  ),
+                  text: 'Sugerencias',
+                ),
+                Tab(
+                  icon: Icon(
+                    Icons.crisis_alert_outlined,
+                    size: 30,
+                  ),
+                  text: 'Complicaciones',
+                ),
+              ],
             ),
-            tabs: const [
-              Tab(
-                icon: Icon(
-                  Icons.data_thresholding,
-                  size: 30,
-                ),
-                // text: 'Datos y cifras',
-              ),
-              Tab(
-                icon: Icon(
-                  Icons.recommend,
-                  size: 30,
-                ),
-                // text: 'Sugerencias',
-              ),
-              Tab(
-                icon: Icon(
-                  Icons.person,
-                  size: 30,
-                ),
-                // text: 'Perfil',
-              ),
-            ],
           ),
-        ),
-        body: const Column(
-          children: [
-            Expanded(
-              child: TabBarView(
-                // physics:
-                //     NeverScrollableScrollPhysics(), // Bloquea el desplazamiento
-                children: [
-                  Info1Tab(),
-                  Info2Tab(),
-                  Info2Tab(),
-                ],
-              ),
+          const Expanded(
+            child: TabBarView(
+              children: [
+                Info1Tab(),
+                Info2Tab(),
+                Info3Tab(),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

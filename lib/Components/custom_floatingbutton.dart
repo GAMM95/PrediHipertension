@@ -24,7 +24,8 @@ class CustomFloatingActionButton extends StatelessWidget {
           child: const Icon(Icons.help),
           label: 'Ayuda',
           onTap: () {
-            CalculoIMC.mostrar(context, imcController);
+            Navigator.of(context).pushNamed('/ayuda');
+            // CalculoIMC.mostrar(context, imcController);
           },
         ),
 

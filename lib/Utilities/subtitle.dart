@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:predihipertension/Theme/global_colors.dart';
-
 class Subtitle extends StatelessWidget {
   final String subtitulo;
   final Color color;

@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:predihipertension/Utilities/title_tab.dart';
 import 'package:predihipertension/Components/custom_card.dart';
 import 'package:predihipertension/Services/firebase_auth.dart';
 import 'package:predihipertension/Theme/global_colors.dart';
@@ -38,7 +37,7 @@ class _ProfileTabState extends State<ProfileTab> {
       color: GlobalColors.bgDark2,
       child: Column(
         children: [
-          const TituloTab(titulo: 'Mi perfil'),
+          // const TituloTab(titulo: 'Mi perfil'),
           Expanded(
             child: Center(
               child: SingleChildScrollView(

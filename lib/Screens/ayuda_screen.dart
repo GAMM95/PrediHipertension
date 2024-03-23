@@ -5,15 +5,14 @@ import 'package:predihipertension/Utilities/lista_items.dart';
 import 'package:predihipertension/Utilities/paragraph.dart';
 import 'package:predihipertension/Utilities/subtitle.dart';
 
-class TerminosCondicionesScreen extends StatefulWidget {
-  const TerminosCondicionesScreen({super.key});
+class AyudaScreen extends StatefulWidget {
+  const AyudaScreen({super.key});
 
   @override
-  State<TerminosCondicionesScreen> createState() =>
-      _TerminosCondicionesScreenState();
+  State<AyudaScreen> createState() => _TerminosCondicionesScreenState();
 }
 
-class _TerminosCondicionesScreenState extends State<TerminosCondicionesScreen> {
+class _TerminosCondicionesScreenState extends State<AyudaScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

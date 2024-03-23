@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:predihipertension/Components/custom_numberfielddark.dart';
+import 'package:predihipertension/Screens/image_screen.dart';
 
 class CalculoIMC {
   static void mostrar(
@@ -17,7 +18,7 @@ class CalculoIMC {
       builder: (context) {
         return AlertDialog(
           title: const Text(
-            '¿Cómo calcular su IMC?',
+            '¿Cuánto es mi IMC?',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontWeight: FontWeight.w500,
@@ -77,18 +78,22 @@ class CalculoIMC {
                 ),
 
                 /// Imagen Talla - Peso - IMC
-                Center(
-                  child: InteractiveViewer(
-                    maxScale: 5.0,
-                    minScale: 1.0,
-                    child: Image.asset('assets/images/imc.png'),
-                  ),
-                ),
-                const Text(
-                  '* Haga zoom para visualizar mejor la imagen',
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w400,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ImageViewer(
+                            imagePath: 'assets/images/imc.png'),
+                      ),
+                    );
+                  },
+                  child: Center(
+                    child: InteractiveViewer(
+                      // maxScale: 5.0,
+                      // minScale: 1.0,
+                      child: Image.asset('assets/images/imc.png'),
+                    ),
                   ),
                 ),
               ],
