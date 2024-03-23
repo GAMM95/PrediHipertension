@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-import 'package:predihipertension/Theme/theme.dart';
-import 'package:predihipertension/Routes/routes_screens.dart';
-import 'package:predihipertension/Screens/splash_screen.dart';
+import 'package:predihipertension/Core/Theme/theme.dart';
+import 'package:predihipertension/Core/Routes/routes_screens.dart';
+import 'package:predihipertension/Presentation/Screens/splash_screen.dart';
 import 'firebase_options.dart';
 
 /// Método principal de la aplicación.
