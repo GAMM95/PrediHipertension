@@ -20,18 +20,18 @@ class CustomFloatingActionButton extends StatelessWidget {
         /// Primer icono flotante
         SpeedDialChild(
           child: const Icon(Icons.help),
-          label: 'Ayuda',
+          label: 'Acerca de',
           onTap: () {
-            Navigator.of(context).pushNamed('/ayuda');
+            Navigator.of(context).pushNamed('/acercade');
           },
         ),
 
         /// Segundo icono flotante
         SpeedDialChild(
-          child: const Icon(Icons.article_rounded),
-          label: 'Términos y condiciones',
+          child: const Icon(Icons.calculate_rounded),
+          label: 'Calculadora de IMC',
           onTap: () {
-            Navigator.of(context).pushNamed('/tercon');
+            Navigator.of(context).pushNamed('/calcimc');
           },
         ),
 

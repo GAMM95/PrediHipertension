@@ -7,7 +7,7 @@ import 'package:predihipertension/Presentation/Utilities/custom_dialogs.dart';
 import 'package:predihipertension/Domain/Logic/testlogic.dart';
 import 'package:predihipertension/Presentation/Widget/custom_listDetail.dart';
 import 'package:predihipertension/Core/Services/methods_firebase.dart';
-import 'package:predihipertension/Domain/Entities/datatest.dart';
+import 'package:predihipertension/Domain/Models/datatest.dart';
 
 // import 'package:pdf/widgets.dart' as pw;
 

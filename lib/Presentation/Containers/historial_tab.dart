@@ -35,7 +35,7 @@ class _HistorialTabState extends State<HistorialTab> {
             child: const Padding(
               padding: EdgeInsets.symmetric(vertical: 10.0),
               child: Text(
-                'Aquí se muestra el historial de consultas:',
+                'Aquí se mostrará el grafico del historial de consultas:',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 16.0,

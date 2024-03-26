@@ -38,4 +38,11 @@ class GlobalColors {
   static HexColor hintText = HexColor("#DCDCDC");
   static HexColor hinTextDark = HexColor("#989898");
   static HexColor linkText = HexColor("#FFC6C6");
+
+  // Colores de resultado de IMC
+  static HexColor pesoBajo = HexColor('#3A859A');
+  static HexColor pesoNormal = HexColor('#2EC6B7');
+  static HexColor sobrepeso = HexColor('#F4CA38');
+  static HexColor obseo = HexColor('#F39F95');
+  static HexColor obesoExtremo = HexColor('#D34B4D');
 }

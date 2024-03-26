@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:predihipertension/Domain/Entities/datatest.dart';
+import 'package:predihipertension/Domain/Models/datatest.dart';
 import 'package:predihipertension/Core/Services/methods_firebase.dart';
 
 class TestLogic {
