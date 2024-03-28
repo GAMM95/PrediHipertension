@@ -2,12 +2,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:predihipertension/Domain/Models/datatest.dart';
 
+/// Clase que proporciona métodos para la autenticación y la gestión de datos del usuario.
 class MethodsAuth {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  /// Devuelve el usuario actualmente autenticado.
   User? get currentUser => _auth.currentUser;
 
+  /// Stream que emite cambios en el estado de la autenticación.
   Stream<User?> get authStateChanges => _auth.authStateChanges();
 
   /// Método para obtener el primer nombre del usuario.
@@ -31,16 +34,21 @@ class MethodsAuth {
     return null;
   }
 
-  // Método para guardar los datos del test en Firestore
+  /// Método para guardar los datos del test del usuario.
   Future<void> guardarTest({
     required Datatest datatest,
   }) async {
     try {
       final User? user = _auth.currentUser;
       if (user != null) {
-        // Guardar los datos del test en Firestore
-        await _firestore.collection('datatest').add({
-          'userId': user.uid,
+        // Obtener una referencia al documento del usuario
+        final userDocRef = _firestore.collection('usuario').doc(user.uid);
+
+        // Crear una subcolección 'datatest' dentro del documento del usuario
+        final userDatatestCollectionRef = userDocRef.collection('datatest');
+
+        // Guardar los datos del test dentro de la subcolección 'datatest'
+        await userDatatestCollectionRef.add({
           'edadIngresada': datatest.edadIngresada,
           'edadAgrupada': datatest.edadAgrupada,
           'genero': datatest.sexo,
@@ -68,19 +76,23 @@ class MethodsAuth {
     }
   }
 
+  /// Método para obtener las fechas de los tests realizados por el usuario.
+
   Future<List<DateTime>> getDataTestDates() async {
     List<DateTime> datasetDates = [];
-
     try {
       // Obtener el usuario actualmente autenticado
       User? user = _auth.currentUser;
 
       if (user != null) {
-        // Consultar los datasets del usuario actual
-        QuerySnapshot querySnapshot = await _firestore
-            .collection('datatest')
-            .where('userId', isEqualTo: user.uid)
-            .get();
+        // Obtener una referencia a la subcolección 'datatest' dentro del documento del usuario
+        final userDatatestCollectionRef = _firestore
+            .collection('usuario')
+            .doc(user.uid)
+            .collection('datatest');
+
+        // Consultar los documentos en la subcolección 'datatest'
+        QuerySnapshot querySnapshot = await userDatatestCollectionRef.get();
 
         // Iterar sobre los documentos y obtener las fechas
         for (var doc in querySnapshot.docs) {
@@ -99,60 +111,70 @@ class MethodsAuth {
     }
   }
 
-  // Método para obtener los datos del test para una fecha específica
+  /// Método para obtener los datos del test para una fecha específica.
   Future<List<Datatest>> getDataTestByDate(DateTime date) async {
     List<Datatest> dataTestList = [];
     try {
-      // Consultar los datos del test para la fecha especificada
-      QuerySnapshot querySnapshot = await _firestore
-          .collection('datatest')
-          .where('timestamp', isGreaterThanOrEqualTo: date)
-          .where('timestamp', isLessThan: date.add(const Duration(days: 1)))
-          .get();
+      // Obtener el usuario actualmente autenticado
+      User? user = _auth.currentUser;
 
-      // Iterar sobre los documentos y obtener los datos del test
-      for (var doc in querySnapshot.docs) {
-        int edadingresada = doc['edadIngresada'];
-        int edadAgrupada = doc['edadAgrupada'];
-        int genero = doc['genero'];
-        double imc = doc['imc'];
-        int saludGeneral = doc['saludGeneral'];
-        int saludFisica = doc['saludFisica'];
-        int saludMental = doc['saludMental'];
-        int dificultadCaminar = doc['dificultadCaminar'];
-        int consumoFrutas = doc['consumoFrutas'];
-        int consumoVerduras = doc['consumoVerduras'];
-        int consumoCigarros = doc['consumoCigarros'];
-        int consumoAlcohol = doc['consumoAlcohol'];
-        int actividadFisica = doc['actividadFisica'];
-        int colesterol = doc['colesterol'];
-        int chequeoColesterol = doc['chequeoColesterol'];
-        int acv = doc['acv'];
-        int diabetes = doc['diabetes'];
-        int enfermedadCardiaca = doc['enfermedadCardiaca'];
+      if (user != null) {
+        // Obtener una referencia a la subcolección 'datatest' dentro del documento del usuario
+        final userDatatestCollectionRef = _firestore
+            .collection('usuario')
+            .doc(user.uid)
+            .collection('datatest');
 
-        // Crea un objeto Datatest con los datos obtenidos
-        Datatest dataTest = Datatest(
-          edadIngresada: edadingresada,
-          edadAgrupada: edadAgrupada,
-          sexo: genero,
-          imc: imc,
-          saludGeneral: saludGeneral,
-          saludFisica: saludFisica,
-          saludMental: saludMental,
-          dificultadCaminar: dificultadCaminar,
-          consumoFrutas: consumoFrutas,
-          consumoVerduras: consumoVerduras,
-          consumoCigarros: consumoCigarros,
-          consumoAlcohol: consumoAlcohol,
-          actividadFisica: actividadFisica,
-          colesterol: colesterol,
-          chequeoColesterol: chequeoColesterol,
-          acv: acv,
-          diabetes: diabetes,
-          enfermedadCardiaca: enfermedadCardiaca,
-        );
-        dataTestList.add(dataTest);
+        // Consultar los documentos en la subcolección 'datatest' para la fecha especificada
+        QuerySnapshot querySnapshot = await userDatatestCollectionRef
+            .where('timestamp', isGreaterThanOrEqualTo: date)
+            .where('timestamp', isLessThan: date.add(const Duration(days: 1)))
+            .get();
+
+        // Iterar sobre los documentos y obtener los datos del test
+        for (var doc in querySnapshot.docs) {
+          int edadingresada = doc['edadIngresada'];
+          int edadAgrupada = doc['edadAgrupada'];
+          int genero = doc['genero'];
+          double imc = doc['imc'];
+          int saludGeneral = doc['saludGeneral'];
+          int saludFisica = doc['saludFisica'];
+          int saludMental = doc['saludMental'];
+          int dificultadCaminar = doc['dificultadCaminar'];
+          int consumoFrutas = doc['consumoFrutas'];
+          int consumoVerduras = doc['consumoVerduras'];
+          int consumoCigarros = doc['consumoCigarros'];
+          int consumoAlcohol = doc['consumoAlcohol'];
+          int actividadFisica = doc['actividadFisica'];
+          int colesterol = doc['colesterol'];
+          int chequeoColesterol = doc['chequeoColesterol'];
+          int acv = doc['acv'];
+          int diabetes = doc['diabetes'];
+          int enfermedadCardiaca = doc['enfermedadCardiaca'];
+
+          // Crear un objeto Datatest con los datos obtenidos
+          Datatest dataTest = Datatest(
+            edadIngresada: edadingresada,
+            edadAgrupada: edadAgrupada,
+            sexo: genero,
+            imc: imc,
+            saludGeneral: saludGeneral,
+            saludFisica: saludFisica,
+            saludMental: saludMental,
+            dificultadCaminar: dificultadCaminar,
+            consumoFrutas: consumoFrutas,
+            consumoVerduras: consumoVerduras,
+            consumoCigarros: consumoCigarros,
+            consumoAlcohol: consumoAlcohol,
+            actividadFisica: actividadFisica,
+            colesterol: colesterol,
+            chequeoColesterol: chequeoColesterol,
+            acv: acv,
+            diabetes: diabetes,
+            enfermedadCardiaca: enfermedadCardiaca,
+          );
+          dataTestList.add(dataTest);
+        }
       }
 
       return dataTestList;
@@ -161,15 +183,19 @@ class MethodsAuth {
     }
   }
 
-  // Método para eliminar un test basado en la fecha
+  /// Método para eliminar un test basado en la fecha.
   Future<void> deleteTestByDateTime(DateTime dateTime) async {
     try {
       final User? user = _auth.currentUser;
       if (user != null) {
-        QuerySnapshot querySnapshot = await _firestore
-            .collection('datatest')
-            .where('userId', isEqualTo: user.uid)
-            .get();
+        // Obtener una referencia a la subcolección 'datatest' dentro del documento del usuario
+        final userDatatestCollectionRef = _firestore
+            .collection('usuario')
+            .doc(user.uid)
+            .collection('datatest');
+
+        // Consultar los documentos en la subcolección 'datatest'
+        QuerySnapshot querySnapshot = await userDatatestCollectionRef.get();
 
         // Iterar sobre los documentos y eliminar aquellos que coincidan con la fecha y hora
         // ignore: avoid_function_literals_in_foreach_calls
