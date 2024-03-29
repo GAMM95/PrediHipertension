@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:predihipertension/Domain/Models/datatest.dart';
+import 'package:predihipertension/Domain/Models/resultado.dart';
 
 /// Clase que proporciona métodos para la autenticación y la gestión de datos del usuario.
 class MethodsAuth {
@@ -76,8 +77,45 @@ class MethodsAuth {
     }
   }
 
-  /// Método para obtener las fechas de los tests realizados por el usuario.
+  // Método para guardar el resultado de la predicción en Firestore.
+  // Future<void> guardarResultadoPrediccion(int hypertensionResult) async {
+  //   try {
+  //     final User? user = _auth.currentUser;
+  //     if (user != null) {
+  //       final userDocRef = _firestore.collection('usuario').doc(user.uid);
+  //       final userDatatestCollectionRef = userDocRef.collection('datatest');
+  //       await userDatatestCollectionRef.add({
+  //         'timestamp': Timestamp.now(),
+  //         'resultado_prediccion': hypertensionResult,
+  //       });
+  //     }
+  //   } catch (error) {
+  //     rethrow;
+  //   }
+  // }
 
+  Future<void> guardarResultadoPrediccion({
+    required Resultado resultado,
+  }) async {
+    try {
+      final User? user = _auth.currentUser;
+      if (user != null) {
+        final userDocRef = _firestore.collection('usuario').doc(user.uid);
+        final userDatatestCollectionRef = userDocRef.collection('datatest');
+        final userDatatestDocRef = userDatatestCollectionRef.doc();
+        final userResultCollectionRef =
+            userDatatestDocRef.collection('resultado');
+        await userResultCollectionRef.add({
+          'timestamp': Timestamp.now(),
+          'resultadoPrediccion': resultado.resultado,
+        });
+      }
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  /// Método para obtener las fechas de los tests realizados por el usuario.
   Future<List<DateTime>> getDataTestDates() async {
     List<DateTime> datasetDates = [];
     try {
@@ -151,6 +189,7 @@ class MethodsAuth {
           int acv = doc['acv'];
           int diabetes = doc['diabetes'];
           int enfermedadCardiaca = doc['enfermedadCardiaca'];
+          // String resultado = doc['resultado'];
 
           // Crear un objeto Datatest con los datos obtenidos
           Datatest dataTest = Datatest(
@@ -172,6 +211,7 @@ class MethodsAuth {
             acv: acv,
             diabetes: diabetes,
             enfermedadCardiaca: enfermedadCardiaca,
+            // resultado: resultado,
           );
           dataTestList.add(dataTest);
         }
@@ -182,6 +222,58 @@ class MethodsAuth {
       rethrow;
     }
   }
+
+  // Future<dynamic> obtenerResultadoPrediccion() async {
+  //   try {
+  //     final User? user = _auth.currentUser;
+  //     if (user != null) {
+  //       final userDocRef = _firestore.collection('usuario').doc(user.uid);
+  //       final userDatatestCollectionRef = userDocRef.collection('datatest');
+
+  //       // Obtener todos los documentos de la colección 'datatest'
+  //       final QuerySnapshot datatestSnapshot =
+  //           await userDatatestCollectionRef.get();
+
+  //       // Iterar sobre los documentos para encontrar el más reciente
+  //       DocumentSnapshot? ultimoDatatestDoc;
+  //       DateTime? ultimoTimestamp;
+  //       for (final doc in datatestSnapshot.docs) {
+  //         final timestamp = (doc.data() as Map)['timestamp'] as Timestamp;
+  //         if (ultimoTimestamp == null ||
+  //             timestamp.toDate().isAfter(ultimoTimestamp)) {
+  //           ultimoTimestamp = timestamp.toDate();
+  //           ultimoDatatestDoc = doc;
+  //         }
+  //       }
+
+  //       if (ultimoDatatestDoc != null) {
+  //         final userResultCollectionRef =
+  //             ultimoDatatestDoc.reference.collection('resultado');
+
+  //         // Obtener el último resultado guardado en la subcolección 'resultado'
+  //         final QuerySnapshot resultadoSnapshot =
+  //             await userResultCollectionRef.get();
+  //         if (resultadoSnapshot.docs.isNotEmpty) {
+  //           final ultimoResultadoDoc = resultadoSnapshot.docs.last;
+  //           return ultimoResultadoDoc.data();
+  //         } else {
+  //           // No hay resultados guardados
+  //           return null;
+  //         }
+  //       } else {
+  //         // No hay documentos en la colección 'datatest'
+  //         return null;
+  //       }
+  //     } else {
+  //       // El usuario no está autenticado
+  //       return null;
+  //     }
+  //   } catch (error) {
+  //     // Manejar el error
+  //     print('Error al obtener resultado de predicción: $error');
+  //     return null;
+  //   }
+  // }
 
   /// Método para eliminar un test basado en la fecha.
   Future<void> deleteTestByDateTime(DateTime dateTime) async {

@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 import 'package:predihipertension/Core/Services/firebase_auth.dart';
+import 'package:predihipertension/Core/Services/methods_firebase.dart';
 import 'package:predihipertension/Core/Theme/global_colors.dart';
+import 'package:predihipertension/Domain/Models/resultado.dart';
 
 class CustomDialogs {
   static void showErrorDialog(
@@ -261,6 +263,10 @@ class CustomDialogs {
     } else {
       message = 'No se pudo determinar el resultado.';
     }
+
+    // Llamar al método para guardar el resultado
+    MethodsAuth().guardarResultadoPrediccion(
+        resultado: Resultado(resultado: hypertension));
 
     // Mostrar el diálogo con el mensaje personalizado
     showDialog(
