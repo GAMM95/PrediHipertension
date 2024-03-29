@@ -35,7 +35,6 @@ class MethodsAuth {
     return null;
   }
 
-  /// Método para guardar los datos del test del usuario.
   Future<void> guardarTest({
     required Datatest datatest,
   }) async {
@@ -48,8 +47,12 @@ class MethodsAuth {
         // Crear una subcolección 'datatest' dentro del documento del usuario
         final userDatatestCollectionRef = userDocRef.collection('datatest');
 
+        // Generar un ID único para el nuevo documento
+        final newDocRef = userDatatestCollectionRef.doc();
+
         // Guardar los datos del test dentro de la subcolección 'datatest'
-        await userDatatestCollectionRef.add({
+        await newDocRef.set({
+          'id': newDocRef.id, // Agregar el ID único al documento
           'edadIngresada': datatest.edadIngresada,
           'edadAgrupada': datatest.edadAgrupada,
           'genero': datatest.sexo,
@@ -77,23 +80,6 @@ class MethodsAuth {
     }
   }
 
-  // Método para guardar el resultado de la predicción en Firestore.
-  // Future<void> guardarResultadoPrediccion(int hypertensionResult) async {
-  //   try {
-  //     final User? user = _auth.currentUser;
-  //     if (user != null) {
-  //       final userDocRef = _firestore.collection('usuario').doc(user.uid);
-  //       final userDatatestCollectionRef = userDocRef.collection('datatest');
-  //       await userDatatestCollectionRef.add({
-  //         'timestamp': Timestamp.now(),
-  //         'resultado_prediccion': hypertensionResult,
-  //       });
-  //     }
-  //   } catch (error) {
-  //     rethrow;
-  //   }
-  // }
-
   Future<void> guardarResultadoPrediccion({
     required Resultado resultado,
   }) async {
@@ -102,18 +88,82 @@ class MethodsAuth {
       if (user != null) {
         final userDocRef = _firestore.collection('usuario').doc(user.uid);
         final userDatatestCollectionRef = userDocRef.collection('datatest');
-        final userDatatestDocRef = userDatatestCollectionRef.doc();
-        final userResultCollectionRef =
-            userDatatestDocRef.collection('resultado');
-        await userResultCollectionRef.add({
-          'timestamp': Timestamp.now(),
-          'resultadoPrediccion': resultado.resultado,
-        });
+
+        // Obtener una referencia al último documento de datatest ordenado por fecha
+        final QuerySnapshot datatestSnapshot = await userDatatestCollectionRef
+            .orderBy('timestamp', descending: true)
+            .limit(1)
+            .get();
+        final lastDatatestDocRef = datatestSnapshot.docs.isNotEmpty
+            ? datatestSnapshot.docs.first.reference
+            : null;
+
+        if (lastDatatestDocRef != null) {
+          // Crear una subcolección 'resultado' dentro del último documento de datatest
+          final userResultCollectionRef =
+              lastDatatestDocRef.collection('resultado');
+          await userResultCollectionRef.add({
+            'timestamp': Timestamp.now(),
+            'resultadoPrediccion': resultado.resultado,
+          });
+        }
       }
     } catch (error) {
       rethrow;
     }
   }
+
+  // Future<void> guardarResultadoPrediccion({
+  //   required Resultado resultado,
+  // }) async {
+  //   try {
+  //     final User? user = _auth.currentUser;
+  //     if (user != null) {
+  //       final userDocRef = _firestore.collection('usuario').doc(user.uid);
+  //       final userDatatestCollectionRef = userDocRef.collection('datatest');
+
+  //       // Obtener una referencia al último documento de datatest
+  //       final QuerySnapshot datatestSnapshot =
+  //           await userDatatestCollectionRef.get();
+  //       final lastDatatestDocRef = datatestSnapshot.docs.isNotEmpty
+  //           ? datatestSnapshot.docs.last.reference
+  //           : null;
+
+  //       if (lastDatatestDocRef != null) {
+  //         // Crear una subcolección 'resultado' dentro del último documento de datatest
+  //         final userResultCollectionRef =
+  //             lastDatatestDocRef.collection('resultado');
+  //         await userResultCollectionRef.add({
+  //           'timestamp': Timestamp.now(),
+  //           'resultadoPrediccion': resultado.resultado,
+  //         });
+  //       }
+  //     }
+  //   } catch (error) {
+  //     rethrow;
+  //   }
+  // }
+
+  // Future<void> guardarResultadoPrediccion({
+  //   required Resultado resultado,
+  // }) async {
+  //   try {
+  //     final User? user = _auth.currentUser;
+  //     if (user != null) {
+  //       final userDocRef = _firestore.collection('usuario').doc(user.uid);
+  //       final userDatatestCollectionRef = userDocRef.collection('datatest');
+  //       final userDatatestDocRef = userDatatestCollectionRef.doc();
+  //       final userResultCollectionRef =
+  //           userDatatestDocRef.collection('resultado');
+  //       await userResultCollectionRef.add({
+  //         'timestamp': Timestamp.now(),
+  //         'resultadoPrediccion': resultado.resultado,
+  //       });
+  //     }
+  //   } catch (error) {
+  //     rethrow;
+  //   }
+  // }
 
   /// Método para obtener las fechas de los tests realizados por el usuario.
   Future<List<DateTime>> getDataTestDates() async {
@@ -142,7 +192,6 @@ class MethodsAuth {
         // Ordenar las fechas en orden descendente
         datasetDates.sort((a, b) => b.compareTo(a));
       }
-
       return datasetDates;
     } catch (e) {
       rethrow;
@@ -189,7 +238,6 @@ class MethodsAuth {
           int acv = doc['acv'];
           int diabetes = doc['diabetes'];
           int enfermedadCardiaca = doc['enfermedadCardiaca'];
-          // String resultado = doc['resultado'];
 
           // Crear un objeto Datatest con los datos obtenidos
           Datatest dataTest = Datatest(
@@ -211,69 +259,15 @@ class MethodsAuth {
             acv: acv,
             diabetes: diabetes,
             enfermedadCardiaca: enfermedadCardiaca,
-            // resultado: resultado,
           );
           dataTestList.add(dataTest);
         }
       }
-
       return dataTestList;
     } catch (e) {
       rethrow;
     }
   }
-
-  // Future<dynamic> obtenerResultadoPrediccion() async {
-  //   try {
-  //     final User? user = _auth.currentUser;
-  //     if (user != null) {
-  //       final userDocRef = _firestore.collection('usuario').doc(user.uid);
-  //       final userDatatestCollectionRef = userDocRef.collection('datatest');
-
-  //       // Obtener todos los documentos de la colección 'datatest'
-  //       final QuerySnapshot datatestSnapshot =
-  //           await userDatatestCollectionRef.get();
-
-  //       // Iterar sobre los documentos para encontrar el más reciente
-  //       DocumentSnapshot? ultimoDatatestDoc;
-  //       DateTime? ultimoTimestamp;
-  //       for (final doc in datatestSnapshot.docs) {
-  //         final timestamp = (doc.data() as Map)['timestamp'] as Timestamp;
-  //         if (ultimoTimestamp == null ||
-  //             timestamp.toDate().isAfter(ultimoTimestamp)) {
-  //           ultimoTimestamp = timestamp.toDate();
-  //           ultimoDatatestDoc = doc;
-  //         }
-  //       }
-
-  //       if (ultimoDatatestDoc != null) {
-  //         final userResultCollectionRef =
-  //             ultimoDatatestDoc.reference.collection('resultado');
-
-  //         // Obtener el último resultado guardado en la subcolección 'resultado'
-  //         final QuerySnapshot resultadoSnapshot =
-  //             await userResultCollectionRef.get();
-  //         if (resultadoSnapshot.docs.isNotEmpty) {
-  //           final ultimoResultadoDoc = resultadoSnapshot.docs.last;
-  //           return ultimoResultadoDoc.data();
-  //         } else {
-  //           // No hay resultados guardados
-  //           return null;
-  //         }
-  //       } else {
-  //         // No hay documentos en la colección 'datatest'
-  //         return null;
-  //       }
-  //     } else {
-  //       // El usuario no está autenticado
-  //       return null;
-  //     }
-  //   } catch (error) {
-  //     // Manejar el error
-  //     print('Error al obtener resultado de predicción: $error');
-  //     return null;
-  //   }
-  // }
 
   /// Método para eliminar un test basado en la fecha.
   Future<void> deleteTestByDateTime(DateTime dateTime) async {
@@ -300,6 +294,46 @@ class MethodsAuth {
         });
       }
     } catch (error) {
+      rethrow;
+    }
+  }
+
+  Future<List<Resultado>> getResultadoPorTest(DateTime date) async {
+    List<Resultado> resultList = [];
+    try {
+      User? user = _auth.currentUser;
+
+      if (user != null) {
+        final userDatatestCollectionRef = _firestore
+            .collection('usuario')
+            .doc(user.uid)
+            .collection('datatest');
+
+        QuerySnapshot querySnapshot = await userDatatestCollectionRef
+            .where('timestamp', isGreaterThanOrEqualTo: date)
+            .where('timestamp', isLessThan: date.add(const Duration(days: 1)))
+            .get();
+
+        for (var doc in querySnapshot.docs) {
+          // Obtener la referencia a la subcolección 'resultado' dentro del datatest
+          final resultadoCollectionRef = doc.reference.collection('resultado');
+
+          // Consultar los documentos en la subcolección 'resultado'
+          QuerySnapshot resultadoSnapshot = await resultadoCollectionRef.get();
+
+          // Iterar sobre los documentos y obtener el primer resultado
+          for (var resultadoDoc in resultadoSnapshot.docs) {
+            var data = resultadoDoc.data();
+            if (data != null && data is Map<String, dynamic>) {
+              // Utilizar el constructor fromMap para crear un objeto Resultado
+              Resultado resultado = Resultado.fromMap(data);
+              resultList.add(resultado);
+            }
+          }
+        }
+      }
+      return resultList; // Si no se encuentra ningún resultado
+    } catch (e) {
       rethrow;
     }
   }

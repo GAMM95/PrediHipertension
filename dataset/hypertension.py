@@ -3,7 +3,7 @@ import pickle
 import numpy as np
 import os
 
-model_file = 'dataset/hypertension_model.pkl'
+model_file = 'D:/PrediHipertension/dataset/hypertension_model.pkl'
 with open(model_file, 'rb') as file:
     model = pickle.load(file)
     

@@ -128,7 +128,7 @@ class Info1Tab extends StatelessWidget {
               ),
               const SizedBox(height: 15.0),
               Text(
-                'Fuente: \nOrganizacion Mundial de la Salud (OMS)',
+                'Fuente: \nOrganización Mundial de la Salud (OMS)',
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
