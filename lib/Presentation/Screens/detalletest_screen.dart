@@ -130,17 +130,17 @@ class _DetalleTestState extends State<DetalleTest> {
           ),
         ),
         titleSpacing: -8,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 15.0),
-            child: IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.picture_as_pdf),
-              color: GlobalColors.buttonColor,
-              iconSize: 30.0,
-            ),
-          ),
-        ],
+        // actions: [
+        //   Padding(
+        //     padding: const EdgeInsets.only(right: 15.0),
+        //     child: IconButton(
+        //       onPressed: () {},
+        //       icon: const Icon(Icons.picture_as_pdf),
+        //       color: GlobalColors.buttonColor,
+        //       iconSize: 30.0,
+        //     ),
+        //   ),
+        // ],
         iconTheme: IconThemeData(
           color: GlobalColors.titlePrimaryColor,
           size: 25.0,

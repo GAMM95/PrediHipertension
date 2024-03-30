@@ -1,21 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:predihipertension/Core/Theme/global_colors.dart';
+import 'package:predihipertension/Presentation/Screens/signin_screen.dart';
+import 'package:predihipertension/Presentation/Screens/signup_screen.dart';
 import 'package:predihipertension/Presentation/Widget/custom_scaffoldwelcome.dart';
 import 'package:predihipertension/Presentation/Widget/welcome_button.dart';
 
-class WelcomeScreen extends StatefulWidget {
+class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
-
-  @override
-  // ignore: library_private_types_in_public_api
-  _WelcomeScreenState createState() => _WelcomeScreenState();
-}
-
-class _WelcomeScreenState extends State<WelcomeScreen> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +53,40 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     child: WelcomeButton(
                       buttonText: 'Iniciar Sesión',
                       onTap: () {
-                        Navigator.of(context).pushNamed('/signin');
+                        Navigator.of(context).push(
+                          PageRouteBuilder(
+                            pageBuilder:
+                                (context, animation, secondaryAnimation) {
+                              return const SignInScreen();
+                            },
+                            transitionsBuilder: (context, animation,
+                                secondaryAnimation, child) {
+                              var begin = const Offset(-1.0, 0.0);
+                              var end = Offset.zero;
+                              var curve = Curves.ease;
+
+                              var tween = Tween(begin: begin, end: end)
+                                  .chain(CurveTween(curve: curve));
+
+                              var offsetAnimation = animation.drive(tween);
+
+                              if (animation.status == AnimationStatus.reverse) {
+                                offsetAnimation = Tween(
+                                        begin: const Offset(1.0, 0.0),
+                                        end: Offset.zero)
+                                    .chain(CurveTween(curve: curve))
+                                    .animate(animation);
+                              }
+
+                              return SlideTransition(
+                                position: offsetAnimation,
+                                child: child,
+                              );
+                            },
+                            transitionDuration:
+                                const Duration(milliseconds: 800),
+                          ),
+                        );
                       },
                       color: Colors.transparent,
                       textColor: Colors.white,
@@ -72,10 +96,35 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     child: WelcomeButton(
                       buttonText: 'Regístrate',
                       onTap: () {
-                        Navigator.of(context).pushNamed('/signup');
+                        Navigator.of(context).push(
+                          PageRouteBuilder(
+                            pageBuilder:
+                                (context, animation, secondaryAnimation) {
+                              return const SignUpScreen();
+                            },
+                            transitionsBuilder: (context, animation,
+                                secondaryAnimation, child) {
+                              var begin = const Offset(1.0, 0.0);
+                              var end = Offset.zero;
+                              var curve = Curves.ease;
+
+                              var tween = Tween(begin: begin, end: end)
+                                  .chain(CurveTween(curve: curve));
+
+                              var offsetAnimation = animation.drive(tween);
+
+                              return SlideTransition(
+                                position: offsetAnimation,
+                                child: child,
+                              );
+                            },
+                            transitionDuration:
+                                const Duration(milliseconds: 800),
+                          ),
+                        );
                       },
                       color: Colors.white,
-                      textColor: GlobalColors.welcomeText,
+                      textColor: GlobalColors.bgDark2,
                     ),
                   ),
                 ],

@@ -564,15 +564,32 @@ class _TestTabState extends State<TestTab> {
       enfermedadCardiaca: heartController.text,
     );
 
+    // Mostrar el diálogo de carga antes de realizar la solicitud HTTP
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+
     try {
       final response = await HttpService.postTest(body);
       if (response.statusCode == 200) {
+        // Cerrar el diálogo de carga
+        Navigator.of(context).pop();
+
+        // Mostrar el resultado del test
         CustomDialogs.mostrarResultadoTest(context, response.body);
         _limpiarCampos();
       } else {
         throw Exception('Error en la solicitud HTTP');
       }
     } catch (error) {
+      // Cerrar el diálogo de carga
+      Navigator.of(context).pop();
+
+      // Mostrar un diálogo de error
       CustomDialogs.showErrorDialog(
         context,
         'Mensaje',

@@ -38,7 +38,6 @@ class Datatest {
     required this.acv,
     required this.diabetes,
     required this.enfermedadCardiaca,
-    // required this.resultado,
   });
 
   factory Datatest.fromMap(Map<String, dynamic> map) {
@@ -61,7 +60,6 @@ class Datatest {
       acv: map['acv'] as int,
       diabetes: map['diabetes'] as int,
       enfermedadCardiaca: map['enfermedadCardiaca'] as int,
-      // resultado: map['resultado'] as String,
     );
   }
 }

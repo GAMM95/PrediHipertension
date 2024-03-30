@@ -113,58 +113,6 @@ class MethodsAuth {
     }
   }
 
-  // Future<void> guardarResultadoPrediccion({
-  //   required Resultado resultado,
-  // }) async {
-  //   try {
-  //     final User? user = _auth.currentUser;
-  //     if (user != null) {
-  //       final userDocRef = _firestore.collection('usuario').doc(user.uid);
-  //       final userDatatestCollectionRef = userDocRef.collection('datatest');
-
-  //       // Obtener una referencia al último documento de datatest
-  //       final QuerySnapshot datatestSnapshot =
-  //           await userDatatestCollectionRef.get();
-  //       final lastDatatestDocRef = datatestSnapshot.docs.isNotEmpty
-  //           ? datatestSnapshot.docs.last.reference
-  //           : null;
-
-  //       if (lastDatatestDocRef != null) {
-  //         // Crear una subcolección 'resultado' dentro del último documento de datatest
-  //         final userResultCollectionRef =
-  //             lastDatatestDocRef.collection('resultado');
-  //         await userResultCollectionRef.add({
-  //           'timestamp': Timestamp.now(),
-  //           'resultadoPrediccion': resultado.resultado,
-  //         });
-  //       }
-  //     }
-  //   } catch (error) {
-  //     rethrow;
-  //   }
-  // }
-
-  // Future<void> guardarResultadoPrediccion({
-  //   required Resultado resultado,
-  // }) async {
-  //   try {
-  //     final User? user = _auth.currentUser;
-  //     if (user != null) {
-  //       final userDocRef = _firestore.collection('usuario').doc(user.uid);
-  //       final userDatatestCollectionRef = userDocRef.collection('datatest');
-  //       final userDatatestDocRef = userDatatestCollectionRef.doc();
-  //       final userResultCollectionRef =
-  //           userDatatestDocRef.collection('resultado');
-  //       await userResultCollectionRef.add({
-  //         'timestamp': Timestamp.now(),
-  //         'resultadoPrediccion': resultado.resultado,
-  //       });
-  //     }
-  //   } catch (error) {
-  //     rethrow;
-  //   }
-  // }
-
   /// Método para obtener las fechas de los tests realizados por el usuario.
   Future<List<DateTime>> getDataTestDates() async {
     List<DateTime> datasetDates = [];
