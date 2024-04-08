@@ -29,21 +29,21 @@ class _HistorialTabState extends State<HistorialTab> {
           // Título para la pestaña de historial.
           const TituloTab(titulo: 'Historial de consultas'),
 
-          Container(
-            color: GlobalColors.bgPanelDark2,
-            width: MediaQuery.of(context).size.width,
-            child: const Padding(
-              padding: EdgeInsets.symmetric(vertical: 10.0),
-              child: Text(
-                'Aquí se mostrará el grafico del historial de consultas:',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
+          // Container(
+          //   color: GlobalColors.bgPanelDark2,
+          //   width: MediaQuery.of(context).size.width,
+          //   child: const Padding(
+          //     padding: EdgeInsets.symmetric(vertical: 10.0),
+          //     child: Text(
+          //       'Aquí se mostrará el grafico del historial de consultas:',
+          //       style: TextStyle(
+          //         color: Colors.white,
+          //         fontSize: 16.0,
+          //         fontWeight: FontWeight.bold,
+          //       ),
+          //     ),
+          //   ),
+          // ),
           Expanded(
             child: Center(
               child: SingleChildScrollView(
