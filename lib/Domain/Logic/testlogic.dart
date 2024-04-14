@@ -32,7 +32,7 @@ class TestLogic {
 
     Map<String, String> body = {
       'Age': ageCategory.toString(),
-      'Sex': genero == 'Masculino' ? '0' : '1',
+      'Sex': genero == 'Femenino' ? '0' : '1',
       'BMI': imc,
       'GenHlth': healthValue.toString(),
       'MentHlth': saludMental,
@@ -54,7 +54,7 @@ class TestLogic {
     Datatest datatest = Datatest(
       edadIngresada: ageValue,
       edadAgrupada: ageCategory,
-      sexo: genero == 'Masculino' ? 0 : 1,
+      sexo: genero == 'Femenino' ? 0 : 1,
       imc: double.tryParse(imc) ?? 0.0,
       saludGeneral: healthValue,
       saludFisica: int.parse(saludFisica),
@@ -173,7 +173,7 @@ class TestLogic {
   }
 
   String getGenderText(int gender) {
-    return gender == 0 ? 'Masculino' : 'Femenino';
+    return gender == 0 ? 'Femenino' : 'Masculino';
   }
 
   String getEducationText(int educationValue) {

@@ -1,4 +1,4 @@
-# predihipertension
+# PrediHipertension
 
 A new Flutter project.
 
