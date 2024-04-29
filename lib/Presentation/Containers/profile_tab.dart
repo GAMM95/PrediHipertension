@@ -54,9 +54,11 @@ class _ProfileTabState extends State<ProfileTab> {
                       children: [
                         const SizedBox(height: 10.0),
                         // Foto del usuario
+
                         CircleAvatar(
-                          backgroundImage: currentUser != null
-                              ? NetworkImage(currentUser!.photoURL ?? '')
+                          backgroundImage: currentUser != null &&
+                                  currentUser!.photoURL != null
+                              ? NetworkImage(currentUser!.photoURL!)
                               : null,
                           radius: 70,
                           backgroundColor: Colors.grey[500],
@@ -69,6 +71,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                 )
                               : null,
                         ),
+
                         const SizedBox(height: 10.0),
                         // Datos del usuario
                         if (currentUser != null)

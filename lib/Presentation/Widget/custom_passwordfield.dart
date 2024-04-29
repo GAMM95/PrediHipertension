@@ -7,6 +7,7 @@ class CustomPasswordTextField extends StatefulWidget {
   final Text label;
   final String validator;
   final bool showNextButton;
+  final GlobalKey<FormState>? formKey;
 
   const CustomPasswordTextField({
     super.key,
@@ -15,6 +16,7 @@ class CustomPasswordTextField extends StatefulWidget {
     required this.validator,
     required this.controller,
     this.showNextButton = false,
+    this.formKey,
   });
 
   @override
@@ -84,6 +86,7 @@ class _CustomPasswordTextFieldState extends State<CustomPasswordTextField> {
         ),
       ),
       textInputAction: widget.showNextButton ? TextInputAction.next : null,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
     );
   }
 }

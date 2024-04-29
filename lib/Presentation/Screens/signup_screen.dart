@@ -33,7 +33,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _formSignupKey = GlobalKey<FormState>();
   bool agreeTercon = false;
   bool agreeDataAuth = false;
-  bool emailVerificationSent = false; // Nuevo estado
+  bool emailVerificationSent = false;
 
   @override
   void dispose() {
@@ -52,6 +52,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
     agreeTercon = false;
     agreeDataAuth = false;
     FocusScope.of(context).unfocus();
+
+    // Restablecer los validadores del formulario
+    _formSignupKey.currentState?.reset();
   }
 
   @override
@@ -192,14 +195,40 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           if (_formSignupKey.currentState!.validate() &&
                               agreeTercon &&
                               agreeDataAuth) {
+                            // Validar longitud de la contraseña
+                            if (_passwordController.text.trim().length < 6) {
+                              CustomDialogs.showErrorDialog(
+                                context,
+                                'Advertencia',
+                                'La contraseña debe tener al menos 6 caracteres.',
+                              );
+                              return;
+                            }
+
                             try {
+                              // Mostrar el círculo de progreso
+                              showDialog(
+                                context: context,
+                                barrierDismissible: false,
+                                builder: (context) => const Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                              );
+
                               bool signUpSuccess = await _authService.signUp(
-                                  usuario: Usuario(
-                                firstName: _nombreController.text.trim(),
-                                lastName: _apellidosController.text.trim(),
-                                email: _emailController.text.trim(),
-                                password: _passwordController.text.trim(),
-                              ));
+                                usuario: Usuario(
+                                  firstName: _nombreController.text.trim(),
+                                  lastName: _apellidosController.text.trim(),
+                                  email: _emailController.text.trim(),
+                                  password: _passwordController.text.trim(),
+                                ),
+                              );
+
+                              // Retrasar la desaparición del círculo de progreso por 4 segundos
+                              await Future.delayed(const Duration(seconds: 4));
+
+                              // Desaparecer el círculo de progreso
+                              Navigator.pop(context);
 
                               if (signUpSuccess) {
                                 // Mostrar cuadro de diálogo de éxito
@@ -227,17 +256,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 );
                               } else if (e.code == 'invalid-email') {
                                 CustomDialogs.showErrorDialog(
-                                    context,
-                                    'Ocurrió un problema:',
-                                    'Formato de correo electrónico inválido.');
+                                  context,
+                                  'Ocurrió un problema:',
+                                  'Formato de correo electrónico inválido.',
+                                );
                               } else if (e.code == 'weak-password') {
                                 CustomDialogs.showErrorDialog(
-                                    context,
-                                    'Ocurrió un problema:',
-                                    'Su contraseña debe tener al menos 6 caracteres.');
+                                  context,
+                                  'Ocurrió un problema:',
+                                  'Su contraseña debe tener al menos 6 caracteres.',
+                                );
                               } else {
-                                CustomDialogs.showErrorDialog(context,
-                                    'Ocurrió un problema:', '${e.message}');
+                                CustomDialogs.showErrorDialog(
+                                  context,
+                                  'Ocurrió un problema:',
+                                  '${e.message}',
+                                );
                               }
                             }
                           } else if (!agreeTercon) {
