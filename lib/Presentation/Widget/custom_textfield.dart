@@ -10,7 +10,7 @@ class CustomTextField extends StatefulWidget {
   final TextInputType textInputType;
   final bool applyTextCapitalization;
   final bool showNextButton;
-  final GlobalKey<FormState>? formKey; 
+  final GlobalKey<FormState>? formKey;
 
   const CustomTextField({
     super.key,
@@ -22,7 +22,7 @@ class CustomTextField extends StatefulWidget {
     required this.textInputType,
     this.applyTextCapitalization = false,
     this.showNextButton = false,
-    this.formKey, 
+    this.formKey,
   });
 
   @override
@@ -78,7 +78,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
       ),
       textInputAction: widget.showNextButton ? TextInputAction.next : null,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      // autovalidateMode: AutovalidateMode.disabled,
     );
   }
 }

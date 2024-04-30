@@ -119,8 +119,7 @@ class _CalculadoraIMCState extends State<CalculadoraIMC> {
                                   ComposicionCorporal.obtenerComposicion(imc);
 
                               // Mostrar la composición corporal en el resultado
-                              resultadoController.text +=
-                                  '\nComposición: $composicion';
+                              resultadoController.text += '\n$composicion';
                               setState(() {
                                 if (composicion == 'Peso inferior al normal') {
                                   textColor = GlobalColors.pesoBajo;
@@ -128,10 +127,14 @@ class _CalculadoraIMCState extends State<CalculadoraIMC> {
                                   textColor = GlobalColors.pesoNormal;
                                 } else if (composicion == 'Sobrepeso') {
                                   textColor = GlobalColors.sobrepeso;
-                                } else if (composicion == 'Obesidad') {
-                                  textColor = GlobalColors.obseo;
+                                } else if (composicion ==
+                                    'Obesidad Grado I o moderada') {
+                                  textColor = GlobalColors.obeso1;
+                                } else if (composicion ==
+                                    'Obesidad Grado II o severa') {
+                                  textColor = GlobalColors.obeso2;
                                 } else {
-                                  textColor = GlobalColors.obesoExtremo;
+                                  textColor = GlobalColors.obeso3;
                                 }
                                 mostrarTextoFinal = true;
                               });

@@ -3,10 +3,16 @@ import 'package:flutter_svg/svg.dart';
 
 /// Widget reutilizable para mostrar iconos sociales.
 class SocialIcons extends StatelessWidget {
+  /// La ruta del archivo SVG del icono.
   final String ruta;
+
+  /// El texto que acompaña al icono social.
   final String texto;
+
+  /// Función de devolución de llamada que se ejecutará cuando se presione el icono social.
   final VoidCallback? onPressed;
 
+  /// Constructor para crear un icono social.
   const SocialIcons({
     super.key,
     required this.ruta,

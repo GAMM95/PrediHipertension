@@ -40,9 +40,10 @@ class GlobalColors {
   static HexColor linkText = HexColor("#FFC6C6");
 
   // Colores de resultado de IMC
-  static HexColor pesoBajo = HexColor('#3A859A');
-  static HexColor pesoNormal = HexColor('#2EC6B7');
-  static HexColor sobrepeso = HexColor('#F4CA38');
-  static HexColor obseo = HexColor('#F39F95');
-  static HexColor obesoExtremo = HexColor('#D34B4D');
+  static HexColor pesoBajo = HexColor('#59CAF6');
+  static HexColor pesoNormal = HexColor('#1851AE');
+  static HexColor sobrepeso = HexColor('#88D621');
+  static HexColor obeso1 = HexColor('#E4B803');
+  static HexColor obeso2 = HexColor('#F38B32');
+  static HexColor obeso3 = HexColor('#ED1B24');
 }

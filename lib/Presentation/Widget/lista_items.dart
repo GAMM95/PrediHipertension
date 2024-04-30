@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart'; 
+import 'package:lottie/lottie.dart';
 
+/// Widget reutilizable para mostrar un elemento de lista con una animación Lottie.
 class ListaItems extends StatelessWidget {
+  /// El texto del elemento de la lista.
   final String parrafo;
+
+  /// El color del texto del elemento de la lista.
   final Color color;
 
+  /// Constructor para crear un elemento de lista.
   const ListaItems({
     super.key,
     required this.parrafo,

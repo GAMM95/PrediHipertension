@@ -15,20 +15,27 @@ class ProfileTab extends StatefulWidget {
 
 class _ProfileTabState extends State<ProfileTab> {
   final AuthService _authService = AuthService();
-
   TextEditingController nombreController = TextEditingController();
-
   User? currentUser;
+  String? displayNameFromFirestore;
 
   @override
   void initState() {
     super.initState();
     getCurrentUser();
+    getDisplayName();
   }
 
   Future<void> getCurrentUser() async {
     currentUser = FirebaseAuth.instance.currentUser;
     setState(() {});
+  }
+
+  Future<void> getDisplayName() async {
+    String fullName = await AuthService.getDisplayNameFromFirestore();
+    setState(() {
+      displayNameFromFirestore = fullName;
+    });
   }
 
   @override
@@ -37,7 +44,6 @@ class _ProfileTabState extends State<ProfileTab> {
       color: GlobalColors.bgDark2,
       child: Column(
         children: [
-          // const TituloTab(titulo: 'Mi perfil'),
           Expanded(
             child: Center(
               child: SingleChildScrollView(
@@ -66,7 +72,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                   currentUser!.photoURL == null
                               ? const Icon(
                                   Icons.person,
-                                  size: 50,
+                                  size: 100,
                                   color: Colors.white,
                                 )
                               : null,
@@ -85,7 +91,7 @@ class _ProfileTabState extends State<ProfileTab> {
                               ),
                             ),
                             subtitle: Text(
-                              currentUser!.displayName ?? '',
+                              displayNameFromFirestore ?? '',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 14.0,

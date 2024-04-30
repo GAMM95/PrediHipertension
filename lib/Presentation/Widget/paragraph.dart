@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
+/// Widget reutilizable para mostrar un párrafo de texto justificado.
 class Parragraph extends StatelessWidget {
+  /// El texto del párrafo que se mostrará.
   final String parrafo;
+
+  /// El color del texto del párrafo.
   final Color color;
 
+  /// Constructor para crear un párrafo de texto.
   const Parragraph({
     super.key,
     required this.parrafo,

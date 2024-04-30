@@ -68,13 +68,11 @@ class _DetalleTestState extends State<DetalleTest> {
               _testLogic.getFruitText(dataTestList[0].consumoFrutas)),
           CustomListItemData('9. Consumo de verduras al menos 1 vez al día:',
               _testLogic.getVeggiesText(dataTestList[0].consumoVerduras)),
-          CustomListItemData(
-              '10. Consumo de al menos 100 cigarrillos en su vida:',
+          CustomListItemData('10. Consumo de al menos 100 cigarrillos:',
               _testLogic.getSmokeText(dataTestList[0].consumoCigarros)),
           CustomListItemData('11. Consumo de alcohol muy frecuente:',
               _testLogic.getAlcoholText(dataTestList[0].consumoAlcohol)),
-          CustomListItemData(
-              '12. Ha realizado actividad física durante los últimos 30 días:',
+          CustomListItemData('12. Actividad física en los últimos 30 días:',
               _testLogic.getPhysActivityText(dataTestList[0].actividadFisica)),
           CustomListItemData(
               '13. Colesterol alto en la sangre según el profesional de salud:',

@@ -3,8 +3,10 @@ import 'package:predihipertension/Core/Theme/global_colors.dart';
 
 /// Widget reutilizable para mostrar un título en una pestaña.
 class TituloTab extends StatelessWidget {
+  /// El título que se mostrará en la pestaña.
   final String titulo;
 
+  /// Constructor para crear un título de pestaña.
   const TituloTab({super.key, required this.titulo});
 
   @override

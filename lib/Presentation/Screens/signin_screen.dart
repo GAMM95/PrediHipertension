@@ -103,7 +103,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                   CustomDialogs.showErrorDialog(
                                     context,
                                     'Correo electrónico no verificado',
-                                    'Por favor, verifique su correo electrónico antes de continuar.',
+                                    'Por favor, revise su bandeja de entrada de su correo electrónico registrado antes de continuar.',
                                   );
                                 } else {
                                   // Iniciar sesión correctamente

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// Widget reutilizable para un botón de bienvenida personalizado.
 class WelcomeButton extends StatelessWidget {
+  /// Constructor para crear un botón de bienvenida.
   const WelcomeButton({
     super.key,
     required this.buttonText,
@@ -9,9 +11,16 @@ class WelcomeButton extends StatelessWidget {
     required this.textColor,
   });
 
+  /// Texto que se mostrará en el botón.
   final String buttonText;
+
+  /// Función de devolución de llamada que se ejecutará cuando se presione el botón.
   final VoidCallback onTap;
+
+  /// Color de fondo del botón.
   final Color color;
+
+  /// Color del texto del botón.
   final Color textColor;
 
   @override

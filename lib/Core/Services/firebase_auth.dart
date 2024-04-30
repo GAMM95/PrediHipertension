@@ -62,7 +62,7 @@ class AuthService {
       );
       // Verificar si el correo electrónico está verificado
       if (!_auth.currentUser!.emailVerified) {
-        throw "Por favor, verifique su correo electrónico antes de iniciar sesión.";
+        throw 'Por favor, revise su bandeja de entrada de su correo electrónico registrado antes de continuar.';
       }
       return true;
     } on FirebaseAuthException catch (e) {
@@ -73,7 +73,8 @@ class AuthService {
       } else if (e.code == 'invalid-email') {
         throw 'Correo electrónico no válido.';
       } else {
-        throw "Error durante la autenticación: ${e.message}";
+        throw "Error durante la autenticación: Correo electrónico no registrado";
+        //  ${e.message}
       }
     } catch (error) {
       // Reenviar la excepción para que pueda ser manejada en la capa superior.
@@ -194,6 +195,40 @@ class AuthService {
         // Otros errores
         throw 'Error inesperado al eliminar la cuenta: $e';
       }
+    }
+  }
+
+  static Future<String> getDisplayNameFromFirestore() async {
+    // Obtener el ID del usuario autenticado
+    String userId = FirebaseAuth.instance.currentUser!.uid;
+
+    // Obtener los datos del usuario desde Firestore
+    DocumentSnapshot docSnapshot = await FirebaseFirestore.instance
+        .collection('usuario')
+        .doc(userId)
+        .get();
+
+    if (docSnapshot.exists) {
+      // Convertir los datos a un mapa para acceder a las propiedades de manera segura
+      Map<String, dynamic> userData =
+          docSnapshot.data() as Map<String, dynamic>;
+
+      // Obtener el nombre y el apellido del usuario del mapa
+      String? firstName = userData['firstName'];
+      String? lastName = userData['lastName'];
+
+      // Concatenar el nombre y el apellido si ambos existen
+      String fullName = '';
+      if (firstName != null) {
+        fullName += firstName;
+      }
+      if (lastName != null) {
+        fullName += ' $lastName';
+      }
+
+      return fullName;
+    } else {
+      return ''; // Retorna una cadena vacía si no se encuentra el documento
     }
   }
 }

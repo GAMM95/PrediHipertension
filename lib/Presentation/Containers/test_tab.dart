@@ -180,7 +180,7 @@ class _TestTabState extends State<TestTab> {
 
                         /// Género del usuario
                         Parragraph(
-                          parrafo: '2. ¿Cuál es tu género?',
+                          parrafo: '2. Seleccione su género',
                           color: GlobalColors.textColor,
                         ),
                         const SizedBox(height: 5.0),
@@ -365,8 +365,7 @@ class _TestTabState extends State<TestTab> {
 
                         /// Consumo de cigarros
                         Parragraph(
-                          parrafo:
-                              '10. ¿Has fumado al menos 100 cigarrillos en tu vida? \n* Nota: 5 paquetes = 100 cigarrillos',
+                          parrafo: '10. ¿Has fumado al menos 100 cigarrillos?',
                           color: GlobalColors.textColor,
                         ),
                         const SizedBox(height: 5.0),
@@ -381,8 +380,7 @@ class _TestTabState extends State<TestTab> {
 
                         /// Consumo de alcohol
                         Parragraph(
-                          parrafo:
-                              '11. ¿Consumes alcohol muy frecuentemente? \n* Hombres > 14 tragos por semana. \n* Mujeres > 7 tragos por semana.',
+                          parrafo: '11. ¿Consumes alcohol muy frecuentemente?',
                           color: GlobalColors.textColor,
                         ),
                         const SizedBox(height: 5.0),
@@ -398,7 +396,7 @@ class _TestTabState extends State<TestTab> {
                         /// Actividad fisica del usuario
                         Parragraph(
                           parrafo:
-                              '12.  ¿Ha hecho ejercicio fuera de su trabajo habitual en los últimos 30 días?',
+                              '12.  ¿Ha realizado actividad física en los últimos 30 días?',
                           color: GlobalColors.textColor,
                         ),
                         const SizedBox(height: 5.0),
@@ -425,7 +423,7 @@ class _TestTabState extends State<TestTab> {
                         ///  Le han dicho que su colesterol en sangre es alto?
                         Parragraph(
                           parrafo:
-                              '13. ¿Un profesional de la salud le ha indicado que tiene colesterol alto en la sangre?',
+                              '13. ¿Algún profesional de la salud le ha indicado que tiene colesterol alto en la sangre?',
                           color: GlobalColors.textColor,
                         ),
                         const SizedBox(height: 5.0),
