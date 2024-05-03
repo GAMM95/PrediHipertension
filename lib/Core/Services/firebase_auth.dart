@@ -73,8 +73,7 @@ class AuthService {
       } else if (e.code == 'invalid-email') {
         throw 'Correo electrónico no válido.';
       } else {
-        throw "Error durante la autenticación: Correo electrónico no registrado";
-        //  ${e.message}
+        throw "Error durante la autenticación: Correo electrónico no registrado o credenciales incorrectas";
       }
     } catch (error) {
       // Reenviar la excepción para que pueda ser manejada en la capa superior.

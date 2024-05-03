@@ -176,7 +176,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               Navigator.of(context).pushNamed('/dataauth');
                             },
                             child: Text(
-                              'Autorización de datos personales',
+                              'Autorización de uso de datos personales',
                               style: TextStyle(
                                 color: lightColorScheme.secondary,
                                 fontWeight: FontWeight.w500,
@@ -284,7 +284,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             CustomDialogs.showCorrectDialog(
                               context,
                               'Advertencia',
-                              'Acepte autorización de datos personales',
+                              'Acepte autorización para el tratamiento de datos personales',
                             );
                           }
                         },

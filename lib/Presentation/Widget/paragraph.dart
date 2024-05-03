@@ -17,14 +17,20 @@ class Parragraph extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      parrafo,
-      textAlign: TextAlign.justify,
-      style: TextStyle(
-        color: color,
-        fontSize: 14.0,
-        fontWeight: FontWeight.w400,
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          parrafo,
+          textAlign: TextAlign.justify,
+          style: TextStyle(
+            color: color,
+            fontSize: 14.0,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+        const SizedBox(height: 5.0),
+      ],
     );
   }
 }

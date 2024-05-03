@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:predihipertension/Core/Theme/global_colors.dart';
+import 'package:predihipertension/Presentation/Widget/custom_bottomappbar.dart';
+import 'package:predihipertension/Presentation/Widget/custom_gesturedetector.dart';
 
-class AcercaDeScreen extends StatefulWidget {
+class AcercaDeScreen extends StatelessWidget {
   const AcercaDeScreen({super.key});
 
   @override
-  State<AcercaDeScreen> createState() => _AcercaDeScreenState();
-}
-
-class _AcercaDeScreenState extends State<AcercaDeScreen> {
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: GlobalColors.bgPanelDark2,
       appBar: AppBar(
+        backgroundColor: GlobalColors.bgColor,
         title: Text(
           'Acerca de',
           style: TextStyle(
@@ -30,61 +28,18 @@ class _AcercaDeScreenState extends State<AcercaDeScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
           children: [
             const SizedBox(height: 20.0),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).pushNamed('/tercon');
-              },
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      'Términos y condiciones',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.0,
-                        color: GlobalColors.bgDark1,
-                      ),
-                    ),
-                  ),
-                  const Icon(Icons.arrow_forward_ios_rounded),
-                ],
-              ),
+            const CustomGestureDetector(
+              text: 'Términos y condiciones de uso',
+              routeName: '/tercon',
+              showDivider: true,
             ),
-            const SizedBox(height: 10.0),
-            const Divider(
-              color: Colors.grey,
-              thickness: 0.5,
-            ),
-            GestureDetector(
-              onTap: () {
-                // Acción para el segundo GestureDetector
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        'Segundo Texto',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16.0,
-                          color: GlobalColors.bgDark1,
-                        ),
-                      ),
-                    ),
-                    const Icon(Icons.arrow_forward_ios_rounded),
-                  ],
-                ),
-              ),
-            ),
-            const Divider(
-              color: Colors.grey,
-              thickness: 0.5,
+            const CustomGestureDetector(
+              text: 'Autorización para el tratamiento de datos personales',
+              routeName: '/dataauth',
+              showDivider: true,
             ),
             GestureDetector(
               child: Padding(
@@ -97,16 +52,16 @@ class _AcercaDeScreenState extends State<AcercaDeScreen> {
                         style: TextStyle(
                           fontWeight: FontWeight.w300,
                           fontSize: 16.0,
-                          color: GlobalColors.bgPanelDark2,
+                          color: GlobalColors.hintText,
                         ),
                       ),
                     ),
                     Text(
-                      '1.0.0',
+                      'v1.0.0',
                       style: TextStyle(
                         fontWeight: FontWeight.w300,
                         fontSize: 16.0,
-                        color: GlobalColors.bgPanelDark2,
+                        color: GlobalColors.hintText,
                       ),
                     ),
                   ],
@@ -116,27 +71,7 @@ class _AcercaDeScreenState extends State<AcercaDeScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: Container(
-          padding: const EdgeInsets.all(5.0),
-          child: Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Desarrollado por: \nGAMM95',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: GlobalColors.bgPanelDark2,
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+      bottomNavigationBar: const CustomBottomAppBar(),
     );
   }
 }

@@ -1,7 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
-
 import 'package:predihipertension/Core/Theme/global_colors.dart';
 import 'package:predihipertension/Presentation/Widget/paragraph.dart';
 import 'package:predihipertension/Presentation/Widget/subtitle.dart';
@@ -26,9 +23,10 @@ class _DataAuthScreenState extends State<DataAuthScreen> {
                 maxHeight: MediaQuery.of(context).size.height * 0.8),
             width: MediaQuery.of(context).size.width * 0.9,
             padding: const EdgeInsets.all(30.0),
-            decoration: BoxDecoration(
-              color: GlobalColors.bgPanelDark,
-              borderRadius: const BorderRadius.all(
+            decoration: const BoxDecoration(
+              // color: GlobalColors.bgPanelDark,
+              color: Color.fromARGB(255, 255, 252, 253),
+              borderRadius: BorderRadius.all(
                 Radius.circular(15),
               ),
             ),
@@ -39,58 +37,28 @@ class _DataAuthScreenState extends State<DataAuthScreen> {
                   children: [
                     const SizedBox(height: 50.0),
                     Text(
-                      "AUTORIZACIÓN DE DATOS PERSONALES",
+                      "AUTORIZACIÓN PARA EL TRATAMIENTO DE DATOS PERSONALES",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: GlobalColors.titlePanel,
-                        fontSize: 18,
+                        color: GlobalColors.titlePrimaryColor,
+                        fontSize: 16,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                     const SizedBox(height: 15.0),
                     Parragraph(
                       parrafo:
-                          'Por favor, lee detenidamente estos términos y condiciones antes de utilizar nuestra aplicación de predicción de hipertensión. Al acceder o utilizar esta aplicación, aceptas estar legalmente vinculado por estos términos y condiciones.',
-                      color: GlobalColors.textColor,
+                          'Yo, en mi calidad de usuario de la aplicación móvil PrediHipertensión, otorgo mi consentimiento libre, previo, expreso e informado de conformidad con la Ley N° 29733, Ley de Protección de Datos Personales y su Reglamento, para que mis datos personales, incluyendo aquellos relacionados con mi salud y datos sensibles, como el registro de usuario e información complementaria, que se encuentran en el historial de la base de datos Firestore de Firebase, sean accedidos y tratados por el equipo de PrediHipertension con el propósito específico de crear un nuevo dataset.',
+                      color: GlobalColors.bgDark1,
                     ),
-                    const SizedBox(height: 10.0),
                     Subtitle(
-                      subtitulo: 'Descripción de la Aplicación',
-                      color: GlobalColors.textColor,
+                      subtitulo: 'Consentimiento del Paciente',
+                      color: GlobalColors.bgDark1,
                     ),
-                    const SizedBox(height: 10.0),
                     Parragraph(
                       parrafo:
-                          'Nuestra aplicación móvil tiene como objetivo proporcionar información y predicciones relacionadas con la hipertensión. Ofrece funcionalidades como:',
-                      color: GlobalColors.textColor,
-                    ),
-                    const SizedBox(height: 10.0),
-                    Parragraph(
-                      parrafo:
-                          "- Análisis de datos introducidos por el usuario para predecir riesgos de hipertensión.\n- Proporciona recomendaciones generales relacionadas con la salud cardiovascular.\n♥ Almacena datos de usuario de manera segura y confidencial.",
-                      color: GlobalColors.textColor,
-                    ),
-                    const SizedBox(height: 10.0),
-                    Subtitle(
-                      subtitulo: 'Requisitos de Uso',
-                      color: GlobalColors.textColor,
-                    ),
-                    const SizedBox(height: 10.0),
-                    Parragraph(
-                      parrafo:
-                          'Al utilizar esta aplicación, aceptas y confirmas que:',
-                      color: GlobalColors.textColor,
-                    ),
-                    const SizedBox(height: 10.0),
-                    Subtitle(
-                      subtitulo: 'Protección de Datos y Privacidad',
-                      color: GlobalColors.textColor,
-                    ),
-                    const SizedBox(height: 10.0),
-                    Parragraph(
-                      parrafo:
-                          'La seguridad y privacidad de tus datos son fundamentales para nosotros. La información que compartas con la aplicación se manejará de acuerdo con nuestra [Política de Privacidad](enlace a la política de privacidad). Nos comprometemos a proteger tus datos y a no compartir información personal sin tu consentimiento.',
-                      color: GlobalColors.textColor,
+                          'He sido debidamente informado del propósito y la naturaleza del tratamiento de mis datos personales descrito anteriormente, así como de las alternativas disponibles, los posibles riesgos y los resultados esperados. Por lo tanto, doy mi consentimiento de manera libre y voluntaria al procedimiento propuesto.',
+                      color: GlobalColors.bgDark1,
                     ),
                   ],
                 ),

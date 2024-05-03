@@ -280,7 +280,7 @@ class MethodsAuth {
           }
         }
       }
-      return resultList; // Si no se encuentra ningún resultado
+      return resultList; 
     } catch (e) {
       rethrow;
     }

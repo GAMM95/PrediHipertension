@@ -17,14 +17,20 @@ class Subtitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      subtitulo,
-      textAlign: TextAlign.start,
-      style: TextStyle(
-        color: color,
-        fontSize: 16.0,
-        fontWeight: FontWeight.w600,
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          subtitulo,
+          textAlign: TextAlign.start,
+          style: TextStyle(
+            color: color,
+            fontSize: 16.0,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        const SizedBox(height: 5.0),
+      ],
     );
   }
 }
