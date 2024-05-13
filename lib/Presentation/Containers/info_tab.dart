@@ -5,6 +5,7 @@ import 'info1_tab.dart';
 import 'info2_tab.dart';
 import 'info3_tab.dart';
 
+/// Widget que muestra pestañas de información sobre definiciones, sugerencias y complicaciones.
 class InfoTab extends StatelessWidget {
   const InfoTab({super.key});
 

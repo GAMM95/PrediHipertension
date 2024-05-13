@@ -204,7 +204,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               );
                               return;
                             }
-
                             try {
                               // Mostrar el círculo de progreso
                               showDialog(
@@ -245,8 +244,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   'Este correo electrónico ya está registrado.',
                                 );
                               }
-
-                              _clearInputs();
+                              _clearInputs(); // Limpiar cajas de texto
                             } on FirebaseAuthException catch (e) {
                               if (e.code == 'email-already-in-use') {
                                 CustomDialogs.showErrorDialog(

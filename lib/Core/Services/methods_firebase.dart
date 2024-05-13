@@ -35,6 +35,7 @@ class MethodsAuth {
     return null;
   }
 
+  /// Metodo para guardar Test de Hipertension Arterial
   Future<void> guardarTest({
     required Datatest datatest,
   }) async {
@@ -80,6 +81,7 @@ class MethodsAuth {
     }
   }
 
+  /// Metodo para guardar el resultado de la evaluacion del test de Hipertension 
   Future<void> guardarResultadoPrediccion({
     required Resultado resultado,
   }) async {
@@ -109,7 +111,7 @@ class MethodsAuth {
         }
       }
     } catch (error) {
-      rethrow;
+      rethrow; // Manejo de errores
     }
   }
 
@@ -246,6 +248,7 @@ class MethodsAuth {
     }
   }
 
+  /// Metodo para obtener los resultados de los test de hipertension 
   Future<List<Resultado>> getResultadoPorTest(DateTime date) async {
     List<Resultado> resultList = [];
     try {

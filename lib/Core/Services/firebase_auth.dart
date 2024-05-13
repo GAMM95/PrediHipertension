@@ -158,6 +158,7 @@ class AuthService {
     }
   }
 
+  /// Elimina la cuenta de usuario actual, eliminando sus datos de Firestore y su cuenta de Firebase Authentication.
   Future<void> deleteAccount() async {
     try {
       // Obtener el usuario actualmente autenticado
@@ -180,8 +181,8 @@ class AuthService {
       }
 
       // Desconectar al usuario localmente
-      await _auth.signOut();
-      await _googleSignIn.signOut();
+      // await _auth.signOut();
+      // await _googleSignIn.signOut();
     } catch (e) {
       // Manejar errores
       if (e is FirebaseAuthException) {
@@ -197,6 +198,7 @@ class AuthService {
     }
   }
 
+  /// Obtiene el nombre completo del usuario actual desde Firestore.
   static Future<String> getDisplayNameFromFirestore() async {
     // Obtener el ID del usuario autenticado
     String userId = FirebaseAuth.instance.currentUser!.uid;

@@ -8,6 +8,7 @@ import 'package:predihipertension/Core/Theme/global_colors.dart';
 import 'package:predihipertension/Core/Utils/saludo.dart';
 import 'package:predihipertension/Presentation/Widget/custom_bottomnavbar.dart';
 
+/// Widget que representa la pantalla principal de la aplicación.
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -36,10 +37,12 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  /// Establece el saludo en función de la hora del día.
   void _setSaludo() {
     _saludo = Saludo.saludarUsuario();
   }
 
+  /// Obtiene el nombre del usuario y lo establece en la pantalla.
   void _setNombreUsuario() async {
     try {
       // Obtener el primer nombre del usuario usando el ID

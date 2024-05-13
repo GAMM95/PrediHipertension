@@ -3,25 +3,32 @@ import pickle
 import numpy as np
 import os
 
+# Ruta al archivo del modelo entrenado
 model_file = 'D:/PrediHipertension/dataset/hypertension_model.pkl'
+
+# Cargar el modelo desde el archivo
 with open(model_file, 'rb') as file:
     model = pickle.load(file)
-    
+
+# Inicializar la aplicación Flask
 app = Flask(__name__)
 
-# Ruta para servir el favicon.ico desde el directorio assets
+# Ruta para servir el icono favicon.ico desde el directorio assets
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'assets'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
+# Ruta de inicio
 @app.route('/')
 def home():
-    return "Hola GAMM\nEstas haciendo prueba de la API"
+    return "Hola GAMM. Estas haciendo prueba de la API"
 
+# Ruta para realizar la predicción
 @app.route('/predict', methods=['GET', 'POST'])
 def predict():
     if request.method == 'GET':
         # Procesar los parámetros de la cadena de consulta
+        # Obtener los datos de la solicitud GET
         Age = request.args.get('Age')
         Sex = request.args.get('Sex')
         BMI = request.args.get('BMI')
@@ -49,7 +56,7 @@ def predict():
         # Devolver el resultado en formato JSON
         return jsonify({'hypertension': str(result)})
     elif request.method == 'POST':
-        # Lógica para manejar solicitudes POST
+        # Obtener los datos de la solicitud POST
         Age = request.form.get('Age')
         Sex = request.form.get('Sex')
         BMI = request.form.get('BMI')
@@ -68,15 +75,20 @@ def predict():
         Stroke = request.form.get('Stroke')
         HeartDiseaseorAttack = request.form.get('HeartDiseaseorAttack')
         
+        # Convertir los datos a un formato adecuado para la predicción
         input_query = np.array([[Age, Sex, BMI, GenHlth, MentHlth, PhysHlth, DiffWalk, Fruits, Veggies, Smoker, HvyAlcoholConsump, PhysActivity, HighChol, CholCheck, Diabetes, Stroke, HeartDiseaseorAttack]])
 
+        # Realizar la predicción
         result = model.predict(input_query)[0]
         
+        # Devolver el resultado en formato JSON
         return jsonify({'hypertension': str(result)})
     else:
+        # Método no permitido
         return 'Method Not Allowed', 405
 
 if __name__ == '__main__':
-    # app.run(debug=True)
+    # Ejecutar la aplicación Flask
     app.run(host="0.0.0.0",port=5000, debug=True)
-    # app.run(debug=True, port=os.getenv("PORT", default=5000))
+    ## app.run(debug=True)
+    ## app.run(debug=True, port=os.getenv("PORT", default=5000))

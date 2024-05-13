@@ -178,8 +178,8 @@ class CustomDialogs {
     );
   }
 
-  static void eliminarCuenta(
-      BuildContext context, String title, String message) {
+  static void eliminarCuenta(BuildContext context, String title, String message,
+      Function()? onDelete) {
     showDialog(
       barrierDismissible: false,
       context: context,
@@ -210,11 +210,11 @@ class CustomDialogs {
           actions: [
             TextButton(
               onPressed: () async {
+                // Llama a la función onDelete si está definida
+                onDelete?.call();
                 // Espera a que se cierre el diálogo de despedida antes de navegar a la página de bienvenida
-                Future.delayed(const Duration(milliseconds: 1500), () {
-                  Navigator.of(context)
-                      .pushNamedAndRemoveUntil('/welcome', (route) => false);
-                });
+                Navigator.of(context)
+                    .pushNamedAndRemoveUntil('/welcome', (route) => false);
               },
               child: const Text(
                 'Eliminar',

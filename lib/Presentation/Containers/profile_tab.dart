@@ -1,11 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:predihipertension/Presentation/Widget/custom_card.dart';
 import 'package:predihipertension/Core/Services/firebase_auth.dart';
 import 'package:predihipertension/Core/Theme/global_colors.dart';
 import 'package:predihipertension/Presentation/Utilities/custom_dialogs.dart';
 import 'package:predihipertension/Presentation/Widget/custom_button.dart';
+import 'package:predihipertension/Presentation/Widget/custom_card.dart';
 
+// Pantalla que muestra la información del perfil del usuario
 class ProfileTab extends StatefulWidget {
   const ProfileTab({super.key});
 
@@ -26,11 +27,13 @@ class _ProfileTabState extends State<ProfileTab> {
     getDisplayName();
   }
 
+  // Obtiene el usuario actualmente autenticado
   Future<void> getCurrentUser() async {
     currentUser = FirebaseAuth.instance.currentUser;
     setState(() {});
   }
 
+  // Obtiene el nombre completo del usuario desde Firestore
   Future<void> getDisplayName() async {
     String fullName = await AuthService.getDisplayNameFromFirestore();
     setState(() {
@@ -60,7 +63,6 @@ class _ProfileTabState extends State<ProfileTab> {
                       children: [
                         const SizedBox(height: 10.0),
                         // Foto del usuario
-
                         CircleAvatar(
                           backgroundImage: currentUser != null &&
                                   currentUser!.photoURL != null
@@ -118,24 +120,27 @@ class _ProfileTabState extends State<ProfileTab> {
                           ),
                         ),
                         const SizedBox(height: 10.0),
+                        // Botones para cerrar sesión y eliminar cuenta
                         CustomButton(
                           texto: 'Cerrar sesión',
                           onPressed: () {
+                            // Muestra un diálogo de confirmación antes de cerrar sesion
                             CustomDialogs.cerrarSesion(context);
                           },
                           isEnabled: true,
                         ),
-
                         CustomButton(
                           texto: 'Eliminar cuenta',
                           onPressed: () {
-                            // Lógica del botón Eliminar cuenta
+                            // Muestra un diálogo de confirmación antes de eliminar la cuenta
                             CustomDialogs.eliminarCuenta(
                               context,
                               'Nos apena que te vayas',
                               'Esperamos regreses pronto.',
+                              () {
+                                _authService.deleteAccount();
+                              },
                             );
-                            _authService.deleteAccount();
                           },
                           isEnabled: true,
                         ),

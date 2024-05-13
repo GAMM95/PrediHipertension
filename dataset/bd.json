@@ -1,0 +1,42 @@
+{
+  "usuario": [
+    {
+      "id": "ID_usuario_1",
+      "email": "usuario1@example.com",
+      "firstName": "Nombre1",
+      "lastName": "Apellido1",
+      "password": "contraseña1",
+      "datatest": [
+        {
+          "id": "ID_datatest_1",
+          "edadAgrupada": "valor_edadAgrupada1",
+          "edadIngresada": "valor_edadIngresada1",
+          "genero": "valor_genero1",
+          "imc": "valor_imc1",
+          "saludGeneral": "valor_saludGeneral1",
+          "saludMental": "valor_saludMental1",
+          "saludFisica": "valor_saludFisica1",
+          "dificultadCaminar": "valor_dificultadCaminar1",
+          "consumoFrutas": "valor_consumoFrutas1",
+          "consumoVerduras": "valor_consumoVerduras1",
+          "consumoCigarros": "valor_consumoCigarros1",
+          "consumoAlcohol": "valor_consumoAlcohol1",
+          "actividadFisica": "valor_actividadFisica1",
+          "colesterol": "valor_colesterol1",
+          "chequeoColesterol": "valor_chequeoColesterol1",
+          "diabetes": "valor_diabetes1",
+          "acv": "valor_acv1",
+          "enfermedadCardiaca": "valor_enfermedadCardiaca1",
+          "timestamp": "valor_timestamp1",
+          "resultado": [
+            {
+              "id": "ID_resultado_1",
+              "resultadoPrediccion": "valor_prediccion",
+              "timestamp": "timestamp"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
