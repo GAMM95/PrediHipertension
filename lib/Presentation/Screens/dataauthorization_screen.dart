@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:predihipertension/Core/Theme/global_colors.dart';
-import 'package:predihipertension/Presentation/Widget/paragraph.dart';
-import 'package:predihipertension/Presentation/Widget/subtitle.dart';
+
+import '../../Core/Theme/global_colors.dart';
+import '../Widget/paragraph.dart';
+import '../Widget/subtitle.dart';
 
 class DataAuthScreen extends StatefulWidget {
   const DataAuthScreen({super.key});

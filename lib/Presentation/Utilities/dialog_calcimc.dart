@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:predihipertension/Presentation/Widget/custom_numberfielddark.dart';
-import 'package:predihipertension/Presentation/Screens/image_screen.dart';
+import '../Screens/image_screen.dart';
+import '../Widget/custom_numberfielddark.dart';
 
 class CalculoIMC {
   static void mostrar(

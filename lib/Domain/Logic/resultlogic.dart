@@ -1,4 +1,4 @@
-import 'package:predihipertension/Domain/Models/resultado.dart';
+import '../Models/resultado.dart';
 
 /// Clase que contiene la lógica para obtener los resultados relacionados con la hipertensión.
 class ResultLogic {

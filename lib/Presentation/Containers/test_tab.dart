@@ -1,18 +1,17 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:predihipertension/Core/Services/function_api.dart';
-import 'package:predihipertension/Presentation/Utilities/custom_dialogs.dart';
-import 'package:predihipertension/Domain/Logic/testLogic.dart';
-import 'package:predihipertension/Presentation/Widget/title_tab.dart';
 
-import 'package:predihipertension/Presentation/Widget/paragraph.dart';
-import 'package:predihipertension/Core/Theme/global_colors.dart';
-import 'package:predihipertension/Presentation/Widget/custom_card.dart';
-
-import 'package:predihipertension/Presentation/Widget/custom_dropdown.dart';
-import 'package:predihipertension/Presentation/Widget/custom_numberfield.dart';
-import 'package:predihipertension/Presentation/Utilities/dialog_calcimc.dart';
+import '../../Core/Services/function_api.dart';
+import '../../Core/Theme/global_colors.dart';
+import '../../Domain/Logic/testlogic.dart';
+import '../Utilities/custom_dialogs.dart';
+import '../Utilities/dialog_calcimc.dart';
+import '../Widget/custom_card.dart';
+import '../Widget/custom_dropdown.dart';
+import '../Widget/custom_numberfield.dart';
+import '../Widget/paragraph.dart';
+import '../Widget/title_tab.dart';
 
 class TestTab extends StatefulWidget {
   const TestTab({super.key});
@@ -22,13 +21,18 @@ class TestTab extends StatefulWidget {
 }
 
 class _TestTabState extends State<TestTab> {
+  String mentalHealthResponse = '';
+  String phisicalHealthResponse = '';
+
   /// Informacion personal
   TextEditingController ageController = TextEditingController();
   TextEditingController sexController = TextEditingController();
   TextEditingController bmiController = TextEditingController();
   TextEditingController genhlthController = TextEditingController();
   TextEditingController menthlthController = TextEditingController();
+  TextEditingController diasmenthlthController = TextEditingController();
   TextEditingController physhlthController = TextEditingController();
+  TextEditingController diasphyshlthController = TextEditingController();
   TextEditingController diffWalkController = TextEditingController();
   TextEditingController fruitController = TextEditingController();
   TextEditingController vegetableController = TextEditingController();
@@ -205,7 +209,7 @@ class _TestTabState extends State<TestTab> {
                         /// Indice de Masa Corporal del usuario
                         Parragraph(
                           parrafo:
-                              '3. ¿Cuál es tu Índice de Masa Corporal (IMC)?',
+                              '3. ¿Cuál es su Índice de Masa Corporal (IMC)?',
                           color: GlobalColors.textColor,
                         ),
                         const SizedBox(height: 5.0),
@@ -256,61 +260,106 @@ class _TestTabState extends State<TestTab> {
                         /// Salud mental percibida en los ultimos 30 dias
                         Parragraph(
                           parrafo:
-                              '5. ¿Durante cuántos días en el último mes considera que su salud mental no fue buena? (Incluya estrés, depresión y problemas emocionales)',
+                              '5. En el último mes, ¿has experimentado estrés, depresión u otros problemas emocionales?',
                           color: GlobalColors.textColor,
                         ),
                         const SizedBox(height: 5.0),
-                        CustomNumberField(
-                          hintText: 'Ingrese la cantidad de días',
-                          enabled: true,
-                          showNextButton: true,
-                          cifras: 2,
+                        CustomDropDown(
+                          hintText: 'Seleccione una opción',
+                          items: const ['Sí', 'No'],
+                          defaultValue: menthlthController.text,
                           controller: menthlthController,
-                          validator: (String? value) {
-                            if (value == null || value.isEmpty) {
-                              return '';
-                            }
-                            int dias = int.tryParse(value) ?? 0;
-                            if (dias > 30) {
-                              return 'No debe exceder más de 30 días';
-                            }
-                            return null;
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              mentalHealthResponse = newValue ?? '';
+                            });
                           },
                         ),
 
                         const SizedBox(height: 15.0),
 
-                        /// Salud mental percibida en los ultimos 30 dias
+                        // Segundo párrafo condicional basado en el valor seleccionado en la pregunta 5
+                        if (mentalHealthResponse == 'Sí') ...[
+                          Parragraph(
+                            parrafo:
+                                '** Si su respuesta fue Sí, indique cuántos días ha presentado los problemas anteriores:',
+                            color: GlobalColors.textColor,
+                          ),
+                          const SizedBox(height: 5.0),
+                          CustomNumberField(
+                            hintText: 'Ingrese la cantidad de días',
+                            enabled: true,
+                            showNextButton: true,
+                            cifras: 2,
+                            controller: diasmenthlthController,
+                            // controller: menthlthController,
+                            validator: (String? value) {
+                              if (value == null || value.isEmpty) {
+                                return '';
+                              }
+                              int dias = int.tryParse(value) ?? 0;
+                              if (dias < 1 || dias > 30) {
+                                return 'El valor debe ser entre 1 y 30 días';
+                              }
+                              return null;
+                            },
+                          ),
+                          const SizedBox(height: 15.0),
+                        ],
+
+                        /// Salud fisica percibida en los ultimos 30 dias
                         Parragraph(
                           parrafo:
-                              '6. ¿Durante cuántos días en el último mes considera que su salud física no fue buena? (Incluya enfermedades y lesiones físicas)',
+                              '6. En el último mes, ¿has padecido de enfermedades o lesiones físicas?',
                           color: GlobalColors.textColor,
                         ),
                         const SizedBox(height: 5.0),
-                        CustomNumberField(
-                          hintText: 'Ingrese la cantidad de días',
-                          enabled: true,
-                          showNextButton: true,
-                          cifras: 2,
-                          validator: (String? value) {
-                            if (value == null || value.isEmpty) {
-                              return '';
-                            }
-                            int dias = int.tryParse(value) ?? 0;
-                            if (dias > 30) {
-                              return 'No debe exceder más de 30 días';
-                            }
-                            return null;
-                          },
+                        CustomDropDown(
+                          hintText: 'Seleccione una opción',
+                          items: const ['Sí', 'No'],
+                          defaultValue: physhlthController.text,
                           controller: physhlthController,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              phisicalHealthResponse = newValue ?? '';
+                            });
+                          },
                         ),
 
                         const SizedBox(height: 15.0),
+
+                        // Segundo párrafo condicional basado en el valor seleccionado en la pregunta 5
+                        if (phisicalHealthResponse == 'Sí') ...[
+                          Parragraph(
+                            parrafo:
+                                '** Si su respuesta fue Sí, indique cuántos días ha presentado los problemas anteriores:',
+                            color: GlobalColors.textColor,
+                          ),
+                          const SizedBox(height: 5.0),
+                          CustomNumberField(
+                            hintText: 'Ingrese la cantidad de días',
+                            enabled: true,
+                            showNextButton: true,
+                            cifras: 2,
+                            controller: diasphyshlthController,
+                            validator: (String? value) {
+                              if (value == null || value.isEmpty) {
+                                return '';
+                              }
+                              int dias = int.tryParse(value) ?? 0;
+                              if (dias < 1 || dias > 30) {
+                                return 'El valor debe ser entre 1 y 30 días';
+                              }
+                              return null;
+                            },
+                          ),
+                          const SizedBox(height: 15.0),
+                        ],
 
                         /// Dificultad para caminar o subir escaleras
                         Parragraph(
                           parrafo:
-                              '7. ¿Tiene dificultades graves para caminar o subir escaleras?',
+                              '7. ¿Presenta dificultades para caminar o subir escaleras?',
                           color: GlobalColors.textColor,
                         ),
                         const SizedBox(height: 5.0),
@@ -350,7 +399,7 @@ class _TestTabState extends State<TestTab> {
                         /// Consumo de vegetales
                         Parragraph(
                           parrafo:
-                              '9. ¿Comes verduras al menos una vez al día?',
+                              '9. ¿Consume verduras al menos una vez al día?',
                           color: GlobalColors.textColor,
                         ),
                         const SizedBox(height: 5.0),
@@ -380,7 +429,8 @@ class _TestTabState extends State<TestTab> {
 
                         /// Consumo de alcohol
                         Parragraph(
-                          parrafo: '11. ¿Consumes alcohol muy frecuentemente?',
+                          parrafo:
+                              '11. ¿Consume bebidas alcoholicas actualmente?',
                           color: GlobalColors.textColor,
                         ),
                         const SizedBox(height: 5.0),
@@ -396,7 +446,7 @@ class _TestTabState extends State<TestTab> {
                         /// Actividad fisica del usuario
                         Parragraph(
                           parrafo:
-                              '12.  ¿Ha realizado actividad física en los últimos 30 días?',
+                              '12.  ¿Sueles hacer al menos 30 minutos de actividad física en tu trabajo o en tu tiempo libre de forma regular?',
                           color: GlobalColors.textColor,
                         ),
                         const SizedBox(height: 5.0),
@@ -423,7 +473,7 @@ class _TestTabState extends State<TestTab> {
                         ///  Le han dicho que su colesterol en sangre es alto?
                         Parragraph(
                           parrafo:
-                              '13. ¿Algún profesional de la salud le ha indicado que tiene colesterol alto en la sangre?',
+                              '13. ¿Alguna vez un médico te ha dicho que tienes niveles elevados de colesterol en la sangre?',
                           color: GlobalColors.textColor,
                         ),
                         const SizedBox(height: 5.0),
@@ -439,7 +489,7 @@ class _TestTabState extends State<TestTab> {
                         /// Control de colesterol en los últimos cinco años
                         Parragraph(
                           parrafo:
-                              '14. ¿Ha realizado un control de colesterol en los últimos 5 años?',
+                              '14. ¿Has hecho un examen para revisar tu nivel de colesterol en sangre en los últimos cinco años?',
                           color: GlobalColors.textColor,
                         ),
                         const SizedBox(height: 5.0),
@@ -454,7 +504,7 @@ class _TestTabState extends State<TestTab> {
 
                         /// Paciente Diabetico
                         Parragraph(
-                          parrafo: '15. ¿Cuál es tu estado actual de diabetes?',
+                          parrafo: '15. ¿Tienes diagnóstico de diabetes?',
                           color: GlobalColors.textColor,
                         ),
                         const SizedBox(height: 5.0),
@@ -473,7 +523,7 @@ class _TestTabState extends State<TestTab> {
 
                         Parragraph(
                           parrafo:
-                              '16. ¿Has tenido alguna vez un accidente cerebrovascular (ACV)?',
+                              '16. ¿Alguna vez has experimentado síntomas repentinos como debilidad, dificultad para hablar o pérdida de visión que afectaron tu capacidad para funcionar normalmente?',
                           color: GlobalColors.textColor,
                         ),
                         const SizedBox(height: 5.0),
@@ -488,7 +538,7 @@ class _TestTabState extends State<TestTab> {
 
                         Parragraph(
                           parrafo:
-                              '17. ¿Has padecido alguna vez de enfermedad coronaria o infarto de miocardio?',
+                              '17. ¿Alguna vez has tenido problemas de salud relacionados con tu corazón?"',
                           color: GlobalColors.textColor,
                         ),
                         const SizedBox(height: 5.0),
@@ -542,7 +592,14 @@ class _TestTabState extends State<TestTab> {
 
   void _mostrarResultadoDialog() async {
     TestLogic testLogic = TestLogic();
-    Map<String, String> body = await testLogic.construirBody(
+    Map<String, String> body;
+
+    String diasSaludMentalValue =
+        mentalHealthResponse == 'Sí' ? diasmenthlthController.text : '0';
+    String diasSaludFisicaValue =
+        phisicalHealthResponse == 'Sí' ? diasphyshlthController.text : '0';
+
+    body = await testLogic.construirBody(
       edad: ageController.text,
       genero: sexController.text,
       imc: bmiController.text,
@@ -560,6 +617,8 @@ class _TestTabState extends State<TestTab> {
       acv: strokeController.text,
       diabetes: diabetesController.text,
       enfermedadCardiaca: heartController.text,
+      diasSaludMental: diasSaludMentalValue,
+      diasSaludFisica: diasSaludFisicaValue,
     );
 
     // Mostrar el diálogo de carga antes de realizar la solicitud HTTP
@@ -593,7 +652,6 @@ class _TestTabState extends State<TestTab> {
         'Mensaje',
         'No se pudo evaluar su resultado: $error',
       );
-      // print('No se pudo evaluar su resultado: $error');
     }
   }
 }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:predihipertension/Presentation/Screens/image_screen.dart';
-import 'package:predihipertension/Core/Theme/global_colors.dart';
-import 'package:predihipertension/Presentation/Widget/lista_items.dart';
-import 'package:predihipertension/Presentation/Widget/paragraph.dart';
-import 'package:predihipertension/Presentation/Widget/subtitle.dart';
+
+import '../../Core/Theme/global_colors.dart';
+import '../Screens/image_screen.dart';
+import '../Widget/lista_items.dart';
+import '../Widget/paragraph.dart';
+import '../Widget/subtitle.dart';
 
 class Info3Tab extends StatelessWidget {
   const Info3Tab({super.key});

@@ -1,12 +1,81 @@
 // ignore_for_file: file_names
 import 'dart:async';
 
-import 'package:predihipertension/Domain/Models/datatest.dart';
-import 'package:predihipertension/Core/Services/methods_firebase.dart';
+import '../../Core/Services/methods_firebase.dart';
+import '../Models/datatest.dart';
 
 class TestLogic {
   final MethodsAuth _methodsAuth = MethodsAuth();
 
+  // Future<Map<String, String>> construirBody({
+  //   required String edad,
+  //   required String genero,
+  //   required String imc,
+  //   required String saludGeneral,
+  //   required String saludMental,
+  //   required String saludFisica,
+  //   required String dificultadCaminar,
+  //   required String consumoFrutas,
+  //   required String consumoVerduras,
+  //   required String consumoCigarros,
+  //   required String consumoAlcohol,
+  //   required String actividadFisica,
+  //   required String colesterol,
+  //   required String chequeoColesterol,
+  //   required String acv,
+  //   required String diabetes,
+  //   required String enfermedadCardiaca,
+  // }) async {
+  //   int ageValue = int.tryParse(edad) ?? 0;
+  //   int ageCategory = _convertirEdadACategoria(edad);
+  //   int healthValue = _convertirSaludGeneralANumero(saludGeneral);
+  //   int diabetesValue = _convertirDiabetesANumero(diabetes);
+
+  //   Map<String, String> body = {
+  //     'Age': ageCategory.toString(),
+  //     'Sex': genero == 'Femenino' ? '0' : '1',
+  //     'BMI': imc,
+  //     'GenHlth': healthValue.toString(),
+  //     'MentHlth': saludMental,
+  //     'PhysHlth': saludFisica,
+  //     'DiffWalk': dificultadCaminar == 'No' ? '0' : '1',
+  //     'Fruits': consumoFrutas == 'No' ? '0' : '1',
+  //     'Veggies': consumoVerduras == 'No' ? '0' : '1',
+  //     'Smoker': consumoCigarros == 'No' ? '0' : '1',
+  //     'HvyAlcoholConsump': consumoAlcohol == 'No' ? '0' : '1',
+  //     'PhysActivity': actividadFisica == 'No' ? '0' : '1',
+  //     'HighChol': colesterol == 'No' ? '0' : '1',
+  //     'CholCheck': chequeoColesterol == 'No' ? '0' : '1',
+  //     'Diabetes': diabetesValue.toString(),
+  //     'Stroke': acv == 'No' ? '0' : '1',
+  //     'HeartDiseaseorAttack': enfermedadCardiaca == 'No' ? '0' : '1',
+  //   };
+
+  //   // Crear un objeto Datatest con los datos del formulario
+  //   Datatest datatest = Datatest(
+  //     edadIngresada: ageValue,
+  //     edadAgrupada: ageCategory,
+  //     sexo: genero == 'Femenino' ? 0 : 1,
+  //     imc: double.tryParse(imc) ?? 0.0,
+  //     saludGeneral: healthValue,
+  //     saludFisica: int.parse(saludFisica),
+  //     saludMental: int.parse(saludMental),
+  //     dificultadCaminar: dificultadCaminar == 'No' ? 0 : 1,
+  //     consumoFrutas: consumoFrutas == 'No' ? 0 : 1,
+  //     consumoVerduras: consumoVerduras == 'No' ? 0 : 1,
+  //     consumoCigarros: consumoCigarros == 'No' ? 0 : 1,
+  //     consumoAlcohol: consumoAlcohol == 'No' ? 0 : 1,
+  //     actividadFisica: actividadFisica == 'No' ? 0 : 1,
+  //     colesterol: colesterol == 'No' ? 0 : 1,
+  //     chequeoColesterol: chequeoColesterol == 'No' ? 0 : 1,
+  //     acv: acv == 'No' ? 0 : 1,
+  //     diabetes: diabetesValue,
+  //     enfermedadCardiaca: enfermedadCardiaca == 'No' ? 0 : 1,
+  //   );
+  //   await _methodsAuth.guardarTest(datatest: datatest);
+
+  //   return body;
+  // }
   Future<Map<String, String>> construirBody({
     required String edad,
     required String genero,
@@ -25,19 +94,27 @@ class TestLogic {
     required String acv,
     required String diabetes,
     required String enfermedadCardiaca,
+    required String diasSaludMental,
+    required String diasSaludFisica,
   }) async {
     int ageValue = int.tryParse(edad) ?? 0;
     int ageCategory = _convertirEdadACategoria(edad);
     int healthValue = _convertirSaludGeneralANumero(saludGeneral);
     int diabetesValue = _convertirDiabetesANumero(diabetes);
 
+    int saludMentalValue =
+        saludMental == 'Sí' ? int.tryParse(diasSaludMental) ?? 0 : 0;
+
+    int saludFisicaValue =
+        saludFisica == 'Sí' ? int.tryParse(diasSaludFisica) ?? 0 : 0;
+
     Map<String, String> body = {
       'Age': ageCategory.toString(),
       'Sex': genero == 'Femenino' ? '0' : '1',
       'BMI': imc,
       'GenHlth': healthValue.toString(),
-      'MentHlth': saludMental,
-      'PhysHlth': saludFisica,
+      'MentHlth': saludMentalValue.toString(),
+      'PhysHlth': saludFisicaValue.toString(),
       'DiffWalk': dificultadCaminar == 'No' ? '0' : '1',
       'Fruits': consumoFrutas == 'No' ? '0' : '1',
       'Veggies': consumoVerduras == 'No' ? '0' : '1',
@@ -58,8 +135,9 @@ class TestLogic {
       sexo: genero == 'Femenino' ? 0 : 1,
       imc: double.tryParse(imc) ?? 0.0,
       saludGeneral: healthValue,
-      saludFisica: int.parse(saludFisica),
-      saludMental: int.parse(saludMental),
+      // saludFisica: int.parse(saludFisica),
+      saludFisica: saludFisicaValue,
+      saludMental: saludMentalValue, // Aquí asignamos el valor correspondiente
       dificultadCaminar: dificultadCaminar == 'No' ? 0 : 1,
       consumoFrutas: consumoFrutas == 'No' ? 0 : 1,
       consumoVerduras: consumoVerduras == 'No' ? 0 : 1,

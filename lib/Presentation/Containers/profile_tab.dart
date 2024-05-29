@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:predihipertension/Core/Services/firebase_auth.dart';
-import 'package:predihipertension/Core/Theme/global_colors.dart';
-import 'package:predihipertension/Presentation/Utilities/custom_dialogs.dart';
-import 'package:predihipertension/Presentation/Widget/custom_button.dart';
-import 'package:predihipertension/Presentation/Widget/custom_card.dart';
+
+import '../../Core/Services/firebase_auth.dart';
+import '../../Core/Theme/global_colors.dart';
+import '../Utilities/custom_dialogs.dart';
+import '../Widget/custom_button.dart';
+import '../Widget/custom_card.dart';
 
 // Pantalla que muestra la información del perfil del usuario
 class ProfileTab extends StatefulWidget {

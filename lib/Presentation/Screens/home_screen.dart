@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:predihipertension/Core/Theme/theme.dart';
 
-import 'package:predihipertension/Presentation/Widget/custom_floatingbutton.dart';
-import 'package:predihipertension/Core/Routes/routes_pages.dart';
-import 'package:predihipertension/Core/Services/methods_firebase.dart';
-import 'package:predihipertension/Core/Theme/global_colors.dart';
-import 'package:predihipertension/Core/Utils/saludo.dart';
-import 'package:predihipertension/Presentation/Widget/custom_bottomnavbar.dart';
+import '../../Core/Routes/routes_pages.dart';
+import '../../Core/Services/methods_firebase.dart';
+import '../../Core/Theme/global_colors.dart';
+import '../../Core/Theme/theme.dart';
+import '../../Core/Utils/saludo.dart';
+import '../Widget/custom_bottomnavbar.dart';
+import '../Widget/custom_floatingbutton.dart';
 
 /// Widget que representa la pantalla principal de la aplicación.
 class HomeScreen extends StatefulWidget {

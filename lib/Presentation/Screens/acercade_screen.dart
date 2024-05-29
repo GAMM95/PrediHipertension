@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:predihipertension/Core/Theme/global_colors.dart';
-import 'package:predihipertension/Presentation/Widget/custom_bottomappbar.dart';
-import 'package:predihipertension/Presentation/Widget/custom_gesturedetector.dart';
+
+import '../../Core/Theme/global_colors.dart';
+import '../Widget/custom_bottomappbar.dart';
+import '../Widget/custom_gesturedetector.dart';
 
 class AcercaDeScreen extends StatelessWidget {
   const AcercaDeScreen({super.key});

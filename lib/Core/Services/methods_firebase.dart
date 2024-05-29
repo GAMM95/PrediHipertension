@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:predihipertension/Domain/Models/datatest.dart';
-import 'package:predihipertension/Domain/Models/resultado.dart';
+
+import '../../Domain/Models/datatest.dart';
+import '../../Domain/Models/resultado.dart';
+
 
 /// Clase que proporciona métodos para la autenticación y la gestión de datos del usuario.
 class MethodsAuth {

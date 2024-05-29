@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:predihipertension/Core/Theme/global_colors.dart';
+import '../../Core/Theme/global_colors.dart';
 
 class CustomNumberField extends StatefulWidget {
   final TextEditingController? controller;

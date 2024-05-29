@@ -2,14 +2,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:predihipertension/Core/Theme/global_colors.dart';
-import 'package:predihipertension/Domain/Logic/resultlogic.dart';
-import 'package:predihipertension/Domain/Models/resultado.dart';
-import 'package:predihipertension/Presentation/Utilities/custom_dialogs.dart';
-import 'package:predihipertension/Domain/Logic/testlogic.dart';
-import 'package:predihipertension/Presentation/Widget/custom_listDetail.dart';
-import 'package:predihipertension/Core/Services/methods_firebase.dart';
-import 'package:predihipertension/Domain/Models/datatest.dart';
+
+import '../../Core/Services/methods_firebase.dart';
+import '../../Core/Theme/global_colors.dart';
+import '../../Domain/Logic/resultlogic.dart';
+import '../../Domain/Logic/testlogic.dart';
+import '../../Domain/Models/datatest.dart';
+import '../../Domain/Models/resultado.dart';
+import '../Utilities/custom_dialogs.dart';
+import '../Widget/custom_listdetail.dart';
+
 
 class DetalleTest extends StatefulWidget {
   final DateTime date;
@@ -70,7 +72,8 @@ class _DetalleTestState extends State<DetalleTest> {
               _testLogic.getVeggiesText(dataTestList[0].consumoVerduras)),
           CustomListItemData('10. Consumo de al menos 100 cigarrillos:',
               _testLogic.getSmokeText(dataTestList[0].consumoCigarros)),
-          CustomListItemData('11. Consumo de alcohol muy frecuente:',
+          CustomListItemData(
+              '11. Consumo de bebidas alcoholicas muy frecuente:',
               _testLogic.getAlcoholText(dataTestList[0].consumoAlcohol)),
           CustomListItemData('12. Actividad física en los últimos 30 días:',
               _testLogic.getPhysActivityText(dataTestList[0].actividadFisica)),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:predihipertension/Core/Theme/global_colors.dart';
+import '../../Core/Theme/global_colors.dart';
 
 class CustomListItem extends StatelessWidget {
   final String title;

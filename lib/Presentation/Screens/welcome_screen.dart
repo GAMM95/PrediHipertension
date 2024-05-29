@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:predihipertension/Core/Theme/global_colors.dart';
-import 'package:predihipertension/Presentation/Screens/signin_screen.dart';
-import 'package:predihipertension/Presentation/Screens/signup_screen.dart';
-import 'package:predihipertension/Presentation/Widget/custom_scaffoldwelcome.dart';
-import 'package:predihipertension/Presentation/Widget/welcome_button.dart';
+
+import '../../Core/Theme/global_colors.dart';
+import '../Widget/custom_scaffoldwelcome.dart';
+import '../Widget/welcome_button.dart';
+import 'signin_screen.dart';
+import 'signup_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});

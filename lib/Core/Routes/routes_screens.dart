@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:predihipertension/Presentation/Widget/calculadora_imc.dart';
 
+import '../../Presentation/Screens/acercade_screen.dart';
 import '../../Presentation/Screens/dataauthorization_screen.dart';
 import '../../Presentation/Screens/fortgotpassword_screen.dart';
 import '../../Presentation/Screens/home_screen.dart';
@@ -8,7 +8,7 @@ import '../../Presentation/Screens/signin_screen.dart';
 import '../../Presentation/Screens/signup_screen.dart';
 import '../../Presentation/Screens/tercon_screen.dart';
 import '../../Presentation/Screens/welcome_screen.dart';
-import 'package:predihipertension/Presentation/Screens/acercade_screen.dart';
+import '../../Presentation/Widget/calculadora_imc.dart';
 
 class RoutesScreens {
   static const String welcome = '/welcome';

@@ -2,18 +2,18 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:predihipertension/Presentation/Screens/signup_screen.dart';
-import 'package:predihipertension/Presentation/Widget/custom_button.dart';
 
-import 'package:predihipertension/Core/Services/firebase_auth.dart';
-import 'package:predihipertension/Core/Theme/global_colors.dart';
-import 'package:predihipertension/Core/Theme/theme.dart';
-import 'package:predihipertension/Presentation/Widget/custom_passwordfield.dart';
-import 'package:predihipertension/Presentation/Widget/custom_textfield.dart';
-import 'package:predihipertension/Presentation/Widget/custom_divider.dart';
-import 'package:predihipertension/Presentation/Widget/custom_clipper.dart';
-import 'package:predihipertension/Presentation/Utilities/custom_dialogs.dart';
-import 'package:predihipertension/Presentation/Widget/social_icon.dart';
+import '../../Core/Services/firebase_auth.dart';
+import '../../Core/Theme/global_colors.dart';
+import '../../Core/Theme/theme.dart';
+import '../Utilities/custom_dialogs.dart';
+import '../Widget/custom_button.dart';
+import '../Widget/custom_clipper.dart';
+import '../Widget/custom_divider.dart';
+import '../Widget/custom_passwordfield.dart';
+import '../Widget/custom_textfield.dart';
+import '../Widget/social_icon.dart';
+import 'signup_screen.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});

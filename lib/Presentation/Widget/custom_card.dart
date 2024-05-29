@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:predihipertension/Core/Theme/global_colors.dart';
+
+import '../../Core/Theme/global_colors.dart';
 
 class CustomCard extends StatelessWidget {
   final String title;

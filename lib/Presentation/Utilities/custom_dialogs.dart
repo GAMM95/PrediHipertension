@@ -5,10 +5,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-import 'package:predihipertension/Core/Services/firebase_auth.dart';
-import 'package:predihipertension/Core/Services/methods_firebase.dart';
-import 'package:predihipertension/Core/Theme/global_colors.dart';
-import 'package:predihipertension/Domain/Models/resultado.dart';
+import '../../Core/Services/firebase_auth.dart';
+import '../../Core/Services/methods_firebase.dart';
+import '../../Core/Theme/global_colors.dart';
+import '../../Domain/Models/resultado.dart';
 
 class CustomDialogs {
   static void showErrorDialog(
@@ -257,10 +257,10 @@ class CustomDialogs {
     String message;
     if (hypertension == 0) {
       message =
-          '¡Felicidades! Usted no esta propenso a desarrollar hipertensión arterial.';
+          'Usted es un paciente con bajo riesgo de desarrollar hipertensión arterial.';
     } else if (hypertension == 1) {
       message =
-          '¡A tomar precauciones! Usted es un paciente propenso a desarrollar hipertensión arterial.';
+          '¡A tomar precauciones! Usted es un paciente con alto riesgo a desarrollar hipertensión arterial.';
     } else {
       message = 'No se pudo determinar el resultado.';
     }

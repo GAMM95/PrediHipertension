@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:predihipertension/Core/Theme/global_colors.dart';
 
+import '../../Core/Theme/global_colors.dart';
 import 'info1_tab.dart';
 import 'info2_tab.dart';
 import 'info3_tab.dart';
