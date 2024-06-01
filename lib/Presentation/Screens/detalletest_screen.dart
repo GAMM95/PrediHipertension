@@ -12,7 +12,6 @@ import '../../Domain/Models/resultado.dart';
 import '../Utilities/custom_dialogs.dart';
 import '../Widget/custom_listdetail.dart';
 
-
 class DetalleTest extends StatefulWidget {
   final DateTime date;
   const DetalleTest({super.key, required this.date});
@@ -51,46 +50,41 @@ class _DetalleTestState extends State<DetalleTest> {
         dataList = [
           CustomListItemData(
               '1. Edad:', '${dataTestList[0].edadIngresada} años'),
+          CustomListItemData('2. Género seleccionado:',
+              _testLogic.getGenderText(dataTestList[0].sexo)),
+          CustomListItemData('3. Nivel educativo logrado:',
+              _testLogic.getEducationText(dataTestList[0].educacion)),
+          CustomListItemData('4. Índice de Masa Corporal - (IMC):',
+              '${dataTestList[0].imc} kg/m²'),
           CustomListItemData(
-              '2. Género:', _testLogic.getGenderText(dataTestList[0].sexo)),
+              '5. Cantidad de días en la que ha experimentado estrés, depresión u otros problemas emocionales:',
+              'Aproximadamente ${dataTestList[0].saludMental} días'),
           CustomListItemData(
-              '3. Índice de Masa Corporal - (IMC):', '${dataTestList[0].imc}'),
-          CustomListItemData('4. Estado de salud percibida:',
-              _testLogic.getGeneralHealth(dataTestList[0].saludGeneral)),
-          CustomListItemData(
-              '5. Cantidad de días en la que considera su estado de salud mental no fue tan buena:',
-              '${dataTestList[0].saludMental} días'),
-          CustomListItemData(
-              '6. Cantidad de días en la que considera su estado de salud física no fue tan buena:',
-              '${dataTestList[0].saludFisica} días'),
-          CustomListItemData(
-              '7. Presenta dificultades graves para caminar o subir escaleras:',
-              _testLogic.getDiffWalkText(dataTestList[0].dificultadCaminar)),
-          CustomListItemData('8. Consumo de frutas al menos 1 vez al día:',
+              '6. Actividad física realizada al menos 30 minutos',
+              _testLogic.getPhysActivityText(dataTestList[0].actividadFisica)),
+          CustomListItemData('7. Consumo de frutas al menos 1 vez al día:',
               _testLogic.getFruitText(dataTestList[0].consumoFrutas)),
-          CustomListItemData('9. Consumo de verduras al menos 1 vez al día:',
+          CustomListItemData('8. Consumo de verduras al menos 1 vez al día:',
               _testLogic.getVeggiesText(dataTestList[0].consumoVerduras)),
-          CustomListItemData('10. Consumo de al menos 100 cigarrillos:',
+          CustomListItemData('9. Control o reducción del consumo de sal:',
+              _testLogic.getSaltText(dataTestList[0].consumoSal)),
+          CustomListItemData('10. Hábito de fumar considerado:',
               _testLogic.getSmokeText(dataTestList[0].consumoCigarros)),
           CustomListItemData(
-              '11. Consumo de bebidas alcoholicas muy frecuente:',
+              '11. Consumo de bebidas alcoholicas en los últimos 30 días:',
               _testLogic.getAlcoholText(dataTestList[0].consumoAlcohol)),
-          CustomListItemData('12. Actividad física en los últimos 30 días:',
-              _testLogic.getPhysActivityText(dataTestList[0].actividadFisica)),
           CustomListItemData(
-              '13. Colesterol alto en la sangre según el profesional de salud:',
+              '12. Consumo compulsivo de alcohol',
+              _testLogic.getCompulsiveAlcoholText(
+                  dataTestList[0].consumoAlcCompulsivo)),
+          CustomListItemData(
+              '13. Niveles altos de colesterol en la sangre según el profesional de salud:',
               _testLogic.getCholesterolText(dataTestList[0].colesterol)),
-          CustomListItemData(
-              '14. Ha realizado un control de colesterol en los últimos 5 años:',
-              _testLogic.getCheckCholText(dataTestList[0].chequeoColesterol)),
-          CustomListItemData('15. Estado actual de diabetes:',
+          CustomListItemData('14. Diagnóstico actual de diabetes:',
               _testLogic.getDiabetesText(dataTestList[0].diabetes)),
           CustomListItemData(
-              '16. Ha presentado un accidente cerebrovascular (acv):',
-              _testLogic.getAcvText(dataTestList[0].acv)),
-          CustomListItemData(
-              '17. Ha presentado una enfermedad coronaria o infarto de miocardio:',
-              _testLogic.getHeartText(dataTestList[0].enfermedadCardiaca)),
+              '15. Ha padecido de un ataque cardiaco o también llamado infarto de miocardio: ',
+              _testLogic.getHeartText(dataTestList[0].ataqueCardiaco)),
         ];
       });
     } catch (e) {
@@ -168,7 +162,10 @@ class _DetalleTestState extends State<DetalleTest> {
               borderRadius: BorderRadius.circular(20.0),
               child: Container(
                 color: Colors.white, // Color de fondo del contenedor
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 15.0,
+                  vertical: 15.0,
+                ),
                 child: Column(
                   // Envuelve los Text widgets dentro de una Column
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -187,7 +184,8 @@ class _DetalleTestState extends State<DetalleTest> {
                       child: Text(
                         resultado!,
                         style: TextStyle(
-                          color: resultado == 'Sin riesgo de hipertensión'
+                          color: resultado ==
+                                  'Bajo riesgo de desarrollar hipertensión arterial'
                               ? Colors.green
                               : resultado == 'Cargando...'
                                   ? GlobalColors.bgPanelDark2

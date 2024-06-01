@@ -7,8 +7,8 @@ class ResultLogic {
   /// Retorna 'Sin riesgo de hipertensión' si el valor es 0, de lo contrario, retorna 'Riesgo de hipertensión'.
   String getResultado(int resultadoValue) {
     return resultadoValue == 0
-        ? 'Sin riesgo de hipertensión'
-        : 'Riesgo de hipertensión';
+        ? 'Bajo riesgo de desarrollar hipertensión arterial'
+        : 'Alto riesgo de desarrollar hipertensión arterial';
   }
 
   /// Obtiene el texto del primer resultado en la lista de resultados.

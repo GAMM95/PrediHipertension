@@ -7,125 +7,48 @@ import '../Models/datatest.dart';
 class TestLogic {
   final MethodsAuth _methodsAuth = MethodsAuth();
 
-  // Future<Map<String, String>> construirBody({
-  //   required String edad,
-  //   required String genero,
-  //   required String imc,
-  //   required String saludGeneral,
-  //   required String saludMental,
-  //   required String saludFisica,
-  //   required String dificultadCaminar,
-  //   required String consumoFrutas,
-  //   required String consumoVerduras,
-  //   required String consumoCigarros,
-  //   required String consumoAlcohol,
-  //   required String actividadFisica,
-  //   required String colesterol,
-  //   required String chequeoColesterol,
-  //   required String acv,
-  //   required String diabetes,
-  //   required String enfermedadCardiaca,
-  // }) async {
-  //   int ageValue = int.tryParse(edad) ?? 0;
-  //   int ageCategory = _convertirEdadACategoria(edad);
-  //   int healthValue = _convertirSaludGeneralANumero(saludGeneral);
-  //   int diabetesValue = _convertirDiabetesANumero(diabetes);
-
-  //   Map<String, String> body = {
-  //     'Age': ageCategory.toString(),
-  //     'Sex': genero == 'Femenino' ? '0' : '1',
-  //     'BMI': imc,
-  //     'GenHlth': healthValue.toString(),
-  //     'MentHlth': saludMental,
-  //     'PhysHlth': saludFisica,
-  //     'DiffWalk': dificultadCaminar == 'No' ? '0' : '1',
-  //     'Fruits': consumoFrutas == 'No' ? '0' : '1',
-  //     'Veggies': consumoVerduras == 'No' ? '0' : '1',
-  //     'Smoker': consumoCigarros == 'No' ? '0' : '1',
-  //     'HvyAlcoholConsump': consumoAlcohol == 'No' ? '0' : '1',
-  //     'PhysActivity': actividadFisica == 'No' ? '0' : '1',
-  //     'HighChol': colesterol == 'No' ? '0' : '1',
-  //     'CholCheck': chequeoColesterol == 'No' ? '0' : '1',
-  //     'Diabetes': diabetesValue.toString(),
-  //     'Stroke': acv == 'No' ? '0' : '1',
-  //     'HeartDiseaseorAttack': enfermedadCardiaca == 'No' ? '0' : '1',
-  //   };
-
-  //   // Crear un objeto Datatest con los datos del formulario
-  //   Datatest datatest = Datatest(
-  //     edadIngresada: ageValue,
-  //     edadAgrupada: ageCategory,
-  //     sexo: genero == 'Femenino' ? 0 : 1,
-  //     imc: double.tryParse(imc) ?? 0.0,
-  //     saludGeneral: healthValue,
-  //     saludFisica: int.parse(saludFisica),
-  //     saludMental: int.parse(saludMental),
-  //     dificultadCaminar: dificultadCaminar == 'No' ? 0 : 1,
-  //     consumoFrutas: consumoFrutas == 'No' ? 0 : 1,
-  //     consumoVerduras: consumoVerduras == 'No' ? 0 : 1,
-  //     consumoCigarros: consumoCigarros == 'No' ? 0 : 1,
-  //     consumoAlcohol: consumoAlcohol == 'No' ? 0 : 1,
-  //     actividadFisica: actividadFisica == 'No' ? 0 : 1,
-  //     colesterol: colesterol == 'No' ? 0 : 1,
-  //     chequeoColesterol: chequeoColesterol == 'No' ? 0 : 1,
-  //     acv: acv == 'No' ? 0 : 1,
-  //     diabetes: diabetesValue,
-  //     enfermedadCardiaca: enfermedadCardiaca == 'No' ? 0 : 1,
-  //   );
-  //   await _methodsAuth.guardarTest(datatest: datatest);
-
-  //   return body;
-  // }
   Future<Map<String, String>> construirBody({
     required String edad,
     required String genero,
+    required String educacion,
     required String imc,
-    required String saludGeneral,
     required String saludMental,
-    required String saludFisica,
-    required String dificultadCaminar,
     required String consumoFrutas,
     required String consumoVerduras,
+    required String consumoSal,
     required String consumoCigarros,
     required String consumoAlcohol,
+    required String consumoAlcCompulsivo,
     required String actividadFisica,
     required String colesterol,
-    required String chequeoColesterol,
-    required String acv,
     required String diabetes,
-    required String enfermedadCardiaca,
+    required String ataqueCardiaco,
     required String diasSaludMental,
-    required String diasSaludFisica,
   }) async {
     int ageValue = int.tryParse(edad) ?? 0;
     int ageCategory = _convertirEdadACategoria(edad);
-    int healthValue = _convertirSaludGeneralANumero(saludGeneral);
+    int educacionValue = _convertirEducacionANumero(educacion);
+    int cigarrosValue = _convertirCigarrosANumero(consumoCigarros);
     int diabetesValue = _convertirDiabetesANumero(diabetes);
-
     int saludMentalValue =
         saludMental == 'Sí' ? int.tryParse(diasSaludMental) ?? 0 : 0;
-
-    int saludFisicaValue =
-        saludFisica == 'Sí' ? int.tryParse(diasSaludFisica) ?? 0 : 0;
 
     Map<String, String> body = {
       'Age': ageCategory.toString(),
       'Sex': genero == 'Femenino' ? '0' : '1',
+      'Education': educacionValue.toString(),
       'BMI': imc,
-      'GenHlth': healthValue.toString(),
       'MentHlth': saludMentalValue.toString(),
-      'PhysHlth': saludFisicaValue.toString(),
-      'DiffWalk': dificultadCaminar == 'No' ? '0' : '1',
       'Fruits': consumoFrutas == 'No' ? '0' : '1',
       'Veggies': consumoVerduras == 'No' ? '0' : '1',
-      'Smoker': consumoCigarros == 'No' ? '0' : '1',
-      'HvyAlcoholConsump': consumoAlcohol == 'No' ? '0' : '1',
+      'Salt': consumoSal == 'No' ? '0' : '1',
+      'Smoker': cigarrosValue.toString(),
+      'Alcohol': consumoAlcohol == 'No' ? '0' : '1',
+      'CompulAlc': consumoAlcCompulsivo == 'No' ? '0' : '1',
       'PhysActivity': actividadFisica == 'No' ? '0' : '1',
       'HighChol': colesterol == 'No' ? '0' : '1',
-      'CholCheck': chequeoColesterol == 'No' ? '0' : '1',
       'Diabetes': diabetesValue.toString(),
-      'Stroke': acv == 'No' ? '0' : '1',
-      'HeartDiseaseorAttack': enfermedadCardiaca == 'No' ? '0' : '1',
+      'HeartAttack': ataqueCardiaco == 'No' ? '0' : '1',
     };
 
     // Crear un objeto Datatest con los datos del formulario
@@ -133,22 +56,19 @@ class TestLogic {
       edadIngresada: ageValue,
       edadAgrupada: ageCategory,
       sexo: genero == 'Femenino' ? 0 : 1,
+      educacion: educacionValue,
       imc: double.tryParse(imc) ?? 0.0,
-      saludGeneral: healthValue,
-      // saludFisica: int.parse(saludFisica),
-      saludFisica: saludFisicaValue,
-      saludMental: saludMentalValue, // Aquí asignamos el valor correspondiente
-      dificultadCaminar: dificultadCaminar == 'No' ? 0 : 1,
+      saludMental: saludMentalValue,
       consumoFrutas: consumoFrutas == 'No' ? 0 : 1,
       consumoVerduras: consumoVerduras == 'No' ? 0 : 1,
-      consumoCigarros: consumoCigarros == 'No' ? 0 : 1,
+      consumoSal: consumoSal == 'No' ? 0 : 1,
+      consumoCigarros: cigarrosValue,
       consumoAlcohol: consumoAlcohol == 'No' ? 0 : 1,
-      actividadFisica: actividadFisica == 'No' ? 0 : 1,
+      consumoAlcCompulsivo: consumoAlcCompulsivo == 'No' ? 0 : 1,
+      actividadFisica: cigarrosValue,
       colesterol: colesterol == 'No' ? 0 : 1,
-      chequeoColesterol: chequeoColesterol == 'No' ? 0 : 1,
-      acv: acv == 'No' ? 0 : 1,
       diabetes: diabetesValue,
-      enfermedadCardiaca: enfermedadCardiaca == 'No' ? 0 : 1,
+      ataqueCardiaco: ataqueCardiaco == 'No' ? 0 : 1,
     );
     await _methodsAuth.guardarTest(datatest: datatest);
 
@@ -188,30 +108,68 @@ class TestLogic {
     }
   }
 
-  int _convertirSaludGeneralANumero(String saludGeneral) {
-    switch (saludGeneral) {
-      case 'Excelente':
+  int _convertirEducacionANumero(String educacion) {
+    switch (educacion) {
+      case 'Nunca asistió':
         return 1;
-      case 'Muy bueno':
+      case 'Educación inicial':
+        return 1;
+      case 'Primaria completa':
         return 2;
-      case 'Bueno':
+      case 'Secundaria incompleta':
         return 3;
-      case 'Regular':
+      case 'Secundaria completa':
         return 4;
-      case 'Deficiente':
+      case 'Estudios técnicos':
         return 5;
+      case 'Universitaria incompleta':
+        return 5;
+      case 'Universitaria completa':
+        return 6;
       default:
-        throw ArgumentError('El valor de salud general no es válido');
+        throw ArgumentError('El valor de educacion no es válido');
+    }
+  }
+
+  // int _convertirSaludGeneralANumero(String saludGeneral) {
+  //   switch (saludGeneral) {
+  //     case 'Excelente':
+  //       return 1;
+  //     case 'Muy bueno':
+  //       return 2;
+  //     case 'Bueno':
+  //       return 3;
+  //     case 'Regular':
+  //       return 4;
+  //     case 'Deficiente':
+  //       return 5;
+  //     default:
+  //       throw ArgumentError('El valor de salud general no es válido');
+  //   }
+  // }
+
+  int _convertirCigarrosANumero(String cigarros) {
+    switch (cigarros) {
+      case 'Fumo a diario':
+        return 1;
+      case 'Fumo ocasionalmente':
+        return 2;
+      case 'He dejado de fumar':
+        return 3;
+      case 'No fumo':
+        return 4;
+      default:
+        throw ArgumentError('El valor de consumo de cigarro no es válido');
     }
   }
 
   int _convertirDiabetesANumero(String diabetes) {
     switch (diabetes) {
-      case 'Sin diabetes':
+      case 'No tengo diagnóstico de diabetes':
         return 0;
-      case 'Prediabetes':
+      case 'Tengo diagnóstico de diabetes':
         return 1;
-      case 'Diabetes':
+      case 'No sé':
         return 2;
       default:
         throw ArgumentError('El valor de diabetes no es válido');
@@ -258,17 +216,25 @@ class TestLogic {
   String getEducationText(int educationValue) {
     switch (educationValue) {
       case 1:
-        return 'Nunca asistió o solo jardín';
+        if (educationValue == 1) {
+          return 'Nunca asistí al colegio';
+        } else {
+          return 'Solo asistí a la educación inicial';
+        }
       case 2:
-        return 'Primaria completa';
+        return 'Solo he completado la educación primaria';
       case 3:
-        return 'Secundaria incompleta';
+        return 'No he compleado la secundaria';
       case 4:
-        return 'Secundaria completa';
+        return 'Solo he logrado completar la educación secundaria';
       case 5:
-        return 'Educación técnica';
+        if (educationValue == 5) {
+          return 'He llevado estudios técnicos';
+        } else {
+          return 'No concluí la universidad';
+        }
       case 6:
-        return 'Universitaria';
+        return 'He logrado egresar de la universidad';
       default:
         return '';
     }
@@ -297,27 +263,6 @@ class TestLogic {
     }
   }
 
-  String getGeneralHealth(int healthValue) {
-    switch (healthValue) {
-      case 1:
-        return 'Excelente';
-      case 2:
-        return 'Muy bueno';
-      case 3:
-        return 'Bueno';
-      case 4:
-        return 'Regular';
-      case 5:
-        return 'Deficiente';
-      default:
-        return '';
-    }
-  }
-
-  String getDiffWalkText(int diffWalk) {
-    return diffWalk == 0 ? 'No' : 'Sí';
-  }
-
   String getFruitText(int fruit) {
     return fruit == 0 ? 'No' : 'Sí';
   }
@@ -326,12 +271,35 @@ class TestLogic {
     return veggies == 0 ? 'No' : 'Sí';
   }
 
+  String getSaltText(int salt) {
+    return salt == 0
+        ? 'Estoy excediendo en el consumo de sal'
+        : 'Estoy controlando y/o reduciendo el consumo de sal';
+  }
+
   String getSmokeText(int smoke) {
-    return smoke == 0 ? 'No' : 'Sí';
+    switch (smoke) {
+      case 1:
+        return 'Fumo a diario';
+      case 2:
+        return 'Fumo ocasionalmente';
+      case 3:
+        return 'He dejado de fumar';
+      case 4:
+        return 'No fumo';
+      default:
+        return '';
+    }
   }
 
   String getAlcoholText(int alcohol) {
-    return alcohol == 0 ? 'No' : 'Sí';
+    return alcohol == 0
+        ? 'No he consumido bebidas alcoholicas'
+        : 'Si he consumido bebidas alcoholicas';
+  }
+
+  String getCompulsiveAlcoholText(int compulsive) {
+    return compulsive == 0 ? 'No' : 'Sí';
   }
 
   String getPhysActivityText(int physActivity) {
@@ -339,31 +307,27 @@ class TestLogic {
   }
 
   String getCholesterolText(int chol) {
-    return chol == 0 ? 'No' : 'Sí';
-  }
-
-  String getCheckCholText(int checkChol) {
-    return checkChol == 0 ? 'No' : 'Sí';
+    return chol == 0
+        ? 'No tengo colesterol elevado en la sangre'
+        : 'Tengo colesterol elevado en la sangre';
   }
 
   String getDiabetesText(int diabetes) {
     switch (diabetes) {
       case 0:
-        return 'Sin diabetes';
+        return 'Soy un paciente sin diabetes';
       case 1:
-        return 'Prediabetes';
+        return 'Soy paciente diagnosticado con diabetes';
       case 2:
-        return 'Diabetes';
+        return 'No ha pasado diagnóstico';
       default:
         return '';
     }
   }
 
-  String getAcvText(int acv) {
-    return acv == 0 ? 'No' : 'Sí';
-  }
-
   String getHeartText(int heart) {
-    return heart == 0 ? 'No' : 'Sí';
+    return heart == 0
+        ? 'No he padecido ataques cardiacos'
+        : 'Sí he padecido ataques cardiacos';
   }
 }

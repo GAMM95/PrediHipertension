@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../Domain/Models/datatest.dart';
 import '../../Domain/Models/resultado.dart';
 
-
 /// Clase que proporciona métodos para la autenticación y la gestión de datos del usuario.
 class MethodsAuth {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -56,24 +55,22 @@ class MethodsAuth {
         // Guardar los datos del test dentro de la subcolección 'datatest'
         await newDocRef.set({
           'id': newDocRef.id, // Agregar el ID único al documento
-          'edadIngresada': datatest.edadIngresada,
+          'Edad ingresada': datatest.edadIngresada,
           'edadAgrupada': datatest.edadAgrupada,
           'genero': datatest.sexo,
+          'educacion': datatest.educacion,
           'imc': datatest.imc,
-          'saludGeneral': datatest.saludGeneral,
-          'saludFisica': datatest.saludFisica,
           'saludMental': datatest.saludMental,
-          'dificultadCaminar': datatest.dificultadCaminar,
           'consumoFrutas': datatest.consumoFrutas,
           'consumoVerduras': datatest.consumoVerduras,
+          'consumoSal': datatest.consumoSal,
           'consumoCigarros': datatest.consumoCigarros,
           'consumoAlcohol': datatest.consumoAlcohol,
+          'consumoAlcCompulsivo': datatest.consumoAlcCompulsivo,
           'actividadFisica': datatest.actividadFisica,
           'colesterol': datatest.colesterol,
-          'chequeoColesterol': datatest.chequeoColesterol,
-          'acv': datatest.acv,
           'diabetes': datatest.diabetes,
-          'enfermedadCardiaca': datatest.enfermedadCardiaca,
+          'ataqueCardiaco': datatest.ataqueCardiaco,
           'timestamp': Timestamp.now(),
         });
       }
@@ -83,7 +80,7 @@ class MethodsAuth {
     }
   }
 
-  /// Metodo para guardar el resultado de la evaluacion del test de Hipertension 
+  /// Metodo para guardar el resultado de la evaluacion del test de Hipertension
   Future<void> guardarResultadoPrediccion({
     required Resultado resultado,
   }) async {
@@ -172,45 +169,41 @@ class MethodsAuth {
 
         // Iterar sobre los documentos y obtener los datos del test
         for (var doc in querySnapshot.docs) {
-          int edadingresada = doc['edadIngresada'];
+          int edadingresada = doc['Edad ingresada'];
           int edadAgrupada = doc['edadAgrupada'];
           int genero = doc['genero'];
+          int educacion = doc['educacion'];
           double imc = doc['imc'];
-          int saludGeneral = doc['saludGeneral'];
-          int saludFisica = doc['saludFisica'];
           int saludMental = doc['saludMental'];
-          int dificultadCaminar = doc['dificultadCaminar'];
           int consumoFrutas = doc['consumoFrutas'];
           int consumoVerduras = doc['consumoVerduras'];
+          int consumoSal = doc['consumoSal'];
           int consumoCigarros = doc['consumoCigarros'];
           int consumoAlcohol = doc['consumoAlcohol'];
+          int consumoAlcCompulsivo = doc['consumoAlcCompulsivo'];
           int actividadFisica = doc['actividadFisica'];
           int colesterol = doc['colesterol'];
-          int chequeoColesterol = doc['chequeoColesterol'];
-          int acv = doc['acv'];
           int diabetes = doc['diabetes'];
-          int enfermedadCardiaca = doc['enfermedadCardiaca'];
+          int ataqueCardiaco = doc['ataqueCardiaco'];
 
           // Crear un objeto Datatest con los datos obtenidos
           Datatest dataTest = Datatest(
             edadIngresada: edadingresada,
             edadAgrupada: edadAgrupada,
             sexo: genero,
+            educacion: educacion,
             imc: imc,
-            saludGeneral: saludGeneral,
-            saludFisica: saludFisica,
             saludMental: saludMental,
-            dificultadCaminar: dificultadCaminar,
             consumoFrutas: consumoFrutas,
             consumoVerduras: consumoVerduras,
+            consumoSal: consumoSal,
             consumoCigarros: consumoCigarros,
             consumoAlcohol: consumoAlcohol,
+            consumoAlcCompulsivo: consumoAlcCompulsivo,
             actividadFisica: actividadFisica,
             colesterol: colesterol,
-            chequeoColesterol: chequeoColesterol,
-            acv: acv,
             diabetes: diabetes,
-            enfermedadCardiaca: enfermedadCardiaca,
+            ataqueCardiaco: ataqueCardiaco,
           );
           dataTestList.add(dataTest);
         }
@@ -250,7 +243,7 @@ class MethodsAuth {
     }
   }
 
-  /// Metodo para obtener los resultados de los test de hipertension 
+  /// Metodo para obtener los resultados de los test de hipertension
   Future<List<Resultado>> getResultadoPorTest(DateTime date) async {
     List<Resultado> resultList = [];
     try {
@@ -285,7 +278,7 @@ class MethodsAuth {
           }
         }
       }
-      return resultList; 
+      return resultList;
     } catch (e) {
       rethrow;
     }

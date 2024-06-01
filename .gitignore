@@ -49,4 +49,6 @@ linux/
 
 dataset/hypertension_model.pkl
 dataset/comparaciones del modelo.xlsx
+dataset/hypertension_model.csv
 dataset/x_test_data.csv
+dataset/2015.csv

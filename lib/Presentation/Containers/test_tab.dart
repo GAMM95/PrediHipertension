@@ -1,5 +1,4 @@
 // ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 
 import '../../Core/Services/function_api.dart';
@@ -22,26 +21,22 @@ class TestTab extends StatefulWidget {
 
 class _TestTabState extends State<TestTab> {
   String mentalHealthResponse = '';
-  String phisicalHealthResponse = '';
 
   /// Informacion personal
   TextEditingController ageController = TextEditingController();
   TextEditingController sexController = TextEditingController();
+  TextEditingController educationController = TextEditingController();
   TextEditingController bmiController = TextEditingController();
-  TextEditingController genhlthController = TextEditingController();
   TextEditingController menthlthController = TextEditingController();
   TextEditingController diasmenthlthController = TextEditingController();
-  TextEditingController physhlthController = TextEditingController();
-  TextEditingController diasphyshlthController = TextEditingController();
-  TextEditingController diffWalkController = TextEditingController();
   TextEditingController fruitController = TextEditingController();
   TextEditingController vegetableController = TextEditingController();
+  TextEditingController saltController = TextEditingController();
   TextEditingController smokeController = TextEditingController();
   TextEditingController drinkController = TextEditingController();
+  TextEditingController compulsiveDrinkController = TextEditingController();
   TextEditingController physactivityController = TextEditingController();
   TextEditingController toldCholController = TextEditingController();
-  TextEditingController checkCholController = TextEditingController();
-  TextEditingController strokeController = TextEditingController();
   TextEditingController diabetesController = TextEditingController();
   TextEditingController heartController = TextEditingController();
 
@@ -52,19 +47,17 @@ class _TestTabState extends State<TestTab> {
     super.initState();
     ageController.addListener(_validarFormulario);
     sexController.addListener(_validarFormulario);
+    educationController.addListener(_validarFormulario);
     bmiController.addListener(_validarFormulario);
-    genhlthController.addListener(_validarFormulario);
     menthlthController.addListener(_validarFormulario);
-    physhlthController.addListener(_validarFormulario);
-    diffWalkController.addListener(_validarFormulario);
     fruitController.addListener(_validarFormulario);
     vegetableController.addListener(_validarFormulario);
+    saltController.addListener(_validarFormulario);
     smokeController.addListener(_validarFormulario);
     drinkController.addListener(_validarFormulario);
+    compulsiveDrinkController.addListener(_validarFormulario);
     physactivityController.addListener(_validarFormulario);
     toldCholController.addListener(_validarFormulario);
-    checkCholController.addListener(_validarFormulario);
-    strokeController.addListener(_validarFormulario);
     diabetesController.addListener(_validarFormulario);
     heartController.addListener(_validarFormulario);
   }
@@ -72,19 +65,17 @@ class _TestTabState extends State<TestTab> {
   void _limpiarCampos() {
     ageController.clear();
     sexController.clear();
+    educationController.clear();
     bmiController.clear();
-    genhlthController.clear();
     menthlthController.clear();
-    physhlthController.clear();
-    diffWalkController.clear();
     fruitController.clear();
     vegetableController.clear();
+    saltController.clear();
     smokeController.clear();
     drinkController.clear();
+    compulsiveDrinkController.clear();
     physactivityController.clear();
     toldCholController.clear();
-    checkCholController.clear();
-    strokeController.clear();
     diabetesController.clear();
     heartController.clear();
   }
@@ -93,19 +84,17 @@ class _TestTabState extends State<TestTab> {
   void dispose() {
     ageController.dispose();
     sexController.dispose();
+    educationController.dispose();
     bmiController.dispose();
-    genhlthController.dispose();
     menthlthController.dispose();
-    physhlthController.dispose();
-    diffWalkController.dispose();
     fruitController.dispose();
     vegetableController.dispose();
+    saltController.dispose();
     smokeController.dispose();
     drinkController.dispose();
+    compulsiveDrinkController.dispose();
     physactivityController.dispose();
     toldCholController.dispose();
-    checkCholController.dispose();
-    strokeController.dispose();
     diabetesController.dispose();
     heartController.dispose();
     super.dispose();
@@ -114,20 +103,18 @@ class _TestTabState extends State<TestTab> {
   void _validarFormulario() {
     final bool isValid = ageController.text.isNotEmpty &&
         sexController.text.isNotEmpty &&
+        educationController.text.isNotEmpty &&
         bmiController.text.isNotEmpty &&
-        genhlthController.text.isNotEmpty &&
         menthlthController.text.isNotEmpty &&
-        physhlthController.text.isNotEmpty &&
-        diffWalkController.text.isNotEmpty &&
         fruitController.text.isNotEmpty &&
         vegetableController.text.isNotEmpty &&
+        saltController.text.isNotEmpty &&
         smokeController.text.isNotEmpty &&
         drinkController.text.isNotEmpty &&
+        compulsiveDrinkController.text.isNotEmpty &&
         physactivityController.text.isNotEmpty &&
         toldCholController.text.isNotEmpty &&
-        checkCholController.text.isNotEmpty &&
         diabetesController.text.isNotEmpty &&
-        strokeController.text.isNotEmpty &&
         heartController.text.isNotEmpty;
 
     setState(() {
@@ -151,7 +138,7 @@ class _TestTabState extends State<TestTab> {
                 children: [
                   /// Card Informacion Personal
                   CustomCard(
-                    title: 'Información personal',
+                    title: 'Datos demográficos',
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -194,6 +181,31 @@ class _TestTabState extends State<TestTab> {
                           defaultValue: sexController.text,
                           controller: sexController,
                         ),
+
+                        const SizedBox(height: 15.0),
+
+                        /// Nivel educativo logrado por el usuario
+                        Parragraph(
+                          parrafo:
+                              '3. ¿Cuál es el más alto nivel educativo logrado?',
+                          color: GlobalColors.textColor,
+                        ),
+                        const SizedBox(height: 5.0),
+                        CustomDropDown(
+                          hintText: 'Seleccione una opción',
+                          items: const [
+                            'No asistió',
+                            'Educación inicial',
+                            'Primaria completa',
+                            'Secundaria incompleta',
+                            'Secundaria completa',
+                            'Estudios técnicos',
+                            'Universitaria incompleta',
+                            'Universitaria completa',
+                          ],
+                          defaultValue: educationController.text,
+                          controller: educationController,
+                        ),
                       ],
                     ),
                   ),
@@ -209,7 +221,7 @@ class _TestTabState extends State<TestTab> {
                         /// Indice de Masa Corporal del usuario
                         Parragraph(
                           parrafo:
-                              '3. ¿Cuál es su Índice de Masa Corporal (IMC)?',
+                              '4. ¿Cuál es su Índice de Masa Corporal (IMC)?',
                           color: GlobalColors.textColor,
                         ),
                         const SizedBox(height: 5.0),
@@ -232,27 +244,6 @@ class _TestTabState extends State<TestTab> {
                               ),
                             ),
                           ],
-                        ),
-
-                        const SizedBox(height: 15.0),
-
-                        /// Estado general percibido de salud del usuario
-                        Parragraph(
-                          parrafo: '4. Diría usted que en general su salud es:',
-                          color: GlobalColors.textColor,
-                        ),
-                        const SizedBox(height: 5.0),
-                        CustomDropDown(
-                          hintText: 'Seleccione una opción',
-                          items: const [
-                            'Excelente',
-                            'Muy bueno',
-                            'Bueno',
-                            'Regular',
-                            'Deficiente',
-                          ],
-                          defaultValue: genhlthController.text,
-                          controller: genhlthController,
                         ),
 
                         const SizedBox(height: 15.0),
@@ -282,7 +273,7 @@ class _TestTabState extends State<TestTab> {
                         if (mentalHealthResponse == 'Sí') ...[
                           Parragraph(
                             parrafo:
-                                '** Si su respuesta fue Sí, indique cuántos días ha presentado los problemas anteriores:',
+                                '** Si su respuesta fue Sí, indique cuántos días aproximadamente ha presentado los problemas anteriores:',
                             color: GlobalColors.textColor,
                           ),
                           const SizedBox(height: 5.0),
@@ -307,146 +298,10 @@ class _TestTabState extends State<TestTab> {
                           const SizedBox(height: 15.0),
                         ],
 
-                        /// Salud fisica percibida en los ultimos 30 dias
-                        Parragraph(
-                          parrafo:
-                              '6. En el último mes, ¿has padecido de enfermedades o lesiones físicas?',
-                          color: GlobalColors.textColor,
-                        ),
-                        const SizedBox(height: 5.0),
-                        CustomDropDown(
-                          hintText: 'Seleccione una opción',
-                          items: const ['Sí', 'No'],
-                          defaultValue: physhlthController.text,
-                          controller: physhlthController,
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              phisicalHealthResponse = newValue ?? '';
-                            });
-                          },
-                        ),
-
-                        const SizedBox(height: 15.0),
-
-                        // Segundo párrafo condicional basado en el valor seleccionado en la pregunta 5
-                        if (phisicalHealthResponse == 'Sí') ...[
-                          Parragraph(
-                            parrafo:
-                                '** Si su respuesta fue Sí, indique cuántos días ha presentado los problemas anteriores:',
-                            color: GlobalColors.textColor,
-                          ),
-                          const SizedBox(height: 5.0),
-                          CustomNumberField(
-                            hintText: 'Ingrese la cantidad de días',
-                            enabled: true,
-                            showNextButton: true,
-                            cifras: 2,
-                            controller: diasphyshlthController,
-                            validator: (String? value) {
-                              if (value == null || value.isEmpty) {
-                                return '';
-                              }
-                              int dias = int.tryParse(value) ?? 0;
-                              if (dias < 1 || dias > 30) {
-                                return 'El valor debe ser entre 1 y 30 días';
-                              }
-                              return null;
-                            },
-                          ),
-                          const SizedBox(height: 15.0),
-                        ],
-
-                        /// Dificultad para caminar o subir escaleras
-                        Parragraph(
-                          parrafo:
-                              '7. ¿Presenta dificultades para caminar o subir escaleras?',
-                          color: GlobalColors.textColor,
-                        ),
-                        const SizedBox(height: 5.0),
-                        CustomDropDown(
-                          hintText: 'Seleccione una opción',
-                          items: const ['Sí', 'No'],
-                          defaultValue: diffWalkController.text,
-                          controller: diffWalkController,
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  const SizedBox(height: 20.0),
-
-                  /// Card Hábitos y Estilos de vida
-                  CustomCard(
-                    title: 'Hábitos y Estilos de Vida',
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        /// Consumo de frutas
-                        Parragraph(
-                          parrafo: '8. ¿Consume fruta al menos una vez al día?',
-                          color: GlobalColors.textColor,
-                        ),
-                        const SizedBox(height: 5.0),
-                        CustomDropDown(
-                          hintText: 'Seleccione una opción',
-                          items: const ['Sí', 'No'],
-                          defaultValue: fruitController.text,
-                          controller: fruitController,
-                        ),
-
-                        const SizedBox(height: 15.0),
-
-                        /// Consumo de vegetales
-                        Parragraph(
-                          parrafo:
-                              '9. ¿Consume verduras al menos una vez al día?',
-                          color: GlobalColors.textColor,
-                        ),
-                        const SizedBox(height: 5.0),
-                        CustomDropDown(
-                          hintText: 'Seleccione una opción',
-                          items: const ['Sí', 'No'],
-                          defaultValue: vegetableController.text,
-                          controller: vegetableController,
-                        ),
-
-                        const SizedBox(height: 15.0),
-
-                        /// Consumo de cigarros
-                        Parragraph(
-                          parrafo: '10. ¿Has fumado al menos 100 cigarrillos?',
-                          color: GlobalColors.textColor,
-                        ),
-                        const SizedBox(height: 5.0),
-                        CustomDropDown(
-                          hintText: 'Seleccione una opción',
-                          items: const ['Sí', 'No'],
-                          defaultValue: smokeController.text,
-                          controller: smokeController,
-                        ),
-
-                        const SizedBox(height: 15.0),
-
-                        /// Consumo de alcohol
-                        Parragraph(
-                          parrafo:
-                              '11. ¿Consume bebidas alcoholicas actualmente?',
-                          color: GlobalColors.textColor,
-                        ),
-                        const SizedBox(height: 5.0),
-                        CustomDropDown(
-                          hintText: 'Seleccione una opción',
-                          items: const ['Sí', 'No'],
-                          defaultValue: drinkController.text,
-                          controller: drinkController,
-                        ),
-
-                        const SizedBox(height: 15.0),
-
                         /// Actividad fisica del usuario
                         Parragraph(
                           parrafo:
-                              '12.  ¿Sueles hacer al menos 30 minutos de actividad física en tu trabajo o en tu tiempo libre de forma regular?',
+                              '6.  ¿Sueles hacer al menos 30 minutos de actividad física en tu trabajo o en tu tiempo libre de forma regular?',
                           color: GlobalColors.textColor,
                         ),
                         const SizedBox(height: 5.0),
@@ -464,9 +319,131 @@ class _TestTabState extends State<TestTab> {
 
                   const SizedBox(height: 20.0),
 
+                  /// Card Hábitos Alimenticios
+                  CustomCard(
+                    title: 'Hábitos Alimenticios',
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        /// Consumo de frutas
+                        Parragraph(
+                          parrafo: '7. ¿Consume fruta al menos una vez al día?',
+                          color: GlobalColors.textColor,
+                        ),
+                        const SizedBox(height: 5.0),
+                        CustomDropDown(
+                          hintText: 'Seleccione una opción',
+                          items: const ['Sí', 'No'],
+                          defaultValue: fruitController.text,
+                          controller: fruitController,
+                        ),
+
+                        const SizedBox(height: 15.0),
+
+                        /// Consumo de vegetales
+                        Parragraph(
+                          parrafo:
+                              '8. ¿Consume verduras al menos una vez al día?',
+                          color: GlobalColors.textColor,
+                        ),
+                        const SizedBox(height: 5.0),
+                        CustomDropDown(
+                          hintText: 'Seleccione una opción',
+                          items: const ['Sí', 'No'],
+                          defaultValue: vegetableController.text,
+                          controller: vegetableController,
+                        ),
+
+                        const SizedBox(height: 15.0),
+
+                        /// Consumo de sal
+                        Parragraph(
+                          parrafo:
+                              '9. ¿Esta usted actualmente controlando o reduciendo su consumo de sodio o sal?',
+                          color: GlobalColors.textColor,
+                        ),
+                        const SizedBox(height: 5.0),
+                        CustomDropDown(
+                          hintText: 'Seleccione una opción',
+                          items: const ['Sí', 'No'],
+                          defaultValue: saltController.text,
+                          controller: saltController,
+                        ),
+
+                        const SizedBox(height: 15.0),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(height: 20.0),
+
+                  /// Card Hábitos y Estilos de vida
+                  CustomCard(
+                    title: 'Hábitos de Estilos de Vida',
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        /// Consumo de cigarros
+                        Parragraph(
+                          parrafo:
+                              '10. ¿Cual de las siguientes opciones describe su hábito de fumar?',
+                          color: GlobalColors.textColor,
+                        ),
+                        const SizedBox(height: 5.0),
+                        CustomDropDown(
+                          hintText: 'Seleccione una opción',
+                          // items: const ['Sí', 'No'],
+                          items: const [
+                            'Fumo a diario',
+                            'Fumo ocasionalmente',
+                            'He dejado de fumar',
+                            'No fumo',
+                          ],
+                          defaultValue: smokeController.text,
+                          controller: smokeController,
+                        ),
+
+                        const SizedBox(height: 15.0),
+
+                        /// Consumo de alcohol
+                        Parragraph(
+                          parrafo:
+                              '11. ¿Ha consumido al menos una bebida alcoholica en los ultimos 30 días?',
+                          color: GlobalColors.textColor,
+                        ),
+                        const SizedBox(height: 5.0),
+                        CustomDropDown(
+                          hintText: 'Seleccione una opción',
+                          items: const ['Sí', 'No'],
+                          defaultValue: drinkController.text,
+                          controller: drinkController,
+                        ),
+
+                        const SizedBox(height: 15.0),
+
+                        /// Consumo de alcohol
+                        Parragraph(
+                          parrafo: '12. ¿Te consideras un bebedor compulsivo?',
+                          color: GlobalColors.textColor,
+                        ),
+                        const SizedBox(height: 5.0),
+                        CustomDropDown(
+                          hintText: 'Seleccione una opción',
+                          items: const ['Sí', 'No'],
+                          defaultValue: compulsiveDrinkController.text,
+                          controller: compulsiveDrinkController,
+                        ),
+
+                        const SizedBox(height: 15.0),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(height: 20.0),
+
                   /// Card Historial Médico
                   CustomCard(
-                    title: 'Historial Médico',
+                    title: 'Diagnósticos Médicos',
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -486,34 +463,19 @@ class _TestTabState extends State<TestTab> {
 
                         const SizedBox(height: 15.0),
 
-                        /// Control de colesterol en los últimos cinco años
-                        Parragraph(
-                          parrafo:
-                              '14. ¿Has hecho un examen para revisar tu nivel de colesterol en sangre en los últimos cinco años?',
-                          color: GlobalColors.textColor,
-                        ),
-                        const SizedBox(height: 5.0),
-                        CustomDropDown(
-                          hintText: 'Seleccione una opción',
-                          items: const ['Sí', 'No'],
-                          defaultValue: checkCholController.text,
-                          controller: checkCholController,
-                        ),
-
-                        const SizedBox(height: 15.0),
-
                         /// Paciente Diabetico
                         Parragraph(
-                          parrafo: '15. ¿Tienes diagnóstico de diabetes?',
+                          parrafo:
+                              '14. ¿Cuál de las siguientes opciones describe mejor su diagnóstico en relación con la diabetes?',
                           color: GlobalColors.textColor,
                         ),
                         const SizedBox(height: 5.0),
                         CustomDropDown(
                           hintText: 'Seleccione una opción',
                           items: const [
-                            'Sin diabetes',
-                            'Prediabetes',
-                            'Diabetes',
+                            'No tengo diagnóstico de diabetes',
+                            'Tengo diagnóstico de diabetes',
+                            'No sé',
                           ],
                           defaultValue: diabetesController.text,
                           controller: diabetesController,
@@ -523,22 +485,7 @@ class _TestTabState extends State<TestTab> {
 
                         Parragraph(
                           parrafo:
-                              '16. ¿Alguna vez has experimentado síntomas repentinos como debilidad, dificultad para hablar o pérdida de visión que afectaron tu capacidad para funcionar normalmente?',
-                          color: GlobalColors.textColor,
-                        ),
-                        const SizedBox(height: 5.0),
-                        CustomDropDown(
-                          hintText: 'Seleccione una opción',
-                          items: const ['Sí', 'No'],
-                          defaultValue: strokeController.text,
-                          controller: strokeController,
-                        ),
-
-                        const SizedBox(height: 15.0),
-
-                        Parragraph(
-                          parrafo:
-                              '17. ¿Alguna vez has tenido problemas de salud relacionados con tu corazón?"',
+                              '15. ¿Alguna vez ha padecido de un ataque cardiaco o también llamado infarto de miocardio?',
                           color: GlobalColors.textColor,
                         ),
                         const SizedBox(height: 5.0),
@@ -596,29 +543,32 @@ class _TestTabState extends State<TestTab> {
 
     String diasSaludMentalValue =
         mentalHealthResponse == 'Sí' ? diasmenthlthController.text : '0';
-    String diasSaludFisicaValue =
-        phisicalHealthResponse == 'Sí' ? diasphyshlthController.text : '0';
+    // String diasSaludFisicaValue =
+    //     phisicalHealthResponse == 'Sí' ? diasphyshlthController.text : '0';
 
     body = await testLogic.construirBody(
       edad: ageController.text,
       genero: sexController.text,
+      educacion: educationController.text,
       imc: bmiController.text,
-      saludGeneral: genhlthController.text,
+      consumoSal: saltController.text,
+      // saludGeneral: genhlthController.text,
       saludMental: menthlthController.text,
-      saludFisica: physhlthController.text,
-      dificultadCaminar: diffWalkController.text,
+      // saludFisica: physhlthController.text,
+      // dificultadCaminar: diffWalkController.text,
       consumoFrutas: fruitController.text,
       consumoVerduras: vegetableController.text,
       consumoCigarros: smokeController.text,
       consumoAlcohol: drinkController.text,
+      consumoAlcCompulsivo: compulsiveDrinkController.text,
       actividadFisica: physactivityController.text,
       colesterol: toldCholController.text,
-      chequeoColesterol: checkCholController.text,
-      acv: strokeController.text,
+      // chequeoColesterol: checkCholController.text,
+      // acv: strokeController.text,
       diabetes: diabetesController.text,
-      enfermedadCardiaca: heartController.text,
+      ataqueCardiaco: heartController.text,
       diasSaludMental: diasSaludMentalValue,
-      diasSaludFisica: diasSaludFisicaValue,
+      // diasSaludFisica: diasSaludFisicaValue,
     );
 
     // Mostrar el diálogo de carga antes de realizar la solicitud HTTP

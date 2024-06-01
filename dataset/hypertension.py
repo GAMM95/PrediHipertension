@@ -31,24 +31,22 @@ def predict():
         # Obtener los datos de la solicitud GET
         Age = request.args.get('Age')
         Sex = request.args.get('Sex')
+        Education = request.args.get('Education')
         BMI = request.args.get('BMI')
-        GenHlth = request.args.get('GenHlth')
         MentHlth = request.args.get('MentHlth')  
-        PhysHlth = request.args.get('PhysHlth')
-        DiffWalk = request.args.get('DiffWalk')
         Fruits = request.args.get('Fruits')
         Veggies = request.args.get('Veggies')
+        Salt = request.args.get('Salt')
         Smoker = request.args.get('Smoker')
-        HvyAlcoholConsump = request.args.get('HvyAlcoholConsump')
+        Alcohol = request.args.get('Alcohol')
+        CompulAlc = request.args.get('CompulAlc')
         PhysActivity = request.args.get('PhysActivity')
         HighChol = request.args.get('HighChol')
-        CholCheck = request.args.get('CholCheck')
         Diabetes = request.args.get('Diabetes')
-        Stroke = request.args.get('Stroke')
-        HeartDiseaseorAttack = request.args.get('HeartDiseaseorAttack')
+        HeartAttack = request.args.get('HeartAttack')
         
         # Convertir los datos a un formato adecuado para la predicción
-        input_query = np.array([[Age, Sex, BMI, GenHlth, MentHlth, PhysHlth, DiffWalk, Fruits, Veggies, Smoker, HvyAlcoholConsump, PhysActivity, HighChol, CholCheck, Diabetes, Stroke, HeartDiseaseorAttack]])
+        input_query = np.array([[Age, Sex, Education, BMI, MentHlth, Fruits, Veggies, Salt, Smoker, Alcohol, CompulAlc, PhysActivity, HighChol, Diabetes, HeartAttack]])
         
         # Realizar la predicción
         result = model.predict(input_query)[0]
@@ -59,24 +57,22 @@ def predict():
         # Obtener los datos de la solicitud POST
         Age = request.form.get('Age')
         Sex = request.form.get('Sex')
+        Education = request.form.get('Education')
         BMI = request.form.get('BMI')
-        GenHlth = request.form.get('GenHlth')
         MentHlth = request.form.get('MentHlth')  
-        PhysHlth = request.form.get('PhysHlth')
-        DiffWalk = request.form.get('DiffWalk')
         Fruits = request.form.get('Fruits')
         Veggies = request.form.get('Veggies')
+        Salt = request.form.get('Salt')
         Smoker = request.form.get('Smoker')
-        HvyAlcoholConsump = request.form.get('HvyAlcoholConsump')
+        Alcohol = request.form.get('Alcohol')
+        CompulAlc = request.form.get('CompulAlc')
         PhysActivity = request.form.get('PhysActivity')
         HighChol = request.form.get('HighChol')
-        CholCheck = request.form.get('CholCheck')
         Diabetes = request.form.get('Diabetes')
-        Stroke = request.form.get('Stroke')
-        HeartDiseaseorAttack = request.form.get('HeartDiseaseorAttack')
+        HeartAttack = request.form.get('HeartAttack')
         
         # Convertir los datos a un formato adecuado para la predicción
-        input_query = np.array([[Age, Sex, BMI, GenHlth, MentHlth, PhysHlth, DiffWalk, Fruits, Veggies, Smoker, HvyAlcoholConsump, PhysActivity, HighChol, CholCheck, Diabetes, Stroke, HeartDiseaseorAttack]])
+        input_query = np.array([[Age, Sex, Education, BMI, MentHlth, Fruits, Veggies, Salt, Smoker, Alcohol, CompulAlc, PhysActivity, HighChol, Diabetes, HeartAttack]])
 
         # Realizar la predicción
         result = model.predict(input_query)[0]
