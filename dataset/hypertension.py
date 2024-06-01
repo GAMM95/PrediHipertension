@@ -4,7 +4,7 @@ import numpy as np
 import os
 
 # Ruta al archivo del modelo entrenado
-model_file = 'D:/PrediHipertension/dataset/hypertension_model.pkl'
+model_file = 'D:/PrediHipertension/dataset/hipertension_model.pkl'
 
 # Cargar el modelo desde el archivo
 with open(model_file, 'rb') as file:
