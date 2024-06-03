@@ -86,7 +86,7 @@ class _CalculadoraIMCState extends State<CalculadoraIMC> {
                     CustomNumberFieldDark(
                       hintText: 'Ingrese su peso en kg',
                       enabled: true,
-                      cifras: 5,
+                      cifras: 4,
                       label: const Text('Peso (kg)'),
                       validator: 'Ingrese su peso',
                       controller: pesoController,
@@ -115,7 +115,8 @@ class _CalculadoraIMCState extends State<CalculadoraIMC> {
                             if (peso > 0 && altura > 0) {
                               final imc = peso / (altura * altura);
                               resultadoController.text = imc.toStringAsFixed(2);
-                              String composicion = ComposicionCorporal.obtenerComposicion(imc);
+                              String composicion =
+                                  ComposicionCorporal.obtenerComposicion(imc);
 
                               // Mostrar la composición corporal en el resultado
                               resultadoController.text += '\n$composicion';
@@ -126,9 +127,11 @@ class _CalculadoraIMCState extends State<CalculadoraIMC> {
                                   textColor = GlobalColors.pesoNormal;
                                 } else if (composicion == 'Sobrepeso') {
                                   textColor = GlobalColors.sobrepeso;
-                                } else if (composicion == 'Obesidad Grado I o moderada') {
+                                } else if (composicion ==
+                                    'Obesidad Grado I o moderada') {
                                   textColor = GlobalColors.obeso1;
-                                } else if (composicion == 'Obesidad Grado II o severa') {
+                                } else if (composicion ==
+                                    'Obesidad Grado II o severa') {
                                   textColor = GlobalColors.obeso2;
                                 } else {
                                   textColor = GlobalColors.obeso3;

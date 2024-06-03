@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../Screens/image_screen.dart';
+// import '../Screens/image_screen.dart';
 import '../Widget/custom_numberfielddark.dart';
 
 class CalculoIMC {
@@ -45,7 +45,7 @@ class CalculoIMC {
                 CustomNumberFieldDark(
                   hintText: 'Ingrese su peso en kg',
                   enabled: true,
-                  cifras: 5,
+                  cifras: 4,
                   label: const Text('Peso (kg)'),
                   validator: 'Ingrese su peso',
                   controller: pesoController,
@@ -77,25 +77,25 @@ class CalculoIMC {
                   child: const Text('Calcular'),
                 ),
 
-                /// Imagen Talla - Peso - IMC
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const ImageViewer(
-                            imagePath: 'assets/images/imc.png'),
-                      ),
-                    );
-                  },
-                  child: Center(
-                    child: InteractiveViewer(
-                      // maxScale: 5.0,
-                      // minScale: 1.0,
-                      child: Image.asset('assets/images/imc.png'),
-                    ),
-                  ),
-                ),
+                // /// Imagen Talla - Peso - IMC
+                // GestureDetector(
+                //   onTap: () {
+                //     Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //         builder: (context) => const ImageViewer(
+                //             imagePath: 'assets/images/imc.png'),
+                //       ),
+                //     );
+                //   },
+                //   child: Center(
+                //     child: InteractiveViewer(
+                //       // maxScale: 5.0,
+                //       // minScale: 1.0,
+                //       child: Image.asset('assets/images/imc.png'),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),

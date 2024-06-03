@@ -65,7 +65,7 @@ class TestLogic {
       consumoCigarros: cigarrosValue,
       consumoAlcohol: consumoAlcohol == 'No' ? 0 : 1,
       consumoAlcCompulsivo: consumoAlcCompulsivo == 'No' ? 0 : 1,
-      actividadFisica: cigarrosValue,
+      actividadFisica: actividadFisica == 'No' ? 0 : 1,
       colesterol: colesterol == 'No' ? 0 : 1,
       diabetes: diabetesValue,
       ataqueCardiaco: ataqueCardiaco == 'No' ? 0 : 1,
@@ -110,7 +110,7 @@ class TestLogic {
 
   int _convertirEducacionANumero(String educacion) {
     switch (educacion) {
-      case 'Nunca asistió':
+      case 'Nunca tengo':
         return 1;
       case 'Educación inicial':
         return 1;
@@ -315,11 +315,11 @@ class TestLogic {
   String getDiabetesText(int diabetes) {
     switch (diabetes) {
       case 0:
-        return 'Soy un paciente sin diabetes';
+        return 'No me han diagnosticado diabetes';
       case 1:
-        return 'Soy paciente diagnosticado con diabetes';
+        return 'Me han diagnosticado diabetes';
       case 2:
-        return 'No ha pasado diagnóstico';
+        return 'No he pasado un diagnóstico';
       default:
         return '';
     }

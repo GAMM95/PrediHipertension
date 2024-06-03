@@ -257,10 +257,10 @@ class CustomDialogs {
     String message;
     if (hypertension == 0) {
       message =
-          'Usted es un paciente con bajo riesgo de desarrollar hipertensión arterial.';
+          '¡Buenas noticias! Usted tiene un bajo riesgo de desarrollar hipertensión arterial. Continúe manteniendo sus hábitos saludables para preservar su bienestar.';
     } else if (hypertension == 1) {
       message =
-          '¡A tomar precauciones! Usted es un paciente con alto riesgo a desarrollar hipertensión arterial.';
+          '¡A tomar precauciones! Usted es un paciente con ALTO RIESGO de desarrollar hipertensión arterial. Le recomendamos encarecidamente que visite a su médico lo antes posible para recibir una evaluación y orientación adecuadas.';
     } else {
       message = 'No se pudo determinar el resultado.';
     }

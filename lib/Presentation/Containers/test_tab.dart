@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../Core/Services/function_api.dart';
 import '../../Core/Theme/global_colors.dart';
 import '../../Domain/Logic/testlogic.dart';
+import '../Utilities/advertencia_test.dart';
 import '../Utilities/custom_dialogs.dart';
 import '../Utilities/dialog_calcimc.dart';
 import '../Widget/custom_card.dart';
@@ -21,6 +22,8 @@ class TestTab extends StatefulWidget {
 
 class _TestTabState extends State<TestTab> {
   String mentalHealthResponse = '';
+  String genderSelection = '';
+  String alcoholQuestion = '12. ¿Te consideras un bebedor compulsivo?';
 
   /// Informacion personal
   TextEditingController ageController = TextEditingController();
@@ -41,6 +44,7 @@ class _TestTabState extends State<TestTab> {
   TextEditingController heartController = TextEditingController();
 
   bool isButtonActive = false;
+  bool _dialogShown = false;
 
   @override
   void initState() {
@@ -122,8 +126,30 @@ class _TestTabState extends State<TestTab> {
     });
   }
 
+  void updateAlcoholQuestion() {
+    // Lógica para determinar qué pregunta de alcohol mostrar basada en las respuestas anteriores
+    if (genderSelection == 'Masculino') {
+      alcoholQuestion =
+          '12. ¿Has consumido cinco o más bebidas alcohólicas en una sola ocasión?';
+    } else if (genderSelection == 'Femenino') {
+      alcoholQuestion =
+          '12. ¿Has consumido cuatro o más bebidas alcohólicas en una sola ocasión?';
+    } else {
+      // Género no seleccionado, mostrar una pregunta genérica
+      alcoholQuestion = '12. ¿Te consideras un bebedor compulsivo?';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    // Mostrar el diálogo de advertencia antes de mostrar la pantalla TestTab
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!_dialogShown) {
+        AdvertenciaTest.mostrar(context);
+        _dialogShown = true; // Marcar que el diálogo ha sido mostrado
+      }
+    });
+
     return Column(
       children: [
         const TituloTab(titulo: 'Test de Hipertensión Arterial'),
@@ -169,6 +195,20 @@ class _TestTabState extends State<TestTab> {
 
                         const SizedBox(height: 15.0),
 
+                        // /// Género del usuario
+                        // Parragraph(
+                        //   parrafo: '2. Seleccione su género',
+                        //   color: GlobalColors.textColor,
+                        // ),
+                        // const SizedBox(height: 5.0),
+                        // CustomDropDown(
+                        //   hintText: 'Seleccione una opción',
+                        //   items: const ['Masculino', 'Femenino'],
+                        //   defaultValue: sexController.text,
+                        //   controller: sexController,
+                        //
+                        // ),
+
                         /// Género del usuario
                         Parragraph(
                           parrafo: '2. Seleccione su género',
@@ -180,6 +220,14 @@ class _TestTabState extends State<TestTab> {
                           items: const ['Masculino', 'Femenino'],
                           defaultValue: sexController.text,
                           controller: sexController,
+                          onChanged: (String? newValue) {
+                            if (newValue != null) {
+                              setState(() {
+                                genderSelection = newValue;
+                                updateAlcoholQuestion(); // Actualizar la pregunta sobre alcohol cuando cambie el género seleccionado
+                              });
+                            }
+                          },
                         ),
 
                         const SizedBox(height: 15.0),
@@ -187,14 +235,14 @@ class _TestTabState extends State<TestTab> {
                         /// Nivel educativo logrado por el usuario
                         Parragraph(
                           parrafo:
-                              '3. ¿Cuál es el más alto nivel educativo logrado?',
+                              '3. ¿Cuál es el nivel educativo más alto que has alcanzado?',
                           color: GlobalColors.textColor,
                         ),
                         const SizedBox(height: 5.0),
                         CustomDropDown(
                           hintText: 'Seleccione una opción',
                           items: const [
-                            'No asistió',
+                            'No tengo',
                             'Educación inicial',
                             'Primaria completa',
                             'Secundaria incompleta',
@@ -227,20 +275,20 @@ class _TestTabState extends State<TestTab> {
                         const SizedBox(height: 5.0),
                         Row(
                           children: [
-                            Expanded(
-                              child: CustomNumberField(
-                                hintText: 'Calcule o ingrese su IMC',
-                                enabled: true,
-                                cifras: 5,
-                                controller: bmiController,
-                              ),
-                            ),
                             IconButton(
                               onPressed: _calcularIMCDialog,
                               icon: Icon(
                                 Icons.calculate,
                                 color: GlobalColors.hintText,
                                 size: 50.0,
+                              ),
+                            ),
+                            Expanded(
+                              child: CustomNumberField(
+                                hintText: 'Calcule o ingrese su IMC',
+                                enabled: true,
+                                cifras: 5,
+                                controller: bmiController,
                               ),
                             ),
                           ],
@@ -301,7 +349,7 @@ class _TestTabState extends State<TestTab> {
                         /// Actividad fisica del usuario
                         Parragraph(
                           parrafo:
-                              '6.  ¿Sueles hacer al menos 30 minutos de actividad física en tu trabajo o en tu tiempo libre de forma regular?',
+                              '6.  ¿Sueles hacer al menos 30 minutos diarios de actividad física?',
                           color: GlobalColors.textColor,
                         ),
                         const SizedBox(height: 5.0),
@@ -359,7 +407,7 @@ class _TestTabState extends State<TestTab> {
                         /// Consumo de sal
                         Parragraph(
                           parrafo:
-                              '9. ¿Esta usted actualmente controlando o reduciendo su consumo de sodio o sal?',
+                              '9. ¿Esta usted actualmente controlando o reduciendo su consumo de sal?',
                           color: GlobalColors.textColor,
                         ),
                         const SizedBox(height: 5.0),
@@ -422,18 +470,28 @@ class _TestTabState extends State<TestTab> {
                         const SizedBox(height: 15.0),
 
                         /// Consumo de alcohol
+                        // Parragraph(
+                        //   parrafo: '12. ¿Te consideras un bebedor compulsivo?',
+                        //   color: GlobalColors.textColor,
+                        // ),
+                        // const SizedBox(height: 5.0),
+                        // CustomDropDown(
+                        //   hintText: 'Seleccione una opción',
+                        //   items: const ['Sí', 'No'],
+                        //   defaultValue: compulsiveDrinkController.text,
+                        //   controller: compulsiveDrinkController,
+                        // ),
+
                         Parragraph(
-                          parrafo: '12. ¿Te consideras un bebedor compulsivo?',
+                          parrafo: alcoholQuestion,
                           color: GlobalColors.textColor,
                         ),
                         const SizedBox(height: 5.0),
                         CustomDropDown(
                           hintText: 'Seleccione una opción',
-                          items: const ['Sí', 'No'],
-                          defaultValue: compulsiveDrinkController.text,
+                          items: const ['Sí', 'No'], // Opciones por defecto
                           controller: compulsiveDrinkController,
                         ),
-
                         const SizedBox(height: 15.0),
                       ],
                     ),
@@ -543,8 +601,6 @@ class _TestTabState extends State<TestTab> {
 
     String diasSaludMentalValue =
         mentalHealthResponse == 'Sí' ? diasmenthlthController.text : '0';
-    // String diasSaludFisicaValue =
-    //     phisicalHealthResponse == 'Sí' ? diasphyshlthController.text : '0';
 
     body = await testLogic.construirBody(
       edad: ageController.text,
@@ -552,10 +608,7 @@ class _TestTabState extends State<TestTab> {
       educacion: educationController.text,
       imc: bmiController.text,
       consumoSal: saltController.text,
-      // saludGeneral: genhlthController.text,
       saludMental: menthlthController.text,
-      // saludFisica: physhlthController.text,
-      // dificultadCaminar: diffWalkController.text,
       consumoFrutas: fruitController.text,
       consumoVerduras: vegetableController.text,
       consumoCigarros: smokeController.text,
@@ -563,12 +616,9 @@ class _TestTabState extends State<TestTab> {
       consumoAlcCompulsivo: compulsiveDrinkController.text,
       actividadFisica: physactivityController.text,
       colesterol: toldCholController.text,
-      // chequeoColesterol: checkCholController.text,
-      // acv: strokeController.text,
       diabetes: diabetesController.text,
       ataqueCardiaco: heartController.text,
       diasSaludMental: diasSaludMentalValue,
-      // diasSaludFisica: diasSaludFisicaValue,
     );
 
     // Mostrar el diálogo de carga antes de realizar la solicitud HTTP

@@ -122,11 +122,11 @@ class Info1Tab extends StatelessWidget {
                 color: GlobalColors.bgDark1,
               ),
               const SizedBox(height: 10.0),
-              Center(
-                child: InteractiveViewer(
-                  child: Image.asset('assets/images/hipertension_arterial.png'),
-                ),
-              ),
+              // Center(
+              //   child: InteractiveViewer(
+              //     child: Image.asset('assets/images/hipertension_arterial.png'),
+              //   ),
+              // ),
               const SizedBox(height: 15.0),
               Text(
                 'Fuente: \nOrganización Mundial de la Salud (OMS)',
