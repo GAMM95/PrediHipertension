@@ -195,20 +195,6 @@ class _TestTabState extends State<TestTab> {
 
                         const SizedBox(height: 15.0),
 
-                        // /// Género del usuario
-                        // Parragraph(
-                        //   parrafo: '2. Seleccione su género',
-                        //   color: GlobalColors.textColor,
-                        // ),
-                        // const SizedBox(height: 5.0),
-                        // CustomDropDown(
-                        //   hintText: 'Seleccione una opción',
-                        //   items: const ['Masculino', 'Femenino'],
-                        //   defaultValue: sexController.text,
-                        //   controller: sexController,
-                        //
-                        // ),
-
                         /// Género del usuario
                         Parragraph(
                           parrafo: '2. Seleccione su género',
@@ -224,7 +210,7 @@ class _TestTabState extends State<TestTab> {
                             if (newValue != null) {
                               setState(() {
                                 genderSelection = newValue;
-                                updateAlcoholQuestion(); // Actualizar la pregunta sobre alcohol cuando cambie el género seleccionado
+                                updateAlcoholQuestion();
                               });
                             }
                           },
@@ -285,8 +271,8 @@ class _TestTabState extends State<TestTab> {
                             ),
                             Expanded(
                               child: CustomNumberField(
-                                hintText: 'Calcule o ingrese su IMC',
-                                enabled: true,
+                                hintText: 'Calcule su IMC',
+                                enabled: false,
                                 cifras: 5,
                                 controller: bmiController,
                               ),
@@ -470,18 +456,6 @@ class _TestTabState extends State<TestTab> {
                         const SizedBox(height: 15.0),
 
                         /// Consumo de alcohol
-                        // Parragraph(
-                        //   parrafo: '12. ¿Te consideras un bebedor compulsivo?',
-                        //   color: GlobalColors.textColor,
-                        // ),
-                        // const SizedBox(height: 5.0),
-                        // CustomDropDown(
-                        //   hintText: 'Seleccione una opción',
-                        //   items: const ['Sí', 'No'],
-                        //   defaultValue: compulsiveDrinkController.text,
-                        //   controller: compulsiveDrinkController,
-                        // ),
-
                         Parragraph(
                           parrafo: alcoholQuestion,
                           color: GlobalColors.textColor,
