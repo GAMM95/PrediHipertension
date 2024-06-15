@@ -569,13 +569,18 @@ class _TestTabState extends State<TestTab> {
     CalculoIMC.mostrar(context, bmiController);
   }
 
+  /// Muestra un diálogo de carga mientras se realiza una solicitud HTTP y
+  /// presenta los resultados o un mensaje de error según corresponda.
   void _mostrarResultadoDialog() async {
+    // Instancia de la lógica del test
     TestLogic testLogic = TestLogic();
     Map<String, String> body;
 
+    // Determina el valor de los días de salud mental
     String diasSaludMentalValue =
         mentalHealthResponse == 'Sí' ? diasmenthlthController.text : '0';
 
+    // Construye el cuerpo de la solicitud con los datos de los controladores
     body = await testLogic.construirBody(
       edad: ageController.text,
       genero: sexController.text,
@@ -605,6 +610,7 @@ class _TestTabState extends State<TestTab> {
     );
 
     try {
+      // Realiza la solicitud HTTP usando el cuerpo construido
       final response = await HttpService.postTest(body);
       if (response.statusCode == 200) {
         // Cerrar el diálogo de carga

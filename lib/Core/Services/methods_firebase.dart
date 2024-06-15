@@ -80,21 +80,30 @@ class MethodsAuth {
     }
   }
 
-  /// Metodo para guardar el resultado de la evaluacion del test de Hipertension
+  /// Metodo para guardar el resultado de la evaluacion del test en Firestore
+  /// dentro de la subcolección 'resultado' del último documento 'datatest' del usuario actual.
   Future<void> guardarResultadoPrediccion({
     required Resultado resultado,
   }) async {
     try {
+      // Obtener el usuario autenticado actualmente.
       final User? user = _auth.currentUser;
-      if (user != null) {
+      if (user != null) { //verifica que el usuario no sea nulo
+        // Referencia al documento del usuario en la colección 'usuario'.
         final userDocRef = _firestore.collection('usuario').doc(user.uid);
+        // Referencia a la subcolección 'datatest' dentro del documento del usuario.
         final userDatatestCollectionRef = userDocRef.collection('datatest');
 
         // Obtener una referencia al último documento de datatest ordenado por fecha
+        // Obtiene un QuerySnapshot de la subcolección datatest, 
+        //ordenando los documentos por timestamp en orden descendente, 
+        //y limitando los resultados a uno. Esto asegura que obtendremos 
+        //el documento más reciente.
         final QuerySnapshot datatestSnapshot = await userDatatestCollectionRef
             .orderBy('timestamp', descending: true)
             .limit(1)
             .get();
+        // Referencia al documento más reciente en 'datatest'.
         final lastDatatestDocRef = datatestSnapshot.docs.isNotEmpty
             ? datatestSnapshot.docs.first.reference
             : null;
@@ -103,6 +112,7 @@ class MethodsAuth {
           // Crear una subcolección 'resultado' dentro del último documento de datatest
           final userResultCollectionRef =
               lastDatatestDocRef.collection('resultado');
+          // Agregar un nuevo documento en la subcolección 'resultado' con la predicción.
           await userResultCollectionRef.add({
             'timestamp': Timestamp.now(),
             'resultadoPrediccion': resultado.resultado,
