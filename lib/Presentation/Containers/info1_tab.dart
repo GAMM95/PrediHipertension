@@ -37,8 +37,22 @@ class Info1Tab extends StatelessWidget {
               ),
               const SizedBox(height: 10.0),
               Center(
-                child: InteractiveViewer(
-                  child: Image.asset('assets/images/afectados.png'),
+                child: Column(
+                  children: [
+                    Text(
+                      'La hipertensión afecta a 1/3 de la población mundial de más de 18 años',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: GlobalColors.bgDark1,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 5.0),
+                    InteractiveViewer(
+                      child: Image.asset('assets/images/afectados.png'),
+                    ),
+                  ],
                 ),
               ),
               const SizedBox(height: 10.0),

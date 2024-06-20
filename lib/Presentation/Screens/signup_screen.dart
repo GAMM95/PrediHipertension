@@ -233,7 +233,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 // Mostrar cuadro de diálogo de éxito
                                 CustomDialogs.showCorrectDialog(
                                   context,
-                                  'Bienvenido a PredHipertension ${_nombreController.text.trim()}',
+                                  'Bienvenido a PrediHipertension ${_nombreController.text.trim()}',
                                   "Se ha enviado un correo electrónico de verificación. Por favor, compruebe su bandeja de entrada al correo ${_emailController.text.trim()}",
                                 );
                               } else {

@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -158,47 +159,7 @@ class AuthService {
     }
   }
 
-  /// Elimina la cuenta de usuario actual, eliminando sus datos de Firestore y su cuenta de Firebase Authentication.
-  Future<void> deleteAccount() async {
-    try {
-      // Obtener el usuario actualmente autenticado
-      User? user = _auth.currentUser;
-
-      if (user != null) {
-        // Eliminar los datos del usuario en Firestore
-        await _firestore.collection('usuario').doc(user.uid).delete();
-
-        // Eliminar la cuenta del usuario en Firebase Authentication
-        await user.delete();
-      } else {
-        // Si no hay usuario autenticado, eliminar la colección datatest
-        await _firestore.collection('datatest').get().then((querySnapshot) {
-          // ignore: avoid_function_literals_in_foreach_calls
-          querySnapshot.docs.forEach((doc) async {
-            await doc.reference.delete();
-          });
-        });
-      }
-
-      // Desconectar al usuario localmente
-      // await _auth.signOut();
-      // await _googleSignIn.signOut();
-    } catch (e) {
-      // Manejar errores
-      if (e is FirebaseAuthException) {
-        // Error relacionado con Firebase Authentication
-        throw 'Error al eliminar la cuenta: ${e.message}';
-      } else if (e is FirebaseException) {
-        // Error relacionado con Firestore
-        throw 'Error al eliminar los datos del usuario: ${e.message}';
-      } else {
-        // Otros errores
-        throw 'Error inesperado al eliminar la cuenta: $e';
-      }
-    }
-  }
-
-  /// Obtiene el nombre completo del usuario actual desde Firestore.
+   /// Obtiene el nombre completo del usuario actual desde Firestore.
   static Future<String> getDisplayNameFromFirestore() async {
     // Obtener el ID del usuario autenticado
     String userId = FirebaseAuth.instance.currentUser!.uid;
@@ -230,6 +191,94 @@ class AuthService {
       return fullName;
     } else {
       return ''; // Retorna una cadena vacía si no se encuentra el documento
+    }
+  }
+
+  /// Re-autentica al usuario con Google.
+  Future<void> reauthenticateUserWithGoogle() async {
+    final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+    if (googleUser == null) return; // Usuario cancela el inicio de sesión
+
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser.authentication;
+
+    final AuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    await _auth.currentUser?.reauthenticateWithCredential(credential);
+  }
+
+  /// Re-autentica al usuario con correo y contraseña.
+  Future<void> reauthenticateUser(String email, String password) async {
+    AuthCredential credential =
+        EmailAuthProvider.credential(email: email, password: password);
+    await _auth.currentUser?.reauthenticateWithCredential(credential);
+  }
+
+  /// Elimina la cuenta de usuario actual, eliminando sus datos de Firestore y su cuenta de Firebase Authentication.
+  Future<void> deleteAccount({String? email, String? password}) async {
+    try {
+      User? user = _auth.currentUser;
+
+      if (user != null) {
+        try {
+          // Intentar eliminar la cuenta sin re-autenticación
+          await _firestore.collection('usuario').doc(user.uid).delete();
+          await user.delete();
+        } catch (e) {
+          // Si la eliminación falla, intentar re-autenticación y reintentar eliminación
+          if (e is FirebaseAuthException && e.code == 'requires-recent-login') {
+            if (user.providerData.any((p) => p.providerId == 'google.com')) {
+              await reauthenticateUserWithGoogle();
+            } else if (email != null && password != null) {
+              await reauthenticateUser(email, password);
+            } else {
+              throw 'La eliminación de la cuenta requiere re-autenticación.';
+            }
+
+            // Intentar eliminar la cuenta nuevamente después de re-autenticación
+            await _firestore.collection('usuario').doc(user.uid).delete();
+            await user.delete();
+          } else {
+            rethrow;
+          }
+        }
+      } else {
+        // Si no hay usuario autenticado, eliminar la colección datatest
+        await _firestore.collection('datatest').get().then((querySnapshot) {
+          // ignore: avoid_function_literals_in_foreach_calls
+          querySnapshot.docs.forEach((doc) async {
+            await doc.reference.delete();
+          });
+        });
+      }
+
+      // Desconectar al usuario localmente
+      await _auth.signOut();
+      await _googleSignIn.signOut();
+    } catch (e) {
+      if (e is FirebaseAuthException) {
+        throw 'Error al eliminar la cuenta: ${e.message}';
+      } else if (e is FirebaseException) {
+        throw 'Error al eliminar los datos del usuario: ${e.message}';
+      } else {
+        throw 'Error inesperado al eliminar la cuenta: $e';
+      }
+    }
+  }
+
+  void handleDeleteAccount(BuildContext context,
+      {String? email, String? password}) async {
+    try {
+      await deleteAccount(email: email, password: password);
+      // Navega o muestra un mensaje de éxito
+    } catch (e) {
+      // Muestra un mensaje de error
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.toString())));
     }
   }
 }

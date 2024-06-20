@@ -18,24 +18,23 @@ class Datatest {
   final int ataqueCardiaco;
 
   /// Constructor que inicializa un objeto Datatest con los datos proporcionados.
-  Datatest({
-    required this.edadIngresada,
-    required this.edadAgrupada,
-    required this.sexo,
-    required this.educacion,
-    required this.imc,
-    required this.saludMental,
-    required this.consumoFrutas,
-    required this.consumoVerduras,
-    required this.consumoSal,
-    required this.consumoCigarros,
-    required this.consumoAlcohol,
-    required this.consumoAlcCompulsivo,
-    required this.actividadFisica,
-    required this.colesterol,
-    required this.diabetes,
-    required this.ataqueCardiaco,
-  });
+  Datatest(
+      {required this.edadIngresada,
+      required this.edadAgrupada,
+      required this.sexo,
+      required this.educacion,
+      required this.imc,
+      required this.saludMental,
+      required this.consumoFrutas,
+      required this.consumoVerduras,
+      required this.consumoSal,
+      required this.consumoCigarros,
+      required this.consumoAlcohol,
+      required this.consumoAlcCompulsivo,
+      required this.actividadFisica,
+      required this.colesterol,
+      required this.diabetes,
+      required this.ataqueCardiaco});
 
   /// Constructor de fábrica que crea un objeto Datatest a partir de un mapa.
   factory Datatest.fromMap(Map<String, dynamic> map) {
