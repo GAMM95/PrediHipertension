@@ -1,5 +1,6 @@
 /// Clase que representa los datos de una prueba.
 class Datatest {
+  final String nombre;
   final int edadIngresada;
   final int edadAgrupada;
   final int sexo;
@@ -19,7 +20,8 @@ class Datatest {
 
   /// Constructor que inicializa un objeto Datatest con los datos proporcionados.
   Datatest(
-      {required this.edadIngresada,
+      {this.nombre = '',
+      required this.edadIngresada,
       required this.edadAgrupada,
       required this.sexo,
       required this.educacion,
@@ -39,6 +41,7 @@ class Datatest {
   /// Constructor de fábrica que crea un objeto Datatest a partir de un mapa.
   factory Datatest.fromMap(Map<String, dynamic> map) {
     return Datatest(
+      nombre: map['nombre'],
       edadIngresada: map['Edad ingresada'] as int,
       edadAgrupada: map['edadAgrupada'] as int,
       sexo: map['genero'] as int,

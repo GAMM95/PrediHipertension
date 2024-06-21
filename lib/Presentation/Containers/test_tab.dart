@@ -1,17 +1,21 @@
 // ignore_for_file: use_build_context_synchronously
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../../Core/Services/function_api.dart';
-import '../../Core/Theme/global_colors.dart';
-import '../../Domain/Logic/testlogic.dart';
-import '../Utilities/advertencia_test.dart';
-import '../Utilities/custom_dialogs.dart';
-import '../Utilities/dialog_calcimc.dart';
-import '../Widget/custom_card.dart';
-import '../Widget/custom_dropdown.dart';
-import '../Widget/custom_numberfield.dart';
-import '../Widget/paragraph.dart';
-import '../Widget/title_tab.dart';
+import '../../Core/Services/firebase_auth.dart';
+import '../../Core/Services/function_api.dart'; // Importación de servicios API
+import '../../Core/Theme/global_colors.dart'; // Importación de colores globales
+import '../../Core/Theme/theme.dart'; // Importación del tema de la aplicación
+import '../../Domain/Logic/testlogic.dart'; // Lógica relacionada con las pruebas
+import '../Utilities/advertencia_test.dart'; // Utilidades para advertencias de pruebas
+import '../Utilities/custom_dialogs.dart'; // Diálogos personalizados
+import '../Utilities/dialog_calcimc.dart'; // Diálogo para cálculo de IMC
+import '../Widget/custom_card.dart'; // Widget de tarjeta personalizado
+import '../Widget/custom_dropdown.dart'; // Widget de menú desplegable personalizado
+import '../Widget/custom_numberfield.dart'; // Widget de campo numérico personalizado
+import '../Widget/custom_textfield.dart'; // Widget de campo de texto personalizado
+import '../Widget/paragraph.dart'; // Widget de párrafo personalizado
+import '../Widget/title_tab.dart'; // Widget de título de pestaña personalizado
 
 class TestTab extends StatefulWidget {
   const TestTab({super.key});
@@ -21,11 +25,13 @@ class TestTab extends StatefulWidget {
 }
 
 class _TestTabState extends State<TestTab> {
-  String mentalHealthResponse = '';
-  String genderSelection = '';
+  String mentalHealthResponse = ''; // Respuesta de salud mental
+  String genderSelection = ''; // Selección de género
   String alcoholQuestion = '12. ¿Te consideras un bebedor compulsivo?';
+  bool checkBoxValue = false; // Estado del checkbox
 
   /// Informacion personal
+  TextEditingController nameController = TextEditingController();
   TextEditingController ageController = TextEditingController();
   TextEditingController sexController = TextEditingController();
   TextEditingController educationController = TextEditingController();
@@ -43,12 +49,16 @@ class _TestTabState extends State<TestTab> {
   TextEditingController diabetesController = TextEditingController();
   TextEditingController heartController = TextEditingController();
 
-  bool isButtonActive = false;
-  bool _dialogShown = false;
+  bool isButtonActive = false; // Estado del botón activo
+  bool _dialogShown = false; // Estado del diálogo mostrado
+  String loggedInUserName = ''; // Nombre de usuario autenticado
 
   @override
   void initState() {
     super.initState();
+    _fetchLoggedInUserName(); // Método para obtener el nombre de usuario al inicializar
+    // Agregar validadores a los controladores de texto para habilitar/deshabilitar el botón según la validez del formulario
+    nameController.addListener(_validarFormulario);
     ageController.addListener(_validarFormulario);
     sexController.addListener(_validarFormulario);
     educationController.addListener(_validarFormulario);
@@ -66,7 +76,9 @@ class _TestTabState extends State<TestTab> {
     heartController.addListener(_validarFormulario);
   }
 
+  // Método para limpiar todos los campos de texto
   void _limpiarCampos() {
+    nameController.clear();
     ageController.clear();
     sexController.clear();
     educationController.clear();
@@ -86,6 +98,8 @@ class _TestTabState extends State<TestTab> {
 
   @override
   void dispose() {
+    // Liberar recursos de los controladores al cerrar la pestaña
+    nameController.dispose();
     ageController.dispose();
     sexController.dispose();
     educationController.dispose();
@@ -104,6 +118,7 @@ class _TestTabState extends State<TestTab> {
     super.dispose();
   }
 
+  // Método para validar el formulario y habilitar/deshabilitar el botón de envío
   void _validarFormulario() {
     final bool isValid = ageController.text.isNotEmpty &&
         sexController.text.isNotEmpty &&
@@ -126,8 +141,9 @@ class _TestTabState extends State<TestTab> {
     });
   }
 
+  // Método para actualizar la pregunta sobre el consumo de alcohol basada en la selección de género
   void updateAlcoholQuestion() {
-    // Lógica para determinar qué pregunta de alcohol mostrar basada en las respuestas anteriores
+    // Lógica para determinar qué pregun>ta de alcohol mostrar basada en las respuestas anteriores
     if (genderSelection == 'Masculino') {
       alcoholQuestion =
           '12. ¿Has consumido cinco o más bebidas alcohólicas en una sola ocasión?';
@@ -137,6 +153,34 @@ class _TestTabState extends State<TestTab> {
     } else {
       // Género no seleccionado, mostrar una pregunta genérica
       alcoholQuestion = '12. ¿Te consideras un bebedor compulsivo?';
+    }
+  }
+
+  // Método asíncrono para obtener el nombre de usuario autenticado
+  // Future<void> _fetchLoggedInUserName() async {
+  //   final user = FirebaseAuth.instance.currentUser;
+  //   if (user != null) {
+  //     setState(() {
+  //       loggedInUserName = user.displayName ?? '';
+  //     });
+  //   }
+  // }
+
+  Future<void> _fetchLoggedInUserName() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      if (user.displayName == null || user.displayName!.isEmpty) {
+        // Intentar obtener el nombre completo desde Firestore
+        String fullName = await AuthService.getDisplayNameFromFirestore();
+        setState(() {
+          loggedInUserName =
+              fullName.isNotEmpty ? fullName : (user.email ?? 'Usuario');
+        });
+      } else {
+        setState(() {
+          loggedInUserName = user.displayName!;
+        });
+      }
     }
   }
 
@@ -152,7 +196,7 @@ class _TestTabState extends State<TestTab> {
 
     return Column(
       children: [
-        const TituloTab(titulo: 'Test de Hipertensión Arterial'),
+        const TituloTab(titulo: 'Test de Riesgo de HTA'),
         Expanded(
           child: SingleChildScrollView(
             child: Container(
@@ -162,6 +206,44 @@ class _TestTabState extends State<TestTab> {
               ),
               child: Column(
                 children: [
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: checkBoxValue,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            checkBoxValue = value!;
+                          });
+                        },
+                        activeColor: GlobalColors.buttonColor,
+                        side: BorderSide(color: GlobalColors.borderTextField),
+                        // activeColor: lightColorScheme.primary,
+                      ),
+                      GestureDetector(
+                        child: Text(
+                          '¿Desea continuar como invitado?',
+                          style: TextStyle(
+                            color: lightColorScheme.secondary,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 14.0,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  if (checkBoxValue) ...[
+                    const SizedBox(height: 10.0),
+                    CustomTextField(
+                        hintText: 'Nombre de invitado',
+                        label: const Text('Nombre de invitado'),
+                        applyTextCapitalization: true,
+                        validator: 'Ingrese nombre',
+                        controller: nameController,
+                        enabled: true,
+                        textInputType: TextInputType.text),
+                    const SizedBox(height: 15.0),
+                  ],
+
                   /// Card Informacion Personal
                   CustomCard(
                     title: 'Datos demográficos',
@@ -580,8 +662,11 @@ class _TestTabState extends State<TestTab> {
     String diasSaludMentalValue =
         mentalHealthResponse == 'Sí' ? diasmenthlthController.text : '0';
 
+    // Determina el nombre a usar dependiendo del estado del checkbox
+    String nombre = checkBoxValue ? nameController.text : loggedInUserName;
     // Construye el cuerpo de la solicitud con los datos de los controladores
     body = await testLogic.construirBody(
+      nombre: nombre,
       edad: ageController.text,
       genero: sexController.text,
       educacion: educationController.text,

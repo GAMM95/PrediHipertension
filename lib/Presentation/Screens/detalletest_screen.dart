@@ -48,6 +48,8 @@ class _DetalleTestState extends State<DetalleTest> {
           await _methodsAuth.getDataTestByDate(widget.date);
       setState(() {
         dataList = [
+          // CustomListItemData('Nombre:', '${dataTestList[0].nombre}'),
+          CustomListItemData('Nombre:', dataTestList[0].nombre),
           CustomListItemData(
               '1. Edad:', '${dataTestList[0].edadIngresada} años'),
           CustomListItemData('2. Género seleccionado:',

@@ -8,6 +8,7 @@ class TestLogic {
   final MethodsAuth _methodsAuth = MethodsAuth();
 
   Future<Map<String, String>> construirBody({
+    String? nombre,
     required String edad,
     required String genero,
     required String educacion,
@@ -34,6 +35,7 @@ class TestLogic {
         saludMental == 'Sí' ? int.tryParse(diasSaludMental) ?? 0 : 0;
 
     Map<String, String> body = {
+      'Nombre': nombre ?? '',
       'Age': ageCategory.toString(),
       'Sex': genero == 'Femenino' ? '0' : '1',
       'Education': educacionValue.toString(),
@@ -53,6 +55,7 @@ class TestLogic {
 
     // Crear un objeto Datatest con los datos del formulario
     Datatest datatest = Datatest(
+      nombre: nombre.toString(),
       edadIngresada: ageValue,
       edadAgrupada: ageCategory,
       sexo: genero == 'Femenino' ? 0 : 1,

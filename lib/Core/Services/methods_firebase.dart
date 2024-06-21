@@ -55,6 +55,7 @@ class MethodsAuth {
         // Guardar los datos del test dentro de la subcolección 'datatest'
         await newDocRef.set({
           'id': newDocRef.id, // Agregar el ID único al documento
+          'nombre': datatest.nombre,
           'Edad ingresada': datatest.edadIngresada,
           'edadAgrupada': datatest.edadAgrupada,
           'genero': datatest.sexo,
@@ -88,16 +89,17 @@ class MethodsAuth {
     try {
       // Obtener el usuario autenticado actualmente.
       final User? user = _auth.currentUser;
-      if (user != null) { //verifica que el usuario no sea nulo
+      if (user != null) {
+        //verifica que el usuario no sea nulo
         // Referencia al documento del usuario en la colección 'usuario'.
         final userDocRef = _firestore.collection('usuario').doc(user.uid);
         // Referencia a la subcolección 'datatest' dentro del documento del usuario.
         final userDatatestCollectionRef = userDocRef.collection('datatest');
 
         // Obtener una referencia al último documento de datatest ordenado por fecha
-        // Obtiene un QuerySnapshot de la subcolección datatest, 
-        //ordenando los documentos por timestamp en orden descendente, 
-        //y limitando los resultados a uno. Esto asegura que obtendremos 
+        // Obtiene un QuerySnapshot de la subcolección datatest,
+        //ordenando los documentos por timestamp en orden descendente,
+        //y limitando los resultados a uno. Esto asegura que obtendremos
         //el documento más reciente.
         final QuerySnapshot datatestSnapshot = await userDatatestCollectionRef
             .orderBy('timestamp', descending: true)
@@ -179,6 +181,7 @@ class MethodsAuth {
 
         // Iterar sobre los documentos y obtener los datos del test
         for (var doc in querySnapshot.docs) {
+          String nombre = doc['nombre'];
           int edadingresada = doc['Edad ingresada'];
           int edadAgrupada = doc['edadAgrupada'];
           int genero = doc['genero'];
@@ -198,6 +201,7 @@ class MethodsAuth {
 
           // Crear un objeto Datatest con los datos obtenidos
           Datatest dataTest = Datatest(
+            nombre: nombre,
             edadIngresada: edadingresada,
             edadAgrupada: edadAgrupada,
             sexo: genero,
