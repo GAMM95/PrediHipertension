@@ -310,13 +310,11 @@ class _TestTabState extends State<TestTab> {
                         CustomDropDown(
                           hintText: 'Seleccione una opción',
                           items: const [
-                            'No tengo',
                             'Educación inicial',
-                            'Primaria completa',
+                            'Educación primaria',
                             'Secundaria incompleta',
                             'Secundaria completa',
-                            'Estudios técnicos',
-                            'Universitaria incompleta',
+                            'Estudios técnicos o universitarios incompletos',
                             'Universitaria completa',
                           ],
                           defaultValue: educationController.text,

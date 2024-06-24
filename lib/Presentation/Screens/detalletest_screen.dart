@@ -51,7 +51,7 @@ class _DetalleTestState extends State<DetalleTest> {
           // CustomListItemData('Nombre:', '${dataTestList[0].nombre}'),
           CustomListItemData('Nombre:', dataTestList[0].nombre),
           CustomListItemData(
-              '1. Edad:', '${dataTestList[0].edadIngresada} años'),
+              '1. Edad:', '${dataTestList[0].edadIngresada} años.'),
           CustomListItemData('2. Género seleccionado:',
               _testLogic.getGenderText(dataTestList[0].sexo)),
           CustomListItemData('3. Nivel educativo logrado:',
@@ -60,7 +60,7 @@ class _DetalleTestState extends State<DetalleTest> {
               '${dataTestList[0].imc} kg/m²'),
           CustomListItemData(
               '5. Cantidad de días en la que ha experimentado estrés, depresión u otros problemas emocionales:',
-              'Aproximadamente ${dataTestList[0].saludMental} días'),
+              'Aproximadamente ${dataTestList[0].saludMental} días.'),
           CustomListItemData(
               '6. Actividad física realizada al menos 30 minutos',
               _testLogic.getPhysActivityText(dataTestList[0].actividadFisica)),

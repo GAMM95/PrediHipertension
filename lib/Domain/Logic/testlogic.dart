@@ -113,9 +113,7 @@ class TestLogic {
 
   int _convertirEducacionANumero(String educacion) {
     switch (educacion) {
-      case 'Nunca tengo':
-        return 1;
-      case 'Educación inicial':
+      case 'Nunca asistió o solo educación inicial':
         return 1;
       case 'Primaria completa':
         return 2;
@@ -123,14 +121,12 @@ class TestLogic {
         return 3;
       case 'Secundaria completa':
         return 4;
-      case 'Estudios técnicos':
-        return 5;
-      case 'Universitaria incompleta':
+      case 'Estudios técnicos o universitarios incompletos':
         return 5;
       case 'Universitaria completa':
         return 6;
       default:
-        throw ArgumentError('El valor de educacion no es válido');
+        throw ArgumentError('El valor de educación no es válido');
     }
   }
 
@@ -213,31 +209,23 @@ class TestLogic {
   }
 
   String getGenderText(int gender) {
-    return gender == 0 ? 'Femenino' : 'Masculino';
+    return gender == 0 ? 'Femenino.' : 'Masculino.';
   }
 
   String getEducationText(int educationValue) {
     switch (educationValue) {
       case 1:
-        if (educationValue == 1) {
-          return 'Nunca asistí al colegio';
-        } else {
-          return 'Solo asistí a la educación inicial';
-        }
+        return 'Solo completé educación inicial.';
       case 2:
-        return 'Solo he completado la educación primaria';
+        return 'Solo he completado la educación primaria.';
       case 3:
-        return 'No he compleado la secundaria';
+        return 'No he completado la educación secundaria.';
       case 4:
-        return 'Solo he logrado completar la educación secundaria';
+        return 'Solo he logrado completar la educación secundaria.';
       case 5:
-        if (educationValue == 5) {
-          return 'He llevado estudios técnicos';
-        } else {
-          return 'No concluí la universidad';
-        }
+        return 'He cursado de 1 a 3 años en la universidad o instituto técnico.';
       case 6:
-        return 'He logrado egresar de la universidad';
+        return 'He logrado obtener un título universitario.';
       default:
         return '';
     }
@@ -267,29 +255,33 @@ class TestLogic {
   }
 
   String getFruitText(int fruit) {
-    return fruit == 0 ? 'No' : 'Sí';
+    return fruit == 0
+        ? 'No he consumido frutas al menos una vez al día.'
+        : 'Consumo frutas al menos una vez al día.';
   }
 
   String getVeggiesText(int veggies) {
-    return veggies == 0 ? 'No' : 'Sí';
+    return veggies == 0
+        ? 'No he consumido verduras al menos una vez al día.'
+        : 'Consumo verduras al menos una vez al día.';
   }
 
   String getSaltText(int salt) {
     return salt == 0
-        ? 'Estoy excediendo en el consumo de sal'
-        : 'Estoy controlando y/o reduciendo el consumo de sal';
+        ? 'Estoy excediendo en el consumo de sal.'
+        : 'Estoy controlando o reduciendo el consumo de sal.';
   }
 
   String getSmokeText(int smoke) {
     switch (smoke) {
       case 1:
-        return 'Fumo a diario';
+        return 'Fumo a diario.';
       case 2:
-        return 'Fumo ocasionalmente';
+        return 'Fumo ocasionalmente.';
       case 3:
-        return 'He dejado de fumar';
+        return 'He dejado de fumar.';
       case 4:
-        return 'No fumo';
+        return 'No fumo.';
       default:
         return '';
     }
@@ -297,32 +289,36 @@ class TestLogic {
 
   String getAlcoholText(int alcohol) {
     return alcohol == 0
-        ? 'No he consumido bebidas alcoholicas'
-        : 'Si he consumido bebidas alcoholicas';
+        ? 'No he consumido bebidas alcoholicas en los últimos 30 días.'
+        : 'Sí he consumido bebidas alcohólicas en los últimos 30 días.';
   }
 
   String getCompulsiveAlcoholText(int compulsive) {
-    return compulsive == 0 ? 'No' : 'Sí';
+    return compulsive == 0
+        ? 'No me considero un bebedor compulsivo.'
+        : 'Sí me considero un bebedor compulsivo.';
   }
 
   String getPhysActivityText(int physActivity) {
-    return physActivity == 0 ? 'No' : 'Sí';
+    return physActivity == 0
+        ? 'No realizo actividad física.'
+        : 'Sí realizo de 30 minutos a mas dioarios de actividad física.';
   }
 
   String getCholesterolText(int chol) {
     return chol == 0
-        ? 'No tengo colesterol elevado en la sangre'
-        : 'Tengo colesterol elevado en la sangre';
+        ? 'No tengo colesterol elevado en la sangre.'
+        : 'Tengo colesterol elevado en la sangre.';
   }
 
   String getDiabetesText(int diabetes) {
     switch (diabetes) {
       case 0:
-        return 'No me han diagnosticado diabetes';
+        return 'No me han diagnosticado diabetes.';
       case 1:
-        return 'Me han diagnosticado diabetes';
+        return 'Me han diagnosticado diabetes.';
       case 2:
-        return 'No he pasado un diagnóstico';
+        return 'No me he realizado una prueba de diagnóstico de diabetes.';
       default:
         return '';
     }
@@ -330,7 +326,7 @@ class TestLogic {
 
   String getHeartText(int heart) {
     return heart == 0
-        ? 'No he padecido ataques cardiacos'
-        : 'Sí he padecido ataques cardiacos';
+        ? 'No he padecido ataques cardiacos.'
+        : 'Sí he padecido ataques cardiacos.';
   }
 }

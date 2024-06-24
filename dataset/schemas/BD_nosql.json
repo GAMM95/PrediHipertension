@@ -1,0 +1,39 @@
+{
+  "usuario": {
+    "_id": "ObjectId",
+    "email": "String",
+    "firstName": "String",
+    "lastName": "String",
+    "password": "String",
+    "datatest": [
+      {
+        "_id": "ObjectId",
+        "nombre": "String",
+        "edadAgrupada": "Number",
+        "edadIngresada": "Number",
+        "genero": "Number",
+        "educacion": "Number",
+        "imc": "Number",
+        "saludMental": "Number",
+        "consumoFrutas": "Number",
+        "consumoVerduras": "Number",
+        "consumoSal": "Number",
+        "consumoCigarros": "Number",
+        "consumoAlcohol": "Number",
+        "consumoAlcCompulsivo":"Number",
+        "actividadFisica": "Number",
+        "colesterol": "Number",
+        "diabetes": "Number",
+        "ataqueCardiaco": "Number",
+        "timestamp": "timestamp",
+        "usuario_id": "ObjectId",
+        "resultado": {
+          "_id": "ObjectId",
+          "resultadoPrediccion": "Number",
+          "timestamp": "timestamp",
+          "datatest_id": "ObjectId"
+        }
+      }
+    ]
+  }
+}
