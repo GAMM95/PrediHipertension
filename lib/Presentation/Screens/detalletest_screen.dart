@@ -132,7 +132,7 @@ class _DetalleTestState extends State<DetalleTest> {
         //     padding: const EdgeInsets.only(right: 15.0),
         //     child: IconButton(
         //       onPressed: () {},
-        //       icon: const Icon(Icons.picture_as_pdf),
+        //       icon: const Icon(Icons.delete),
         //       color: GlobalColors.buttonColor,
         //       iconSize: 30.0,
         //     ),

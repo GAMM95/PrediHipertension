@@ -15,7 +15,8 @@ class CustomScaffoldWelcome extends StatelessWidget {
       extendBodyBehindAppBar: true,
       body: Stack(children: [
         Image.asset(
-          'assets/images/bg3.png',
+          // 'assets/images/bg3.png',
+          'assets/images/welcome6.jpg',
           fit: BoxFit.cover,
           width: double.infinity,
           height: double.infinity,

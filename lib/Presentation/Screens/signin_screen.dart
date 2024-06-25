@@ -8,10 +8,10 @@ import '../../Core/Theme/global_colors.dart';
 import '../../Core/Theme/theme.dart';
 import '../Utilities/custom_dialogs.dart';
 import '../Widget/custom_button.dart';
-import '../Widget/custom_clipper.dart';
 import '../Widget/custom_divider.dart';
 import '../Widget/custom_passwordfield.dart';
 import '../Widget/custom_textfield.dart';
+import '../Widget/inputfieldheader.dart';
 import '../Widget/social_icon.dart';
 import 'signup_screen.dart';
 
@@ -41,7 +41,13 @@ class _SignInScreenState extends State<SignInScreen> {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.33,
               width: double.infinity,
-              child: _buildInputFields(context),
+              child: InputFieldsHeader(
+                title: 'Inicia Sesión',
+                onBackPressed: () {
+                  Navigator.of(context)
+                      .pushNamedAndRemoveUntil('/welcome', (route) => false);
+                },
+              ),
             ),
             Expanded(
               child: Padding(
@@ -315,7 +321,6 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                         ],
                       ),
-
                       const SizedBox(height: 20.0), // Espacio
                     ],
                   ),
@@ -324,53 +329,6 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildInputFields(BuildContext context) {
-    return ClipPath(
-      clipper: CustomClipperWidget(),
-      child: Stack(
-        children: [
-          FractionallySizedBox(
-            widthFactor: 1.0,
-            child: Container(
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(
-                    'assets/images/bg4.jpg',
-                  ),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          ),
-          AppBar(
-            leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back_ios,
-                color: GlobalColors.titlePrimaryColor,
-                size: 20,
-              ),
-              onPressed: () {
-                Navigator.of(context)
-                    .pushNamedAndRemoveUntil('/welcome', (route) => false);
-              },
-            ),
-            title: Text(
-              'Inicia Sesión',
-              style: TextStyle(
-                color: GlobalColors.titlePrimaryColor,
-                fontSize: 22,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            titleSpacing: -15, // Ajusta este valor según sea necesario
-          ),
-        ],
       ),
     );
   }

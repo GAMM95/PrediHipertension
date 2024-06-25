@@ -9,9 +9,9 @@ import '../../Core/Theme/theme.dart';
 import '../../Domain/Models/usuario.dart';
 import '../Utilities/custom_dialogs.dart';
 import '../Widget/custom_button.dart';
-import '../Widget/custom_clipper.dart';
 import '../Widget/custom_passwordfield.dart';
 import '../Widget/custom_textfield.dart';
+import '../Widget/inputfieldheader.dart';
 import 'signin_screen.dart';
 import 'welcome_screen.dart';
 
@@ -67,7 +67,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.33,
               width: double.infinity,
-              child: _buildInputFields(context),
+              child: InputFieldsHeader(
+                title: 'Únete a PrediHipertension',
+                onBackPressed: () {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const WelcomeScreen(),
+                    ),
+                    (route) => false,
+                  );
+                },
+              ),
             ),
             Expanded(
               child: Padding(
@@ -350,58 +361,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildInputFields(BuildContext context) {
-    return ClipPath(
-      clipper: CustomClipperWidget(),
-      child: Stack(
-        children: [
-          FractionallySizedBox(
-            widthFactor: 1.0,
-            child: Container(
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(
-                    'assets/images/bg4.jpg',
-                  ),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          ),
-          AppBar(
-            leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back_ios,
-                color: GlobalColors.titlePrimaryColor,
-                size: 20,
-              ),
-              onPressed: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const WelcomeScreen(),
-                  ),
-                  (route) => false,
-                );
-              },
-            ),
-            title: Text(
-              'Únete a PrediHipertension',
-              style: TextStyle(
-                color: GlobalColors.titlePrimaryColor,
-                fontSize: 22,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            titleSpacing: -15, // Ajusta este valor según sea necesario
-          ),
-        ],
       ),
     );
   }

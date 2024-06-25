@@ -16,7 +16,8 @@ app = Flask(__name__)
 # Ruta para servir el icono favicon.ico desde el directorio assets
 @app.route('/favicon.ico')
 def favicon():
-    return send_from_directory(os.path.join(app.root_path, 'assets'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
+    return send_from_directory(os.path.join(app.root_path, 'assets'), 
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 # Ruta de inicio
 @app.route('/')
@@ -46,7 +47,10 @@ def predict():
         HeartAttack = request.args.get('HeartAttack')
         
         # Convertir los datos a un formato adecuado para la predicción
-        input_query = np.array([[Age, Sex, Education, BMI, MentHlth, Fruits, Veggies, Salt, Smoker, Alcohol, CompulAlc, PhysActivity, HighChol, Diabetes, HeartAttack]])
+        input_query = np.array([[Age, Sex, Education, BMI, MentHlth, 
+                                 Fruits, Veggies, Salt, Smoker, 
+                                 Alcohol, CompulAlc, PhysActivity, 
+                                 HighChol, Diabetes, HeartAttack]])
         
         # Realizar la predicción
         result = model.predict(input_query)[0]
@@ -72,8 +76,10 @@ def predict():
         HeartAttack = request.form.get('HeartAttack')
         
         # Convertir los datos a un formato adecuado para la predicción
-        input_query = np.array([[Age, Sex, Education, BMI, MentHlth, Fruits, Veggies, Salt, Smoker, Alcohol, CompulAlc, PhysActivity, HighChol, Diabetes, HeartAttack]])
-
+        input_query = np.array([[Age, Sex, Education, BMI, MentHlth, 
+                                 Fruits, Veggies, Salt, Smoker, 
+                                 Alcohol, CompulAlc, PhysActivity, 
+                                 HighChol, Diabetes, HeartAttack]])
         # Realizar la predicción
         result = model.predict(input_query)[0]
         
