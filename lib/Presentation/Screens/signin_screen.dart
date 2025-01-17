@@ -269,18 +269,6 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
 
                           // Texto Regístrese
-                          // GestureDetector(
-                          //   onTap: () {
-                          //     Navigator.of(context).pushNamed('/signup');
-                          //   },
-                          //   child: Text(
-                          //     'Regístrese',
-                          //     style: TextStyle(
-                          //       fontWeight: FontWeight.bold,
-                          //       color: lightColorScheme.secondary,
-                          //     ),
-                          //   ),
-                          // ),
                           GestureDetector(
                             onTap: () {
                               Navigator.of(context).push(

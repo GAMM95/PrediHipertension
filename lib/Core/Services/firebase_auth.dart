@@ -15,41 +15,6 @@ class AuthService {
   Stream<User?> get authStateChanges => _auth.authStateChanges();
 
   /// Método para registrar un usuario con autenticación de email y contraseña.
-  // Future<bool> signUp({
-  //   required Usuario usuario,
-  // }) async {
-  //   try {
-  //     // Verificar si el correo electrónico ya está registrado.
-  //     await _auth.createUserWithEmailAndPassword(
-  //       email: usuario.email.trim(),
-  //       password: usuario.password.trim(),
-  //     );
-
-  //     // Obtener el ID del usuario autenticado
-  //     String userId = _auth.currentUser!.uid;
-
-  //     // Guardar información adicional del usuario en Firestore
-  //     await _firestore.collection('usuario').doc(userId).set({
-  //       'firstName': usuario.firstName,
-  //       'lastName': usuario.lastName,
-  //       'email': usuario.email,
-  //       'password': usuario.password,
-  //     });
-
-  //     // Enviar correo de verificación
-  //     await _auth.currentUser!.sendEmailVerification();
-
-  //     return true; // Registro exitoso
-  //   } on FirebaseAuthException catch (e) {
-  //     if (e.code == 'email-already-in-use') {
-  //       return false; // Correo electrónico ya registrado
-  //     } else {
-  //       throw 'Error durante el registro: ${e.message}';
-  //     }
-  //   } catch (error) {
-  //     rethrow; // Reenviar la excepción para que pueda ser manejada en la capa superior.
-  //   }
-  // }
   Future<bool> signUp({
     required Usuario usuario,
   }) async {

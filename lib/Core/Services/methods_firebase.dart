@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -90,21 +92,17 @@ class MethodsAuth {
       // Obtener el usuario autenticado actualmente.
       final User? user = _auth.currentUser;
       if (user != null) {
-        //verifica que el usuario no sea nulo
         // Referencia al documento del usuario en la colección 'usuario'.
         final userDocRef = _firestore.collection('usuario').doc(user.uid);
         // Referencia a la subcolección 'datatest' dentro del documento del usuario.
         final userDatatestCollectionRef = userDocRef.collection('datatest');
 
         // Obtener una referencia al último documento de datatest ordenado por fecha
-        // Obtiene un QuerySnapshot de la subcolección datatest,
-        //ordenando los documentos por timestamp en orden descendente,
-        //y limitando los resultados a uno. Esto asegura que obtendremos
-        //el documento más reciente.
         final QuerySnapshot datatestSnapshot = await userDatatestCollectionRef
             .orderBy('timestamp', descending: true)
             .limit(1)
             .get();
+
         // Referencia al documento más reciente en 'datatest'.
         final lastDatatestDocRef = datatestSnapshot.docs.isNotEmpty
             ? datatestSnapshot.docs.first.reference
@@ -114,11 +112,25 @@ class MethodsAuth {
           // Crear una subcolección 'resultado' dentro del último documento de datatest
           final userResultCollectionRef =
               lastDatatestDocRef.collection('resultado');
+
           // Agregar un nuevo documento en la subcolección 'resultado' con la predicción.
           await userResultCollectionRef.add({
             'timestamp': Timestamp.now(),
             'resultadoPrediccion': resultado.resultado,
           });
+
+          // Contar la cantidad de resultados con valor 0 y 1 en 'resultadoPrediccion'
+          QuerySnapshot resultCountSnapshot = await userResultCollectionRef
+              .where('resultadoPrediccion', isEqualTo: 0)
+              .get();
+
+          int count0 = resultCountSnapshot.size;
+
+          resultCountSnapshot = await userResultCollectionRef
+              .where('resultadoPrediccion', isEqualTo: 1)
+              .get();
+
+          int count1 = resultCountSnapshot.size;
         }
       }
     } catch (error) {
@@ -239,18 +251,24 @@ class MethodsAuth {
             .doc(user.uid)
             .collection('datatest');
 
-        // Consultar los documentos en la subcolección 'datatest'
-        QuerySnapshot querySnapshot = await userDatatestCollectionRef.get();
+        // Consultar los documentos en la subcolección 'datatest' con una consulta más precisa
+        QuerySnapshot querySnapshot = await userDatatestCollectionRef
+            .where('timestamp',
+                isGreaterThanOrEqualTo: Timestamp.fromDate(
+                    dateTime.subtract(const Duration(seconds: 1))))
+            .where('timestamp',
+                isLessThanOrEqualTo: Timestamp.fromDate(
+                    dateTime.add(const Duration(seconds: 1))))
+            .get();
 
         // Iterar sobre los documentos y eliminar aquellos que coincidan con la fecha y hora
-        // ignore: avoid_function_literals_in_foreach_calls
-        querySnapshot.docs.forEach((doc) async {
+        for (QueryDocumentSnapshot doc in querySnapshot.docs) {
           Timestamp timestamp = doc['timestamp'];
           DateTime documentDateTime = timestamp.toDate();
           if (documentDateTime.isAtSameMomentAs(dateTime)) {
             await doc.reference.delete();
           }
-        });
+        }
       }
     } catch (error) {
       rethrow;
@@ -293,6 +311,29 @@ class MethodsAuth {
         }
       }
       return resultList;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  /// Método para contar la cantidad de tests realizados por el usuario.
+  Future<int> countTests() async {
+    try {
+      // Obtener el usuario actualmente autenticado
+      final User? user = _auth.currentUser;
+
+      if (user != null) {
+        // Obtener una referencia a la subcolección 'datatest' dentro del documento del usuario
+        final userDatatestCollectionRef = _firestore
+            .collection('usuario')
+            .doc(user.uid)
+            .collection('datatest');
+
+        // Consultar los documentos en la subcolección 'datatest' y contar el número de documentos
+        QuerySnapshot querySnapshot = await userDatatestCollectionRef.get();
+        return querySnapshot.docs.length;
+      }
+      return 0; // Retornar 0 si no hay un usuario autenticado
     } catch (e) {
       rethrow;
     }

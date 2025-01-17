@@ -146,10 +146,10 @@ class _TestTabState extends State<TestTab> {
     // Lógica para determinar qué pregun>ta de alcohol mostrar basada en las respuestas anteriores
     if (genderSelection == 'Masculino') {
       alcoholQuestion =
-          '12. ¿Has consumido cinco o más bebidas alcohólicas en una sola ocasión?';
+          '12. ¿Has consumido cinco o más bebidas alcohólicas en una sola ocasión? (Bebedor compulsivo)';
     } else if (genderSelection == 'Femenino') {
       alcoholQuestion =
-          '12. ¿Has consumido cuatro o más bebidas alcohólicas en una sola ocasión?';
+          '12. ¿Has consumido cuatro o más bebidas alcohólicas en una sola ocasión? (Bebedor compulsivo)';
     } else {
       // Género no seleccionado, mostrar una pregunta genérica
       alcoholQuestion = '12. ¿Te consideras un bebedor compulsivo?';
@@ -157,15 +157,6 @@ class _TestTabState extends State<TestTab> {
   }
 
   // Método asíncrono para obtener el nombre de usuario autenticado
-  // Future<void> _fetchLoggedInUserName() async {
-  //   final user = FirebaseAuth.instance.currentUser;
-  //   if (user != null) {
-  //     setState(() {
-  //       loggedInUserName = user.displayName ?? '';
-  //     });
-  //   }
-  // }
-
   Future<void> _fetchLoggedInUserName() async {
     final user = FirebaseAuth.instance.currentUser;
     if (user != null) {
@@ -217,15 +208,16 @@ class _TestTabState extends State<TestTab> {
                         },
                         activeColor: GlobalColors.buttonColor,
                         side: BorderSide(color: GlobalColors.borderTextField),
-                        // activeColor: lightColorScheme.primary,
                       ),
-                      GestureDetector(
-                        child: Text(
-                          '¿Desea continuar como invitado?',
-                          style: TextStyle(
-                            color: lightColorScheme.secondary,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 14.0,
+                      Expanded(
+                        child: GestureDetector(
+                          child: Text(
+                            '¿Le gustaría realizar el test para un usuario diferente?',
+                            style: TextStyle(
+                              color: lightColorScheme.secondary,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 14.0,
+                            ),
                           ),
                         ),
                       ),
@@ -240,9 +232,9 @@ class _TestTabState extends State<TestTab> {
                         validator: 'Ingrese nombre',
                         controller: nameController,
                         enabled: true,
-                        textInputType: TextInputType.text),
-                    const SizedBox(height: 15.0),
+                        textInputType: TextInputType.text)
                   ],
+                  const SizedBox(height: 15.0),
 
                   /// Card Informacion Personal
                   CustomCard(
@@ -415,7 +407,7 @@ class _TestTabState extends State<TestTab> {
                         /// Actividad fisica del usuario
                         Parragraph(
                           parrafo:
-                              '6.  ¿Sueles hacer al menos 30 minutos diarios de actividad física?',
+                              '6.  ¿Sueles hacer al menos 30 minutos diarios de actividad física? (No considere caminar)',
                           color: GlobalColors.textColor,
                         ),
                         const SizedBox(height: 5.0),

@@ -23,7 +23,7 @@ class InputFieldsHeader extends StatelessWidget {
             child: Container(
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/images/inicio2.jpg'),
+                  image: AssetImage('assets/images/bg4.jpg'),
                   fit: BoxFit.cover,
                 ),
               ),
